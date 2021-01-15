@@ -6,7 +6,9 @@
   "main": "main.js",
   "keywords": [],
   "scripts": {
-    "release": "release-it",
+    "release:alpha": "release-it -- patch --ci --preRelease=alpha --dry-run",
+    "release:beta": "release-it -- patch --ci --preRelease=beta --dry-run",
+    "release": "release-it -- patch --ci --dry-run",
     "start": "electron-forge start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "package": "electron-forge package",
