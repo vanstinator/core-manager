@@ -1,13 +1,13 @@
 {
   "name": "project-xenomorph",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Xeno Morph",
   "description": "My Electron app",
   "main": "main.js",
   "keywords": [],
   "scripts": {
-    "release:alpha": "release-it -- patch --ci --preRelease=alpha --dry-run",
-    "release:beta": "release-it -- patch --ci --preRelease=beta --dry-run",
+    "release:alpha": "release-it patch --ci --preRelease=alpha --dry-run",
+    "release:beta": "release-it patch --ci --preRelease=beta --dry-run",
     "release": "release-it -- patch --ci --dry-run",
     "start": "electron-forge start",
     "test": "echo \"Error: no test specified\" && exit 1",
