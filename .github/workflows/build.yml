@@ -17,7 +17,13 @@ jobs:
 
       - name: Install Volta
         uses: volta-cli/action@v1
-      - run: "npm run make"
+        
+      - name: Install Deps 
+        run: "npm install"
+        shell: bash
+        
+      - name: Build 
+        run: "npm run make"
         shell: bash
         
 #       - name: Build/release Electron app
