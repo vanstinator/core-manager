@@ -1,11 +1,12 @@
 {
   "name": "project-xenomorph",
-  "version": "0.0.1-alpha1",
+  "version": "0.0.1",
   "author": "Xeno Morph",
   "description": "My Electron app",
   "main": "main.js",
   "keywords": [],
   "scripts": {
+    "release": "release-it",
     "start": "electron-forge start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "package": "electron-forge package",
@@ -17,7 +18,8 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
-    "electron": "^11.2.0"
+    "electron": "^11.2.0",
+    "release-it": "^14.2.2"
   },
   "volta": {
     "node": "15.6.0",
