@@ -1,4 +1,16 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, autoUpdater, dialog } = require('electron')
+var os = require('os');
+
+const server = 'https://project-xenomorph.herokuapp.com/'
+
+let url;
+if (process.platform === 'win32') {
+  url = `${server}/update/win32/${app.getVersion()}/RELEASES`
+} else if (process.platform === 'darwin') {
+  url = `${server}/update/osx/:currentVersion/${os.platform() + '_' + os.arch()}/${app.getVersion()}/`
+}
+
+autoUpdater.setFeedURL({ url })
 
 function createWindow () {
   const win = new BrowserWindow({
