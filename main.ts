@@ -1,10 +1,22 @@
-import { app, BrowserWindow, screen } from 'electron';
+import {
+  app,
+  BrowserWindow,
+  ipcMain,
+  screen
+} from 'electron';
+
 import * as path from 'path';
 import * as url from 'url';
+import { MESSAGE_CHANNEL } from './core/constants';
+import { pmsCheckHandler } from './main/handlers/ipc';
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
+
+ipcMain.handle(MESSAGE_CHANNEL.pmsCheck, pmsCheckHandler);
+
+pmsCheckHandler().then();
 
 function createWindow(): BrowserWindow {
 
@@ -18,10 +30,11 @@ function createWindow(): BrowserWindow {
     width: 600,
     height: 600,
     webPreferences: {
-      nodeIntegration: true,
+      nodeIntegration: false,
       allowRunningInsecureContent: (serve) ? true : false,
-      contextIsolation: false,  // false if you want to run 2e2 test with Spectron
-      enableRemoteModule : true // true if you want to run 2e2 test  with Spectron or use remote module in renderer context (ie. Angular)
+      contextIsolation: true,  // false if you want to run 2e2 test with Spectron
+      enableRemoteModule : true, // true if you want to run 2e2 test  with Spectron or use remote module in renderer context (ie. Angular),
+      preload: path.join(__dirname, "preload.js")
     },
   });
 
