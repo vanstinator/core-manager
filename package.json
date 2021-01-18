@@ -25,7 +25,7 @@
     "lint": "ng lint",
     "release:alpha": "release-it --ci --preRelease=alpha",
     "release:beta": "release-it --ci --preRelease=beta",
-    "release": "release-it --ci",
+    "release": "dotenv release-it --ci",
     "release:patch": "release-it patch --ci --preRelease=alpha",
     "release:minor": "release-it minor --ci --preRelease=alpha",
     "package": "electron-forge package",
@@ -92,8 +92,10 @@
     "webdriver-manager": "12.1.7",
     "zone.js": "0.10.3",
     "@release-it/conventional-changelog": "^2.0.0",
+    "dotenv-cli": "^4.0.0",
     "electron": "^11.2.0",
-    "release-it": "^14.2.2"
+    "release-it": "^14.2.2",
+    "dotenv": "^8.2.0"
   },
   "volta": {
     "node": "15.6.0",
