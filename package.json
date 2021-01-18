@@ -4,7 +4,7 @@
   "author": "Xeno Morph",
   "description": "My Electron app",
   "main": "main.js",
-  "keywords": [],
+  "keywords": ["wut"],
   "scripts": {
     "ng": "ng",
     "start": "npm-run-all -p electron:serve ng:serve",
