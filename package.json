@@ -89,6 +89,7 @@
     "wait-on": "5.0.1",
     "webdriver-manager": "12.1.7",
     "zone.js": "0.10.3",
+    "@release-it/conventional-changelog": "^2.0.0",
     "electron": "^11.2.0",
     "release-it": "^14.2.2"
   },
@@ -115,6 +116,12 @@
           ]
         }
       ]
+    }
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": "angular",
+      "infile": "CHANGELOG.md"
     }
   }
 }
