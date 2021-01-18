@@ -6,29 +6,95 @@
   "main": "main.js",
   "keywords": [],
   "scripts": {
-    "start": "electron-forge start",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "ng": "ng",
+    "start": "npm-run-all -p electron:serve ng:serve",
+    "build": "npm run electron:serve-tsc && ng build --base-href ./",
+    "build:dev": "npm run build -- -c dev",
+    "build:prod": "npm run build -- -c production",
+    "ng:serve": "ng serve -c web -o --port 6001",
+    "electron:serve-tsc": "tsc -p tsconfig.serve.json",
+    "electron:serve": "npm run electron:serve-tsc && npx electron . --serve",
+    "electron:local": "npm run build:prod && npx electron .",
+    "electron:build": "npm run build:prod && electron-forge make",
+    "test": "ng test --watch=false",
+    "test:watch": "ng test",
+    "e2e": "npm run build:prod && cross-env TS_NODE_PROJECT='e2e/tsconfig.e2e.json' mocha --timeout 300000 --require ts-node/register e2e/**/*.e2e.ts",
+    "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
+    "lint": "ng lint",
+    "package": "electron-forge package"
   },
+  "dependencies": {},
   "devDependencies": {
+    "@angular-builders/custom-webpack": "10.0.1",
+    "@angular-devkit/build-angular": "0.1100.3",
+    "@angular-eslint/builder": "0.8.0-beta.3",
+    "@angular-eslint/eslint-plugin": "0.8.0-beta.3",
+    "@angular-eslint/eslint-plugin-template": "0.8.0-beta.3",
+    "@angular-eslint/schematics": "0.8.0-beta.3",
+    "@angular-eslint/template-parser": "0.8.0-beta.3",
+    "@angular/cli": "11.0.3",
+    "@angular/common": "11.0.3",
+    "@angular/compiler": "11.0.3",
+    "@angular/compiler-cli": "11.0.3",
+    "@angular/core": "11.0.3",
+    "@angular/forms": "11.0.3",
+    "@angular/language-service": "11.0.3",
+    "@angular/platform-browser": "11.0.3",
+    "@angular/platform-browser-dynamic": "11.0.3",
+    "@angular/router": "11.0.3",
     "@electron-forge/cli": "^6.0.0-beta.54",
     "@electron-forge/maker-deb": "^6.0.0-beta.54",
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
-    "electron": "^11.2.0"
+    "@ngx-translate/core": "13.0.0",
+    "@ngx-translate/http-loader": "6.0.0",
+    "@types/jasmine": "3.6.2",
+    "@types/jasminewd2": "2.0.8",
+    "@types/mocha": "8.0.4",
+    "@types/node": "12.12.6",
+    "@typescript-eslint/eslint-plugin": "4.7.0",
+    "@typescript-eslint/eslint-plugin-tslint": "4.7.0",
+    "@typescript-eslint/parser": "4.7.0",
+    "chai": "4.2.0",
+    "conventional-changelog-cli": "2.1.1",
+    "core-js": "3.6.5",
+    "cross-env": "7.0.2",
+    "electron": "11.2.0",
+    "electron-reload": "1.5.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "eslint": "7.13.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jsdoc": "30.7.8",
+    "eslint-plugin-prefer-arrow": "1.2.2",
+    "jasmine-core": "3.6.0",
+    "jasmine-spec-reporter": "6.0.0",
+    "karma": "~5.1.0",
+    "karma-coverage-istanbul-reporter": "3.0.3",
+    "karma-electron": "6.3.1",
+    "karma-jasmine": "4.0.1",
+    "karma-jasmine-html-reporter": "1.5.4",
+    "mocha": "8.2.1",
+    "npm-run-all": "4.1.5",
+    "rxjs": "6.6.3",
+    "spectron": "13.0.0",
+    "ts-node": "9.1.0",
+    "tslib": "2.0.3",
+    "typescript": "4.0.5",
+    "wait-on": "5.0.1",
+    "webdriver-manager": "12.1.7",
+    "zone.js": "0.10.3"
   },
   "volta": {
     "node": "15.6.0",
     "npm": "6.14.11"
   },
-  "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
-  },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "ignore": "\\.git(ignore|modules)|node_modules/(.cache|.cli-ngcc)|.vscode|src|e2e|.editorconfig|.eslintrc.json|.npmrc|angular.json|angular.webpack.js|main.js.map|main.ts|tsconfig.json|tsconfig.serve.json"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
@@ -41,14 +107,6 @@
           "platforms": [
             "darwin"
           ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
         }
       ]
     }
