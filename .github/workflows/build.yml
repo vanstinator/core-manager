@@ -43,5 +43,5 @@ jobs:
         name: Upload macOS artifacts 
         if: matrix.os == 'macOS-latest'
         with:
-          # name: windows.zip
-          # path: ./out/make/squirrel.windows/x64/
+          name: windows.zip
+          path: ./out/make/zip/darwin/x64 
