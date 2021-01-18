@@ -8,9 +8,9 @@
     "wut"
   ],
   "scripts": {
-    "release:alpha": "release-it --ci --preRelease=alpha",
-    "release:beta": "release-it --ci --preRelease=beta",
-    "release": "release-it --ci",
+    "release:alpha": "dotenv release-it --ci --preRelease=alpha",
+    "release:beta": "dotenv release-it --ci --preRelease=beta",
+    "release": "dotenv release-it --ci",
     "release:patch": "release-it patch --ci --preRelease=alpha",
     "release:minor": "release-it minor --ci --preRelease=alpha",
     "start": "electron-forge start",
@@ -25,6 +25,7 @@
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
     "@release-it/conventional-changelog": "^2.0.0",
+    "dotenv-cli": "^4.0.0",
     "electron": "^11.2.0",
     "release-it": "^14.2.2"
   },
@@ -33,6 +34,7 @@
     "npm": "6.14.11"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "electron-squirrel-startup": "^1.0.0"
   },
   "config": {
