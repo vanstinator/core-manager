@@ -8,9 +8,9 @@
     "wut"
   ],
   "scripts": {
-    "release:alpha": "dotenv release-it --preRelease=alpha",
-    "release:beta": "dotenv release-it --preRelease=beta",
-    "release": "dotenv release-it ci",
+    "release:alpha": "dotenv release-it -- --preRelease=alpha",
+    "release:beta": "dotenv release-it -- --preRelease=beta",
+    "release": "dotenv release-it",
     "release:patch": "release-it patch --ci --preRelease=alpha",
     "release:minor": "release-it minor --ci --preRelease=alpha",
     "start": "electron-forge start",
