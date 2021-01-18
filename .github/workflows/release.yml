@@ -1,0 +1,70 @@
+name: Build release
+
+on: 
+  release:
+    types: [published,pre]
+
+jobs:
+  release:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+#         os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [macos-latest, windows-latest]
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v1
+
+      - name: Install Volta
+        uses: volta-cli/action@v1
+        
+      - name: NPM Cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules
+
+      - name: Install Deps 
+        run: "npm install"
+        shell: bash
+        
+      - name: Build 
+        run: "npm run make"
+        shell: bash
+        
+      # - uses: actions/upload-artifact@v2
+      #   name: Upload Windows artifacts 
+      #   if: matrix.os == 'windows-latest'
+      #   with:
+      #     name: windows.zip
+      #     path: ./out/make/squirrel.windows/x64/
+
+      # - uses: actions/upload-artifact@v2
+      #   name: Upload macOS artifacts 
+      #   if: matrix.os == 'macOS-latest'
+      #   with:
+      #     name: windows.zip
+      #     path: ./out/make/zip/darwin/x64 
+
+      # Upload build file to the release as an asset
+      - name: Upload Windows Files
+        if: matrix.os == 'windows-latest'
+        uses: svenstaro/upload-release-action@v1-release
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file_glob: true
+          file: ./out/make/squirrel.windows/x64/**
+          tag: ${{ github.ref }}
+          overwrite: true
+
+      - name: Upload Windows Files
+        if: matrix.os == 'macOS-latest'
+        uses: svenstaro/upload-release-action@v1-release
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file_glob: true
+          file: ./out/make/zip/darwin/x64/**
+          tag: ${{ github.ref }}
+          overwrite: true

@@ -1,32 +1,23 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var electron_1 = require("electron");
-var path = require("path");
-var url = require("url");
-var win = null;
-var args = process.argv.slice(1), serve = args.some(function (val) { return val === '--serve'; });
-function createWindow() {
-    var electronScreen = electron_1.screen;
-    var size = electronScreen.getPrimaryDisplay().workAreaSize;
-    // Create the browser window.
-    win = new electron_1.BrowserWindow({
-        x: 0,
-        y: 0,
-        width: size.width,
-        height: size.height,
-        webPreferences: {
-            nodeIntegration: true,
-            allowRunningInsecureContent: (serve) ? true : false,
-            contextIsolation: false,
-            enableRemoteModule: true // true if you want to run 2e2 test  with Spectron or use remote module in renderer context (ie. Angular)
-        },
-    });
-    if (serve) {
-        win.webContents.openDevTools();
-        require('electron-reload')(__dirname, {
-            electron: require(__dirname + "/node_modules/electron")
-        });
-        win.loadURL('http://localhost:6001');
+const { app, BrowserWindow, autoUpdater, dialog } = require('electron')
+var os = require('os');
+
+const server = 'https://project-xenomorph.herokuapp.com/'
+
+let url;
+if (process.platform === 'win32') {
+  url = `${server}/update/win32/${app.getVersion()}/RELEASES`
+} else if (process.platform === 'darwin') {
+  url = `${server}/update/osx/:currentVersion/${os.platform() + '_' + os.arch()}/${app.getVersion()}/`
+}
+
+autoUpdater.setFeedURL({ url })
+
+function createWindow () {
+  const win = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true
     }
     else {
         win.loadURL(url.format({
