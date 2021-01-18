@@ -3,6 +3,7 @@
     "commitMessage": "chore: release v${version}"
   },
   "github": {
+    "release": true,
     "releaseNotes": "git log --pretty=format:\"* %s (%h)\" ${from}...${to}"
   },
   "npm": {
