@@ -2,6 +2,9 @@
   "git": {
     "commitMessage": "chore: release v${version}"
   },
+  "github": {
+    "releaseNotes": "git log --pretty=format:\"* %s (%h)\" ${from}...${to}"
+  },
   "npm": {
     "publish": false
   }
