@@ -47,11 +47,11 @@
             "web": {
               "optimization": false,
               "outputHashing": "all",
-              "sourceMap": true,
-              "extractCss": true,
+              "sourceMap": false,
+              "extractCss": false,
               "namedChunks": false,
               "aot": false,
-              "extractLicenses": true,
+              "extractLicenses": false,
               "vendorChunk": false,
               "buildOptimizer": false,
               "fileReplacements": [

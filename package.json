@@ -31,7 +31,6 @@
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
-  "dependencies": {},
   "devDependencies": {
     "@angular-builders/custom-webpack": "10.0.1",
     "@angular-devkit/build-angular": "0.1100.3",
@@ -101,7 +100,7 @@
   },
   "volta": {
     "node": "15.6.0",
-    "npm": "6.14.11"
+    "npm": "7.4.2"
   },
   "config": {
     "forge": {
@@ -129,5 +128,10 @@
       "preset": "conventionalcommits",
       "infile": "CHANGELOG.md"
     }
+  },
+  "dependencies": {
+    "esm": "3.2.25",
+    "got": "9.6.0",
+    "unzipper": "0.10.11"
   }
 }

@@ -1,3 +1,32 @@
 <p *ngIf="pmsLibraryExists">plex library found and writeable!</p>
 <p *ngIf="pmsLibraryExists===false">plex library not found or unwriteable!</p>
 <p *ngIf="pmsLibraryExists===undefined">checking for plex library...</p>
+<ngb-accordion *ngIf="pmsLibraryExists" #acc="ngbAccordion" activeIds="ngb-panel-0">
+  <ngb-panel *ngFor="let platform of platforms" title="{{platform.name}}">
+    <ng-template ngbPanelContent>
+      <div class="table-responsive">
+      <table class="table-striped">
+        <thead>
+          <tr>
+            <th style="width: 65%" scope="col">Core</th>
+            <th style="width: 35%" scope="col">Download</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let core of platform.cores">
+            <td>
+              {{ core.name }}
+            </td>
+            <td>
+              <button *ngIf="core.downloaded" type="button" class="btn btn-danger core-btn" (click)="delete(core)">X</button>
+              <button *ngIf="!core.downloaded" type="button" class="btn btn-primary core-btn" (click)="download(core)">Download</button>
+              <button *ngIf="core.downloaded && !core.needsUpdate" disabled="true" type="button" class="btn btn-light core-btn" (click)="update(core)">Downloaded</button>
+              <button *ngIf="core.downloaded && core.needsUpdate" type="button" class="btn btn-info core-btn" (click)="update(core)">Update</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>

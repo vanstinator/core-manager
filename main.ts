@@ -8,15 +8,14 @@ import {
 import * as path from 'path';
 import * as url from 'url';
 import { MESSAGE_CHANNEL } from './core/constants';
-import { pmsCheckHandler } from './main/handlers/ipc';
+import { getCore, pmsCheckHandler } from './main/handlers/ipc';
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
 
+ipcMain.handle(MESSAGE_CHANNEL.getCore, (event, args: string[]) => getCore(args?.[0]));
 ipcMain.handle(MESSAGE_CHANNEL.pmsCheck, pmsCheckHandler);
-
-pmsCheckHandler().then();
 
 function createWindow(): BrowserWindow {
 
