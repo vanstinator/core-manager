@@ -17,7 +17,7 @@
     "electron:serve-tsc": "tsc -p tsconfig.serve.json",
     "electron:serve": "npm run electron:serve-tsc && npx electron . --serve",
     "electron:local": "npm run build:prod && npx electron .",
-    "electron:build": "npm run build:prod && electron-forge make",
+    "electron:build": "dotenv npm run build:prod && dotenv electron-forge make",
     "test": "ng test --watch=false",
     "test:watch": "ng test",
     "e2e": "npm run build:prod && cross-env TS_NODE_PROJECT='e2e/tsconfig.e2e.json' mocha --timeout 300000 --require ts-node/register e2e/**/*.e2e.ts",
@@ -28,8 +28,13 @@
     "release": "dotenv release-it",
     "release:patch": "release-it patch --ci --preRelease=alpha",
     "release:minor": "release-it minor --ci --preRelease=alpha",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "package": "dotenv electron-forge package",
+    "make": "dotenv electron-forge make"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "got": "9.6.0",
+    "unzipper": "0.10.11"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "10.0.1",
@@ -72,9 +77,8 @@
     "cross-env": "7.0.2",
     "dotenv": "8.2.0",
     "dotenv-cli": "^4.0.0",
-    "electron": "^11.2.0",
+    "electron": "11.2.0",
     "electron-reload": "1.5.0",
-    "electron-squirrel-startup": "^1.0.0",
     "eslint": "7.13.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.8",
@@ -103,34 +107,12 @@
     "npm": "6.14.11"
   },
   "config": {
-    "forge": {
-      "packagerConfig": {
-        "ignore": "\\.git(ignore|modules)|node_modules/(.cache|.cli-ngcc)|.vscode|src|e2e|.editorconfig|.eslintrc.json|.npmrc|angular.json|angular.webpack.js|main.js.map|main.ts|tsconfig.json|tsconfig.serve.json"
-      },
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "project_xenomorph"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        }
-      ]
-    }
+    "forge": "./config.forge.js"
   },
   "plugins": {
     "@release-it/conventional-changelog": {
       "preset": "conventionalcommits",
       "infile": "CHANGELOG.md"
     }
-  },
-  "dependencies": {
-    "got": "9.6.0",
-    "unzipper": "0.10.11"
   }
 }

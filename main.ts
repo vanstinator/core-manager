@@ -9,6 +9,11 @@ import * as path from 'path';
 import * as url from 'url';
 import { MESSAGE_CHANNEL } from './core/constants';
 import { getCore, pmsCheckHandler } from './main/handlers/ipc';
+import squirrelStartup from 'electron-squirrel-startup';
+
+if (squirrelStartup) {
+  app.quit();
+}
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
