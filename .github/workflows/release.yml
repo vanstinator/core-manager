@@ -44,7 +44,7 @@ jobs:
         env:
           WINDOWS_PFX_FILE: ${{ steps.write_file.outputs.filePath }}
           WINDOWS_PFX_PASSWORD: ${{ secrets.WINDOWS_PFX_PASSWORD }}
-        run: "npm run make"
+        run: "npm run electron:build"
         shell: bash
 
       # - uses: actions/upload-artifact@v2

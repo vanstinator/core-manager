@@ -9,7 +9,6 @@ module.exports = {
         "name": "project_xenomorph",
         "certificateFile": process.env['WINDOWS_PFX_FILE'],
         "certificatePassword": process.env['WINDOWS_PFX_PASSWORD']
-
       }
     },
     {
