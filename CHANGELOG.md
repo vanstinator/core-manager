@@ -1,5 +1,12 @@
+## <small>0.0.1-alpha.5 (2021-01-20)</small>
+
+* fixup! build the frontend too ([a6d263f](https://github.com/vanstinator/project-xenomorph/commit/a6d263f))
+
+
+
 ## <small>0.0.1-alpha.4 (2021-01-20)</small>
 
+* chore: release v0.0.1-alpha.4 ([83f7611](https://github.com/vanstinator/project-xenomorph/commit/83f7611))
 * fixup! add signing to actions ([46d8d3e](https://github.com/vanstinator/project-xenomorph/commit/46d8d3e))
 * fixup! more ([474f4da](https://github.com/vanstinator/project-xenomorph/commit/474f4da))
 * feat(core): start signing windows builds ([cd4e9bf](https://github.com/vanstinator/project-xenomorph/commit/cd4e9bf))
