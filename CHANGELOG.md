@@ -1,5 +1,12 @@
+## <small>0.0.1-alpha.6 (2021-01-20)</small>
+
+* fixup! more stuff ([b3b0268](https://github.com/vanstinator/project-xenomorph/commit/b3b0268))
+
+
+
 ## <small>0.0.1-alpha.5 (2021-01-20)</small>
 
+* chore: release v0.0.1-alpha.5 ([befcf49](https://github.com/vanstinator/project-xenomorph/commit/befcf49))
 * fixup! build the frontend too ([a6d263f](https://github.com/vanstinator/project-xenomorph/commit/a6d263f))
 
 
