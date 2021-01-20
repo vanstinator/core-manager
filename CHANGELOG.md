@@ -1,3 +1,9 @@
+## <small>0.0.1-alpha.4 (2021-01-20)</small>
+
+* feat(core): start signing windows builds (#5) ([71b3791](https://github.com/vanstinator/project-xenomorph/commit/71b3791)), closes [#5](https://github.com/vanstinator/project-xenomorph/issues/5)
+
+
+
 ## <small>0.0.1-alpha.3 (2021-01-20)</small>
 
 * chore: release v0.0.1-alpha.3 ([0c965e2](https://github.com/vanstinator/project-xenomorph/commit/0c965e2))
