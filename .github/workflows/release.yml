@@ -1,6 +1,6 @@
 name: Build release
 
-on: 
+on:
   release:
     types: [published,pre]
 
@@ -11,7 +11,8 @@ jobs:
     strategy:
       matrix:
 #         os: [macos-latest, ubuntu-latest, windows-latest]
-        os: [macos-latest, windows-latest]
+#         os: [macos-latest, windows-latest]
+        os: [windows-latest]
 
     steps:
       - name: Check out Git repository
@@ -19,34 +20,46 @@ jobs:
 
       - name: Install Volta
         uses: volta-cli/action@v1
-        
+
       - name: NPM Cache
         uses: actions/cache@v2
         with:
           path: node_modules
           key: ${{ runner.os }}-node_modules
 
-      - name: Install Deps 
+      - name: Install Deps
         run: "npm install"
         shell: bash
-        
-      - name: Build 
+
+      - name: Add Windows certificate
+        if: matrix.os == 'windows-latest'
+        id: write_file
+        uses: timheuer/base64-to-file@v1
+        with:
+          fileName: 'win-certificate.pfx'
+          encodedString: ${{ secrets.WINDOWS_PFX_CERT }}
+
+
+      - name: Build
+        env:
+          WINDOWS_PFX_FILE: ${{ steps.write_file.outputs.filePath }}
+          WINDOWS_PFX_PASSWORD: ${{ secrets.WINDOWS_PFX_PASSWORD }}
         run: "npm run make"
         shell: bash
-        
+
       # - uses: actions/upload-artifact@v2
-      #   name: Upload Windows artifacts 
+      #   name: Upload Windows artifacts
       #   if: matrix.os == 'windows-latest'
       #   with:
       #     name: windows.zip
       #     path: ./out/make/squirrel.windows/x64/
 
       # - uses: actions/upload-artifact@v2
-      #   name: Upload macOS artifacts 
+      #   name: Upload macOS artifacts
       #   if: matrix.os == 'macOS-latest'
       #   with:
       #     name: windows.zip
-      #     path: ./out/make/zip/darwin/x64 
+      #     path: ./out/make/zip/darwin/x64
 
       # Upload build file to the release as an asset
       - name: Upload Windows Files
