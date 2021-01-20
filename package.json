@@ -1,6 +1,6 @@
 {
   "name": "project-xenomorph",
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1-alpha.4",
   "author": "Xeno Morph",
   "description": "My Electron app",
   "main": "main.js",
