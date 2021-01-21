@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MESSAGE_CHANNEL } from '../../../core/constants';
+import { MESSAGE_CHANNEL, PLATFORMS } from '../../../core/constants';
 import { Platform, PlatformCore } from '../../../core/types';
 import { ElectronService } from '../core/services';
 @Component({
@@ -17,25 +17,7 @@ export class PlexComponent implements OnInit {
   downloaded = false;
   needsUpdate = false;
 
-  platforms: Platform[] = [
-    {
-      name: 'Nintendo Entertainment System',
-      cores: [
-        {
-          name: 'FCEUmm',
-          filename: 'fceumm_libretro',
-          needsUpdate: false,
-          downloaded: false
-        },
-        {
-          name: 'bnes',
-          filename: 'fbneo_libretro',
-          needsUpdate: false,
-          downloaded: false
-        }
-      ]
-    }
-  ];
+  platforms = PLATFORMS;
 
   async download($core: PlatformCore): Promise<void> {
     await window.api.electronIpcInvoke(MESSAGE_CHANNEL.downloadCore, $core.filename);
@@ -43,10 +25,10 @@ export class PlexComponent implements OnInit {
     $core.needsUpdate = true;
   }
 
-  async update($core: PlatformCore): Promise<void> {
-    await window.api.electronIpcInvoke(MESSAGE_CHANNEL.downloadCore, $core.filename);
-    $core.needsUpdate = false;
-  }
+  // async update($core: PlatformCore): Promise<void> {
+  //   await window.api.electronIpcInvoke(MESSAGE_CHANNEL.downloadCore, $core.filename);
+  //   $core.needsUpdate = false;
+  // }
 
   async delete($core: PlatformCore): Promise<void> {
     await window.api.electronIpcInvoke(MESSAGE_CHANNEL.deleteCore, $core.filename);

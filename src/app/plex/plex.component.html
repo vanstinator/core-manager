@@ -21,7 +21,7 @@
               <button *ngIf="core.downloaded" type="button" class="btn btn-danger core-btn" (click)="delete(core)">X</button>
               <button *ngIf="!core.downloaded" type="button" class="btn btn-primary core-btn" (click)="download(core)">Download</button>
               <button *ngIf="core.downloaded && !core.needsUpdate" disabled="true" type="button" class="btn btn-light core-btn" (click)="update(core)">Downloaded</button>
-              <button *ngIf="core.downloaded && core.needsUpdate" type="button" class="btn btn-info core-btn" (click)="update(core)">Update</button>
+              <!-- <button *ngIf="core.downloaded && core.needsUpdate" type="button" class="btn btn-info core-btn" (click)="update(core)">Update</button> -->
             </td>
           </tr>
         </tbody>
