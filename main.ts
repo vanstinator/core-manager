@@ -1,11 +1,96 @@
-import { app, BrowserWindow, ipcMain,  screen} from 'electron';
+import { app, autoUpdater, BrowserWindow, ipcMain, screen } from 'electron';
 import logger from 'electron-log';
 import squirrelStartup from 'electron-squirrel-startup';
+import os from 'os';
 import * as path from 'path';
 import * as url from 'url';
 
 import { MESSAGE_CHANNEL } from './core/constants';
 import { getCore, pmsCheckHandler } from './main/handlers/ipc';
+
+// this should be placed at top of main.js to handle setup events quickly
+if (handleSquirrelEvent()) {
+  // squirrel event handled and app will exit in 1000ms, so don't do anything else
+  // @ts-expect-error this is fine
+  return;
+}
+
+function handleSquirrelEvent() {
+  if (process.argv.length === 1) {
+    return false;
+  }
+
+  const ChildProcess = require('child_process');
+  const path = require('path');
+
+  const appFolder = path.resolve(process.execPath, '..');
+  const rootAtomFolder = path.resolve(appFolder, '..');
+  const updateDotExe = path.resolve(path.join(rootAtomFolder, 'Update.exe'));
+  const exeName = path.basename(process.execPath);
+
+  const spawn = function(command, args) {
+    let spawnedProcess, error;
+
+    try {
+      spawnedProcess = ChildProcess.spawn(command, args, { detached: true });
+    } catch (error) {
+      logger.error(error);
+    }
+
+    return spawnedProcess;
+  };
+
+  const spawnUpdate = function(args) {
+    return spawn(updateDotExe, args);
+  };
+
+  const squirrelEvent = process.argv[1];
+  switch (squirrelEvent) {
+    case '--squirrel-install':
+    case '--squirrel-updated':
+      // Optionally do things such as:
+      // - Add your .exe to the PATH
+      // - Write to the registry for things like file associations and
+      //   explorer context menus
+
+      // Install desktop and start menu shortcuts
+      spawnUpdate(['--createShortcut', exeName]);
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      setTimeout(app.quit, 1000);
+      return true;
+
+    case '--squirrel-uninstall':
+      // Undo anything you did in the --squirrel-install and
+      // --squirrel-updated handlers
+
+      // Remove desktop and start menu shortcuts
+      spawnUpdate(['--removeShortcut', exeName]);
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      setTimeout(app.quit, 1000);
+      return true;
+
+    case '--squirrel-obsolete':
+      // This is called on the outgoing version of your app before
+      // we update to the new version - it's the opposite of
+      // --squirrel-updated
+
+      app.quit();
+      return true;
+  }
+}
+
+const server = 'https://project-xenomorph.herokuapp.com/';
+
+let updateUrl;
+if (process.platform === 'win32') {
+  updateUrl = `${server}/update/win32/${app.getVersion()}/RELEASES`;
+} else if (process.platform === 'darwin') {
+  updateUrl = `${server}/update/osx/:currentVersion/${os.platform() + '_' + os.arch()}/${app.getVersion()}/`;
+}
+
+autoUpdater.setFeedURL({ url: updateUrl });
 
 logger.transports.file.level = 'silly';
 
@@ -36,7 +121,7 @@ function createWindow(): BrowserWindow {
       allowRunningInsecureContent: (serve) ? true : false,
       contextIsolation: true,  // false if you want to run 2e2 test with Spectron
       enableRemoteModule : true, // true if you want to run 2e2 test  with Spectron or use remote module in renderer context (ie. Angular),
-      preload: path.join(__dirname, "preload.js")
+      preload: path.join(__dirname, 'preload.js')
     },
   });
 
