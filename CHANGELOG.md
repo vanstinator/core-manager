@@ -1,5 +1,13 @@
+## <small>0.0.1-alpha.8 (2021-01-21)</small>
+
+* fix(core): actually fix updates ([17e0f25](https://github.com/vanstinator/project-xenomorph/commit/17e0f25))
+* chore(build): stop building mac until we get signing working ([2a4771d](https://github.com/vanstinator/project-xenomorph/commit/2a4771d))
+
+
+
 ## <small>0.0.1-alpha.7 (2021-01-21)</small>
 
+* chore: release v0.0.1-alpha.7 ([11cc70b](https://github.com/vanstinator/project-xenomorph/commit/11cc70b))
 * chore(build): only build releases once ([76ac911](https://github.com/vanstinator/project-xenomorph/commit/76ac911))
 
 
