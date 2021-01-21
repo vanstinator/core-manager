@@ -1,5 +1,12 @@
+## <small>0.0.1-alpha.7 (2021-01-21)</small>
+
+* chore(build): only build releases once ([76ac911](https://github.com/vanstinator/project-xenomorph/commit/76ac911))
+
+
+
 ## <small>0.0.1-alpha.6 (2021-01-21)</small>
 
+* chore: release v0.0.1-alpha.6 ([a312114](https://github.com/vanstinator/project-xenomorph/commit/a312114))
 * fix(core): malformed update url ([f0a0396](https://github.com/vanstinator/project-xenomorph/commit/f0a0396))
 * fix(main): handle squirrel startup quickly ([c0f74b8](https://github.com/vanstinator/project-xenomorph/commit/c0f74b8))
 
