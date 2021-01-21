@@ -1,5 +1,15 @@
+## <small>0.0.1-alpha.5 (2021-01-21)</small>
+
+* feat(core): handle updates and other squirrel nits ([dbbe452](https://github.com/vanstinator/project-xenomorph/commit/dbbe452))
+* feat(main): add logger ([9f2e783](https://github.com/vanstinator/project-xenomorph/commit/9f2e783))
+* chore(core): bunch of new eslint rules ([ef5a5bd](https://github.com/vanstinator/project-xenomorph/commit/ef5a5bd))
+* fix(main): pms file path detection in windows ([e386459](https://github.com/vanstinator/project-xenomorph/commit/e386459))
+
+
+
 ## <small>0.0.1-alpha.4 (2021-01-20)</small>
 
+* chore: release v0.0.1-alpha.4 ([f7c1e07](https://github.com/vanstinator/project-xenomorph/commit/f7c1e07))
 * feat(core): start signing windows builds (#5) ([71b3791](https://github.com/vanstinator/project-xenomorph/commit/71b3791)), closes [#5](https://github.com/vanstinator/project-xenomorph/issues/5)
 
 
