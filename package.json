@@ -32,6 +32,7 @@
     "make": "dotenv electron-forge make"
   },
   "dependencies": {
+    "electron-log": "4.3.1",
     "electron-squirrel-startup": "^1.0.0",
     "got": "9.6.0",
     "unzipper": "0.10.11"

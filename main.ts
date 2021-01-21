@@ -10,6 +10,9 @@ import * as url from 'url';
 import { MESSAGE_CHANNEL } from './core/constants';
 import { getCore, pmsCheckHandler } from './main/handlers/ipc';
 import squirrelStartup from 'electron-squirrel-startup';
+import logger from 'electron-log';
+
+logger.transports.file.level = 'silly';
 
 if (squirrelStartup) {
   app.quit();

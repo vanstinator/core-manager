@@ -2,8 +2,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import got from 'got';
 import unzipper from 'unzipper';
-const stream = require("stream");
-const { promisify } = require("util");
+import logger from 'electron-log';
+const log = logger.scope('ipc');
 const pipeline = promisify(stream.pipeline);
 
 let pmsPath: string;
@@ -17,8 +17,9 @@ export async function pmsCheckHandler(): Promise<boolean> {
 
   try {
     await fs.promises.access(pmsPath, fs.constants.F_OK);
+    log.warn(`unable to access ${pmsPath}`);
   } catch (e) {
-    console.log(e);
+    log.error(`error accessing ${pmsPath}`, e);
     return false;
   }
 
@@ -26,6 +27,8 @@ export async function pmsCheckHandler(): Promise<boolean> {
 }
 
 export async function getCore(coreFilename: string): Promise<void> {
+
+  log.info(`attempting to get ${coreFilename}`);
 
   let filename: string;
   let downloadPath: string;
@@ -43,19 +46,25 @@ export async function getCore(coreFilename: string): Promise<void> {
 
   downloadStream.on("downloadProgress", ({ transferred, total, percent }: { transferred: string, total: string, percent: number}) => {
     const percentage = Math.round(percent * 100);
-    console.error(`progress: ${transferred}/${total} (${percentage}%)`);
+    log.silly(`progress: ${transferred}/${total} (${percentage}%)`);
   });
 
+  try {
+
   // Download the zip to disk
-  await pipeline(downloadStream, fileWriterStream)
-    .then(() => console.log(`File downloaded to ${pathToZip}`))
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    .catch((error) => console.error(`Something went wrong. ${error.message}`));
+    await pipeline(downloadStream, fileWriterStream);
+    log.debug(`file downloaded to ${pathToZip}`);
 
   // Extract the core
   await pipeline(fs.createReadStream(pathToZip), unzipper.Extract({ path: `${pmsPath}` }));
+    log.debug('file extracted');
 
   // Delete the zip
   await fs.promises.unlink(pathToZip);
+    log.debug('deleted file');
 
+  } catch (e) {
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    log.error(`Something went wrong. ${e.message}`);
+  }
 }
