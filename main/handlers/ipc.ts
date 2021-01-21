@@ -2,13 +2,17 @@ import * as fs from 'fs';
 import * as path from 'path';
 import got from 'got';
 import unzipper from 'unzipper';
+import stream from 'stream';
+import { promisify } from 'util';
 import logger from 'electron-log';
 const log = logger.scope('ipc');
+import { app } from 'electron';
+
 const pipeline = promisify(stream.pipeline);
 
 let pmsPath: string;
 if (process.platform === 'win32') {
-  pmsPath = path.resolve(`${process.env.HOME}\\AppData\\Local\\Plex Media Server\\Game Cores`);
+  pmsPath = path.resolve(`${app.getPath('home')}\\AppData\\Local\\Plex Media Server\\Game Cores`);
 } else if (process.platform === 'darwin') {
   pmsPath = path.resolve('~/Library/Application Support/Plex Media Server/Game Cores');
 }
@@ -51,16 +55,16 @@ export async function getCore(coreFilename: string): Promise<void> {
 
   try {
 
-  // Download the zip to disk
+    // Download the zip to disk
     await pipeline(downloadStream, fileWriterStream);
     log.debug(`file downloaded to ${pathToZip}`);
 
-  // Extract the core
-  await pipeline(fs.createReadStream(pathToZip), unzipper.Extract({ path: `${pmsPath}` }));
+    // Extract the core
+    await pipeline(fs.createReadStream(pathToZip), unzipper.Extract({ path: `${pmsPath}` }));
     log.debug('file extracted');
 
-  // Delete the zip
-  await fs.promises.unlink(pathToZip);
+    // Delete the zip
+    await fs.promises.unlink(pathToZip);
     log.debug('deleted file');
 
   } catch (e) {
