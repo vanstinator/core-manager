@@ -85,7 +85,7 @@ function handleSquirrelEvent() {
   }
 }
 
-const server = 'https://project-xenomorph.herokuapp.com/';
+const server = 'https://project-xenomorph.herokuapp.com';
 
 let updateUrl;
 if (process.platform === 'win32') {
