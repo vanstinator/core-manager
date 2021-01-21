@@ -2,7 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "module": "es2020",
-    "outDir": "./dist/out-tsc",
+    "outDir": "./serve",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -21,7 +21,7 @@
   },
   "files": [
     "src/main.ts",
-    "src/polyfills.ts"
+    "src/polyfills.ts",
   ],
   "include": [
     "src/**/*.d.ts"

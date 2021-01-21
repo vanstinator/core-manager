@@ -3,7 +3,7 @@
   "version": "0.0.1-alpha.8",
   "author": "Xeno Morph",
   "description": "My Electron app",
-  "main": "main.js",
+  "main": "serve/main.js",
   "keywords": [
     "wut"
   ],
@@ -15,7 +15,7 @@
     "build:prod": "npm run build -- -c production",
     "ng:serve": "ng serve -c web -o --port 6001",
     "electron:serve-tsc": "tsc -p tsconfig.serve.json",
-    "electron:serve": "npm run electron:serve-tsc && npx electron . --serve",
+    "electron:serve": "npm run electron:serve-tsc && electron . --serve",
     "electron:local": "npm run build:prod && npx electron .",
     "electron:build": "dotenv npm run build:prod && dotenv electron-forge make",
     "test": "ng test --watch=false",

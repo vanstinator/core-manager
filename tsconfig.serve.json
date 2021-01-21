@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
+    "sourceMap": false,
     "declaration": false,
+    "outDir": "./serve",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
