@@ -8,6 +8,10 @@ import * as url from 'url';
 import { MESSAGE_CHANNEL } from './core/constants';
 import { getCore, pmsCheckHandler } from './main/handlers/ipc';
 
+if (squirrelStartup) {
+  app.quit();
+}
+
 // this should be placed at top of main.js to handle setup events quickly
 if (handleSquirrelEvent()) {
   // squirrel event handled and app will exit in 1000ms, so don't do anything else
@@ -93,10 +97,6 @@ if (process.platform === 'win32') {
 autoUpdater.setFeedURL({ url: updateUrl });
 
 logger.transports.file.level = 'silly';
-
-if (squirrelStartup) {
-  app.quit();
-}
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
