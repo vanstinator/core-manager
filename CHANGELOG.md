@@ -1,8 +1,16 @@
+## <small>0.0.1-alpha.6 (2021-01-21)</small>
+
+* fix(core): malformed update url ([f0a0396](https://github.com/vanstinator/project-xenomorph/commit/f0a0396))
+* fix(main): handle squirrel startup quickly ([c0f74b8](https://github.com/vanstinator/project-xenomorph/commit/c0f74b8))
+
+
+
 ## <small>0.0.1-alpha.5 (2021-01-21)</small>
 
+* chore: release v0.0.1-alpha.5 ([642d8e2](https://github.com/vanstinator/project-xenomorph/commit/642d8e2))
+* chore(core): bunch of new eslint rules ([ef5a5bd](https://github.com/vanstinator/project-xenomorph/commit/ef5a5bd))
 * feat(core): handle updates and other squirrel nits ([dbbe452](https://github.com/vanstinator/project-xenomorph/commit/dbbe452))
 * feat(main): add logger ([9f2e783](https://github.com/vanstinator/project-xenomorph/commit/9f2e783))
-* chore(core): bunch of new eslint rules ([ef5a5bd](https://github.com/vanstinator/project-xenomorph/commit/ef5a5bd))
 * fix(main): pms file path detection in windows ([e386459](https://github.com/vanstinator/project-xenomorph/commit/e386459))
 
 
