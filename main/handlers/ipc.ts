@@ -1,14 +1,15 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import got from 'got';
-import unzipper from 'unzipper';
-import stream from 'stream';
-import { promisify } from 'util';
-import logger from 'electron-log';
-const log = logger.scope('ipc');
 import { app } from 'electron';
+import logger from 'electron-log';
+import * as fs from 'fs';
+import got from 'got';
+import * as path from 'path';
+import stream from 'stream';
+import unzipper from 'unzipper';
+import { promisify } from 'util';
 
 const pipeline = promisify(stream.pipeline);
+
+const log = logger.scope('ipc');
 
 let pmsPath: string;
 if (process.platform === 'win32') {
@@ -48,7 +49,7 @@ export async function getCore(coreFilename: string): Promise<void> {
   const downloadStream = got.stream(downloadPath);
   const fileWriterStream = fs.createWriteStream(pathToZip);
 
-  downloadStream.on("downloadProgress", ({ transferred, total, percent }: { transferred: string, total: string, percent: number}) => {
+  downloadStream.on('downloadProgress', ({ transferred, total, percent }: { transferred: string, total: string, percent: number}) => {
     const percentage = Math.round(percent * 100);
     log.silly(`progress: ${transferred}/${total} (${percentage}%)`);
   });

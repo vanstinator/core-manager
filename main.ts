@@ -1,16 +1,11 @@
-import {
-  app,
-  BrowserWindow,
-  ipcMain,
-  screen
-} from 'electron';
-
+import { app, BrowserWindow, ipcMain,  screen} from 'electron';
+import logger from 'electron-log';
+import squirrelStartup from 'electron-squirrel-startup';
 import * as path from 'path';
 import * as url from 'url';
+
 import { MESSAGE_CHANNEL } from './core/constants';
 import { getCore, pmsCheckHandler } from './main/handlers/ipc';
-import squirrelStartup from 'electron-squirrel-startup';
-import logger from 'electron-log';
 
 logger.transports.file.level = 'silly';
 

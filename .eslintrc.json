@@ -38,7 +38,9 @@
       },
       "plugins": [
         "@typescript-eslint",
-        "@angular-eslint/eslint-plugin"
+        "@angular-eslint/eslint-plugin",
+        "simple-import-sort",
+        "import"
       ],
       "rules": {
         "@typescript-eslint/indent": [
@@ -67,7 +69,39 @@
         "@typescript-eslint/no-floating-promises": 0,
         "@typescript-eslint/semi": "error",
         "@angular-eslint/use-injectable-provided-in": "error",
-        "@angular-eslint/no-attribute-decorator": "error"
+        "@angular-eslint/no-attribute-decorator": "error",
+        "simple-import-sort/imports": "error",
+        "simple-import-sort/exports": "error",
+        "sort-imports": "off",
+        "import/first": "error",
+        "import/newline-after-import": "error",
+        "import/no-duplicates": "error",
+        "no-multiple-empty-lines": [
+          "error",
+          {
+            "max": 1
+          }
+        ],
+        "quote-props": [
+          "error",
+          "as-needed"
+        ],
+        "quotes": [
+          "error",
+          "single"
+        ],
+        "semi": [
+          "error",
+          "always"
+        ],
+        "no-trailing-spaces": "error",
+        "callback-return": "error",
+        "keyword-spacing": "error",
+        "comma-spacing": "error",
+        "object-curly-spacing": [
+          "error",
+          "always"
+        ]
       }
     },
     {
