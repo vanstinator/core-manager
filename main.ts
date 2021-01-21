@@ -5,6 +5,7 @@ import * as path from 'path';
 import * as url from 'url';
 
 import { MESSAGE_CHANNEL } from './core/constants';
+import deleteCore from './main/handlers/deleteCore';
 import downloadCore from './main/handlers/downloadCore';
 import pmsLibraryCheck from './main/handlers/pmsLibraryCheck';
 import startup from './main/startup';
@@ -26,6 +27,7 @@ if (startup()) {
 
 registerUpdates();
 
+ipcMain.handle(MESSAGE_CHANNEL.deleteCore, (event, args: string[]) => deleteCore(args?.[0]));
 ipcMain.handle(MESSAGE_CHANNEL.downloadCore, (event, args: string[]) => downloadCore(args?.[0]));
 ipcMain.handle(MESSAGE_CHANNEL.pmsLibraryCheck, pmsLibraryCheck);
 

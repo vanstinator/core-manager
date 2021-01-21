@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { MESSAGE_CHANNEL } from '../../../core/constants';
 import { Platform, PlatformCore } from '../../../core/types';
 import { ElectronService } from '../core/services';
-import { MESSAGE_CHANNEL } from '../../../core/constants'
 @Component({
   selector: 'app-plex',
   templateUrl: './plex.component.html',
@@ -38,20 +38,18 @@ export class PlexComponent implements OnInit {
   ];
 
   async download($core: PlatformCore): Promise<void> {
-    console.log($core);
     await window.api.electronIpcInvoke(MESSAGE_CHANNEL.downloadCore, $core.filename);
-    console.log('done!');
     $core.downloaded = true;
     $core.needsUpdate = true;
   }
 
-  update($core: PlatformCore): void {
-    console.log($core);
+  async update($core: PlatformCore): Promise<void> {
+    await window.api.electronIpcInvoke(MESSAGE_CHANNEL.downloadCore, $core.filename);
     $core.needsUpdate = false;
   }
 
-  delete($core: PlatformCore): void {
-    console.log('update');
+  async delete($core: PlatformCore): Promise<void> {
+    await window.api.electronIpcInvoke(MESSAGE_CHANNEL.deleteCore, $core.filename);
     $core.needsUpdate = false;
     $core.downloaded = false;
   }
