@@ -1,4 +1,4 @@
-import { app, autoUpdater, BrowserWindow, ipcMain, screen } from 'electron';
+import { app, autoUpdater, BrowserWindow, dialog, ipcMain, screen } from 'electron';
 import logger from 'electron-log';
 import squirrelStartup from 'electron-squirrel-startup';
 import os from 'os';
@@ -89,12 +89,30 @@ const server = 'https://project-xenomorph.herokuapp.com';
 
 let updateUrl;
 if (process.platform === 'win32') {
-  updateUrl = `${server}/update/win32/${app.getVersion()}/RELEASES`;
+  updateUrl = `${server}/update/win32/${app.getVersion()}`;
 } else if (process.platform === 'darwin') {
   updateUrl = `${server}/update/osx/:currentVersion/${os.platform() + '_' + os.arch()}/${app.getVersion()}/`;
 }
 
 autoUpdater.setFeedURL({ url: updateUrl });
+autoUpdater.checkForUpdates();
+setInterval(() => {
+  autoUpdater.checkForUpdates();
+}, 60000);
+
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+  const dialogOpts = {
+    type: 'info',
+    buttons: ['Restart', 'Later'],
+    title: 'Application Update',
+    message: process.platform === 'win32' ? releaseNotes : releaseName,
+    detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+  };
+
+  dialog.showMessageBox(dialogOpts).then((returnValue) => {
+    if (returnValue.response === 0) autoUpdater.quitAndInstall();
+  });
+});
 
 logger.transports.file.level = 'silly';
 
