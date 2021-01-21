@@ -1,7 +1,15 @@
+## <small>0.0.1-alpha.9 (2021-01-21)</small>
+
+* chore(build): package as asar ([beb4ffe](https://github.com/vanstinator/project-xenomorph/commit/beb4ffe))
+* chore(core): move tsc output to sub dir and launch app in that context ([3a4ef1b](https://github.com/vanstinator/project-xenomorph/commit/3a4ef1b))
+
+
+
 ## <small>0.0.1-alpha.8 (2021-01-21)</small>
 
-* fix(core): actually fix updates ([17e0f25](https://github.com/vanstinator/project-xenomorph/commit/17e0f25))
+* chore: release v0.0.1-alpha.8 ([4b50ab2](https://github.com/vanstinator/project-xenomorph/commit/4b50ab2))
 * chore(build): stop building mac until we get signing working ([2a4771d](https://github.com/vanstinator/project-xenomorph/commit/2a4771d))
+* fix(core): actually fix updates ([17e0f25](https://github.com/vanstinator/project-xenomorph/commit/17e0f25))
 
 
 
