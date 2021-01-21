@@ -1,4 +1,4 @@
 export const MESSAGE_CHANNEL = {
-  getCore: 'getCore',
-  pmsCheck: 'pmsCheck'
+  downloadCore: 'downloadCore',
+  pmsLibraryCheck: 'pmsLibraryCheck'
 };

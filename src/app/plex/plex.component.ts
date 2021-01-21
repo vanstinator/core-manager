@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ElectronService } from '../core/services';
-import { Platform, PlatformCore } from '../../../core/types';
 
+import { Platform, PlatformCore } from '../../../core/types';
+import { ElectronService } from '../core/services';
+import { MESSAGE_CHANNEL } from '../../../core/constants'
 @Component({
   selector: 'app-plex',
   templateUrl: './plex.component.html',
@@ -38,7 +39,7 @@ export class PlexComponent implements OnInit {
 
   async download($core: PlatformCore): Promise<void> {
     console.log($core);
-    await window.api.electronIpcInvoke('getCore', $core.filename);
+    await window.api.electronIpcInvoke(MESSAGE_CHANNEL.downloadCore, $core.filename);
     console.log('done!');
     $core.downloaded = true;
     $core.needsUpdate = true;
@@ -56,7 +57,7 @@ export class PlexComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    window.api.electronIpcInvoke('pmsCheck').then((result: boolean) => {
+    window.api.electronIpcInvoke(MESSAGE_CHANNEL.pmsLibraryCheck).then((result: boolean) => {
       this.pmsLibraryExists = result;
       console.log(`pmsLibraryExists: ${result.toString()}`);
     });

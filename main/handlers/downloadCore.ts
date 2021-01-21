@@ -1,4 +1,3 @@
-import { app } from 'electron';
 import logger from 'electron-log';
 import * as fs from 'fs';
 import got from 'got';
@@ -7,45 +6,28 @@ import stream from 'stream';
 import unzipper from 'unzipper';
 import { promisify } from 'util';
 
+import { LIBRETRO_PATH_MACOS, LIBRETRO_PATH_WIN32, PMS_LIBRARY_PATH } from '../constants';
+
 const pipeline = promisify(stream.pipeline);
 
-const log = logger.scope('ipc');
+const log = logger.scope('downloadCore');
 
-let pmsPath: string;
-if (process.platform === 'win32') {
-  pmsPath = path.resolve(`${app.getPath('home')}\\AppData\\Local\\Plex Media Server\\Game Cores`);
-} else if (process.platform === 'darwin') {
-  pmsPath = path.resolve('~/Library/Application Support/Plex Media Server/Game Cores');
-}
-
-export async function pmsCheckHandler(): Promise<boolean> {
-
-  try {
-    await fs.promises.access(pmsPath, fs.constants.F_OK);
-    log.warn(`unable to access ${pmsPath}`);
-  } catch (e) {
-    log.error(`error accessing ${pmsPath}`, e);
-    return false;
-  }
-
-  return true;
-}
-
-export async function getCore(coreFilename: string): Promise<void> {
+export default async function downloadCore(coreFilename: string): Promise<void> {
 
   log.info(`attempting to get ${coreFilename}`);
 
   let filename: string;
   let downloadPath: string;
+
   if (process.platform === 'win32') {
     filename = `${coreFilename}.dll.zip`;
-    downloadPath = `https://buildbot.libretro.com/nightly/windows/x86_64/latest/${filename}`;
+    downloadPath = `${LIBRETRO_PATH_WIN32}/${filename}`;
   } else if (process.platform === 'darwin') {
     filename = `${coreFilename}.dylib.zip`;
-    downloadPath = `https://buildbot.libretro.com/nightly/apple/osx/x86_64/${filename}`;
+    downloadPath = `${LIBRETRO_PATH_MACOS}${filename}`;
   }
 
-  const pathToZip = path.resolve(`${pmsPath}/${filename}`);
+  const pathToZip = path.resolve(`${PMS_LIBRARY_PATH()}/${filename}`);
   const downloadStream = got.stream(downloadPath);
   const fileWriterStream = fs.createWriteStream(pathToZip);
 
@@ -61,7 +43,7 @@ export async function getCore(coreFilename: string): Promise<void> {
     log.debug(`file downloaded to ${pathToZip}`);
 
     // Extract the core
-    await pipeline(fs.createReadStream(pathToZip), unzipper.Extract({ path: `${pmsPath}` }));
+    await pipeline(fs.createReadStream(pathToZip), unzipper.Extract({ path: `${PMS_LIBRARY_PATH()}` }));
     log.debug('file extracted');
 
     // Delete the zip

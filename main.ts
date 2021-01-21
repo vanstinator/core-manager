@@ -5,7 +5,8 @@ import * as path from 'path';
 import * as url from 'url';
 
 import { MESSAGE_CHANNEL } from './core/constants';
-import { getCore, pmsCheckHandler } from './main/handlers/ipc';
+import downloadCore from './main/handlers/downloadCore';
+import pmsLibraryCheck from './main/handlers/pmsLibraryCheck';
 import startup from './main/startup';
 import registerUpdates from './main/update';
 
@@ -25,8 +26,8 @@ if (startup()) {
 
 registerUpdates();
 
-ipcMain.handle(MESSAGE_CHANNEL.getCore, (event, args: string[]) => getCore(args?.[0]));
-ipcMain.handle(MESSAGE_CHANNEL.pmsCheck, pmsCheckHandler);
+ipcMain.handle(MESSAGE_CHANNEL.downloadCore, (event, args: string[]) => downloadCore(args?.[0]));
+ipcMain.handle(MESSAGE_CHANNEL.pmsLibraryCheck, pmsLibraryCheck);
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
