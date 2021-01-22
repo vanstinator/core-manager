@@ -1,8 +1,8 @@
-<p *ngIf="pmsLibraryExists">plex library found and writeable!</p>
-<p *ngIf="pmsLibraryExists===false">plex library not found or unwriteable!</p>
-<p *ngIf="pmsLibraryExists===undefined">checking for plex library...</p>
-<ngb-accordion *ngIf="pmsLibraryExists" #acc="ngbAccordion" activeIds="ngb-panel-0">
-  <ngb-panel *ngFor="let platform of platforms" title="{{platform.name}}">
+<!-- <p *ngIf="pmsLibraryExists">plex library found and writeable!</p> -->
+<p *ngIf="pmsLibraryExists===false">couldn't find or write to a plex library! grab logs from here and send them to me: %USERPROFILE%\AppData\Roaming\project-xenomorph\logs\</p>
+<!-- <p *ngIf="pmsLibraryExists===undefined">checking for plex library...</p> -->
+<ngb-accordion *ngIf="pmsLibraryExists" #acc="ngbAccordion" [activeIds]="activeIds">
+  <ngb-panel *ngFor="let platform of platforms" title="{{platform.name}}" class="open">
     <ng-template ngbPanelContent>
       <div class="table-responsive">
       <table class="table-striped">

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { MESSAGE_CHANNEL, PLATFORMS } from '../../../core/constants';
-import { Platform, PlatformCore } from '../../../core/types';
+import { PlatformCore, PlatformCoreMapping } from '../../../core/types';
 import { ElectronService } from '../core/services';
+
 @Component({
   selector: 'app-plex',
   templateUrl: './plex.component.html',
@@ -18,6 +19,8 @@ export class PlexComponent implements OnInit {
   needsUpdate = false;
 
   platforms = PLATFORMS;
+
+  activeIds = [];
 
   async download($core: PlatformCore): Promise<void> {
     await window.api.electronIpcInvoke(MESSAGE_CHANNEL.downloadCore, $core.filename);
@@ -37,9 +40,22 @@ export class PlexComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.activeIds = [];
+    for (let i = 0; i < PLATFORMS.length; i++) {
+      this.activeIds.push(`ngb-panel-${i}`);
+    }
+
     window.api.electronIpcInvoke(MESSAGE_CHANNEL.pmsLibraryCheck).then((result: boolean) => {
       this.pmsLibraryExists = result;
       console.log(`pmsLibraryExists: ${result.toString()}`);
+      window.api.electronIpcInvoke(MESSAGE_CHANNEL.coreCheck).then((results: PlatformCoreMapping[]) => {
+        if (results.length) {
+          for (const result of results) {
+            const core = this.platforms.find(platform => platform.name === result.platformName)?.cores.find(core => core.filename === result.core);
+            core.downloaded = true;
+          }
+        }
+      });
     });
   }
 

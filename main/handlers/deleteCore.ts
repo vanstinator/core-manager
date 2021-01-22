@@ -2,7 +2,8 @@ import logger from 'electron-log';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { PMS_LIBRARY_PATH } from '../constants';
+import { PMS_GAME_CORES_PATH } from '../constants';
+import generateMappings from '../xml';
 
 const log = logger.scope('deleteCore');
 
@@ -18,13 +19,16 @@ export default async function deleteCore(coreFilename: string): Promise<void> {
     filename = `${coreFilename}.dylib`;
   }
 
-  const pathToCore = path.resolve(`${PMS_LIBRARY_PATH()}/${filename}`);
+  const pathToCore = path.resolve(`${PMS_GAME_CORES_PATH}/${filename}`);
 
   try {
 
     // Delete the zip
     await fs.promises.unlink(pathToCore);
     log.debug(`deleted file: ${coreFilename}`);
+
+    // Re-generate RetroCores.xml mappings
+    await generateMappings();
 
   } catch (e) {
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions

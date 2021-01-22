@@ -9,3 +9,8 @@ export interface PlatformCore {
   needsUpdate?: boolean;
   downloaded?: boolean;
 }
+
+export interface PlatformCoreMapping {
+  core: string,
+  platformName: string
+}
