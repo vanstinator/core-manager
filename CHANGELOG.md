@@ -1,9 +1,16 @@
+## <small>0.0.1-alpha.11 (2021-01-22)</small>
+
+* fix(build): remove broken button ([90d1569](https://github.com/vanstinator/project-xenomorph/commit/90d1569))
+
+
+
 ## <small>0.0.1-alpha.10 (2021-01-22)</small>
 
-* feat(core): clean up everything ([398ecc9](https://github.com/vanstinator/project-xenomorph/commit/398ecc9))
-* feat(core): wire up core delete and update actions ([d84c352](https://github.com/vanstinator/project-xenomorph/commit/d84c352))
+* chore: release v0.0.1-alpha.10 ([dfab5e7](https://github.com/vanstinator/project-xenomorph/commit/dfab5e7))
 * chore(core): break out handlers into sub modules ([151490d](https://github.com/vanstinator/project-xenomorph/commit/151490d))
 * chore(ui): temporarily hide update logic ([6db7c7d](https://github.com/vanstinator/project-xenomorph/commit/6db7c7d))
+* feat(core): clean up everything ([398ecc9](https://github.com/vanstinator/project-xenomorph/commit/398ecc9))
+* feat(core): wire up core delete and update actions ([d84c352](https://github.com/vanstinator/project-xenomorph/commit/d84c352))
 
 
 
