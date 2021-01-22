@@ -1,5 +1,15 @@
+## <small>0.0.1-alpha.10 (2021-01-22)</small>
+
+* feat(core): clean up everything ([398ecc9](https://github.com/vanstinator/project-xenomorph/commit/398ecc9))
+* feat(core): wire up core delete and update actions ([d84c352](https://github.com/vanstinator/project-xenomorph/commit/d84c352))
+* chore(core): break out handlers into sub modules ([151490d](https://github.com/vanstinator/project-xenomorph/commit/151490d))
+* chore(ui): temporarily hide update logic ([6db7c7d](https://github.com/vanstinator/project-xenomorph/commit/6db7c7d))
+
+
+
 ## <small>0.0.1-alpha.9 (2021-01-21)</small>
 
+* chore: release v0.0.1-alpha.9 ([9da7bb1](https://github.com/vanstinator/project-xenomorph/commit/9da7bb1))
 * chore(build): package as asar ([beb4ffe](https://github.com/vanstinator/project-xenomorph/commit/beb4ffe))
 * chore(core): move tsc output to sub dir and launch app in that context ([3a4ef1b](https://github.com/vanstinator/project-xenomorph/commit/3a4ef1b))
 
