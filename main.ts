@@ -16,14 +16,14 @@ logger.transports.file.level = 'silly';
 
 const log = logger.scope('startup');
 
-if (squirrelStartup) {
-  log.silly('squirrel statup mode. quitting.');
-  app.quit();
-}
-
 if (startup()) {
   // @ts-expect-error this is fine
   return;
+}
+
+if (squirrelStartup) {
+  log.silly('squirrel statup mode. quitting.');
+  app.quit();
 }
 
 registerUpdates();
