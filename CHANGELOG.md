@@ -1,5 +1,12 @@
+## <small>0.0.1-alpha.13 (2021-01-22)</small>
+
+* fix(win32): updates still aren't taking properly ([5cc987b](https://github.com/vanstinator/project-xenomorph/commit/5cc987b))
+
+
+
 ## <small>0.0.1-alpha.12 (2021-01-22)</small>
 
+* chore: release v0.0.1-alpha.12 ([d1039b5](https://github.com/vanstinator/project-xenomorph/commit/d1039b5))
 * fix(mac): fix a variety of mac specific issues ([fcea236](https://github.com/vanstinator/project-xenomorph/commit/fcea236))
 * fix(win32): app startup wouldn't properly register shortcuts ([4348b0e](https://github.com/vanstinator/project-xenomorph/commit/4348b0e))
 
