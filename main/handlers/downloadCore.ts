@@ -6,7 +6,7 @@ import stream from 'stream';
 import unzipper from 'unzipper';
 import { promisify } from 'util';
 
-import { LIBRETRO_PATH_MACOS, LIBRETRO_PATH_WIN32, PMS_GAME_CORES_PATH } from '../constants';
+import { LIBRETRO_PATH_MACOS, LIBRETRO_PATH_WIN32, PMS_GAME_CORES_PATH, PMS_LIBRARY_PATH } from '../constants';
 import generateMappings from '../xml';
 
 const pipeline = promisify(stream.pipeline);
@@ -20,9 +20,13 @@ export default async function downloadCore(coreFilename: string): Promise<void> 
   let filename: string;
   let downloadPath: string;
 
+  if (!fs.existsSync(PMS_GAME_CORES_PATH)) {
+    await fs.promises.mkdir(PMS_GAME_CORES_PATH);
+  }
+
   if (process.platform === 'win32') {
     filename = `${coreFilename}.dll.zip`;
-    downloadPath = `${LIBRETRO_PATH_WIN32}/${filename}`;
+    downloadPath = `${LIBRETRO_PATH_WIN32}${filename}`;
   } else if (process.platform === 'darwin') {
     filename = `${coreFilename}.dylib.zip`;
     downloadPath = `${LIBRETRO_PATH_MACOS}${filename}`;
