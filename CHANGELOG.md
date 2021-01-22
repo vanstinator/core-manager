@@ -1,5 +1,13 @@
+## <small>0.0.1-alpha.12 (2021-01-22)</small>
+
+* fix(mac): fix a variety of mac specific issues ([fcea236](https://github.com/vanstinator/project-xenomorph/commit/fcea236))
+* fix(win32): app startup wouldn't properly register shortcuts ([4348b0e](https://github.com/vanstinator/project-xenomorph/commit/4348b0e))
+
+
+
 ## <small>0.0.1-alpha.11 (2021-01-22)</small>
 
+* chore: release v0.0.1-alpha.11 ([9f99d06](https://github.com/vanstinator/project-xenomorph/commit/9f99d06))
 * fix(build): remove broken button ([90d1569](https://github.com/vanstinator/project-xenomorph/commit/90d1569))
 
 
