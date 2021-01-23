@@ -21,11 +21,10 @@ jobs:
       - name: Install Volta
         uses: volta-cli/action@v1
 
-      - name: NPM Cache
-        uses: actions/cache@v2
+      - uses: actions/cache@v2
         with:
-          path: "./node_modules"
-          key: ${{ runner.os }}-node_modules
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-
 
       - name: Install Deps
         run: "npm install"
