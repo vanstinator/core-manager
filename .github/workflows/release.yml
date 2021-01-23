@@ -10,8 +10,6 @@ jobs:
 
     strategy:
       matrix:
-#         os: [macos-latest, ubuntu-latest, windows-latest]
-        # os: [macos-latest, windows-latest]
         os: [self-hosted-macOS, self-hosted-windows]
 
     steps:
@@ -21,14 +19,19 @@ jobs:
       - name: Install Volta
         uses: volta-cli/action@v1
 
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
       - uses: actions/cache@v2
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-modules-
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-modules-
 
       - name: Install Deps
         run: "npm install"
-        shell: bash
 
       - name: Add Windows certificate
         if: matrix.os == 'self-hosted-windows'
@@ -38,27 +41,20 @@ jobs:
           fileName: 'win-certificate.pfx'
           encodedString: ${{ secrets.WINDOWS_PFX_CERT }}
 
+      - name: Add MacOS certs
+        if: matrix.os == 'self-hosted-macOS'
+        run: chmod +x bin/add-macos-cert.sh && ./bin/add-macos-cert.sh
+        env:
+          MACOS_PFX_CERT: ${{ secrets.MACOS_PFX_CERT }}
+          CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
 
       - name: Build
         env:
           WINDOWS_PFX_FILE: ${{ steps.write_file.outputs.filePath }}
-          WINDOWS_PFX_PASSWORD: ${{ secrets.WINDOWS_PFX_PASSWORD }}
+          CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
         run: "npm run electron:build"
-        shell: bash
-
-      # - uses: actions/upload-artifact@v2
-      #   name: Upload Windows artifacts
-      #   if: matrix.os == 'windows-latest'
-      #   with:
-      #     name: windows.zip
-      #     path: ./out/make/squirrel.windows/x64/
-
-      # - uses: actions/upload-artifact@v2
-      #   name: Upload macOS artifacts
-      #   if: matrix.os == 'macOS-latest'
-      #   with:
-      #     name: windows.zip
-      #     path: ./out/make/zip/darwin/x64
 
       # Upload build file to the release as an asset
       - name: Upload Windows Files

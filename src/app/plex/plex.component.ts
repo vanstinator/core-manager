@@ -47,7 +47,8 @@ export class PlexComponent implements OnInit {
 
   select(): void {
     if (this.model) {
-      this.platforms = PLATFORMS.filter(p => p.name === this.model || !!p.cores.some(c => c.filename === this.model));
+      this.platforms = PLATFORMS.filter(p => p.name === this.model || !!p.cores.some(c => c.name === this.model));
+      this.platforms.map(p => p.cores = p.cores.filter(c => c.filename === this.model));
     } else {
       this.platforms = PLATFORMS;
     }
