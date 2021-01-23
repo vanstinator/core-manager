@@ -52,7 +52,7 @@ export const PLATFORMS: Platform[] = [
     cores: [
       {
         name: 'Atari800',
-        filename: 'Atari800_libretro',
+        filename: 'atari800_libretro',
         arch: [ARCH.win32, ARCH.macOS],
         url: 'https://docs.libretro.com/library/atari800/'
       }
