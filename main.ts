@@ -36,10 +36,10 @@ function createWindow(): BrowserWindow {
 
   // Create the browser window.
   win = new BrowserWindow({
-    x: 0,
-    y: 0,
-    width: 600,
-    height: 600,
+    // x: 0,
+    // y: 0,
+    width: 800,
+    height: 800,
     webPreferences: {
       nodeIntegration: false,
       allowRunningInsecureContent: (serve) ? true : false,

@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PlexComponent } from './plex.component';
+import { NgModule } from '@angular/core';
+import { NgbModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { PlexRoutingModule } from './plex-routing.module';
 import { SharedModule } from '../shared/shared.module';
-
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PlexComponent } from './plex.component';
+import { PlexRoutingModule } from './plex-routing.module';
 
 @NgModule({
   declarations: [PlexComponent],
@@ -13,7 +12,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     SharedModule,
     PlexRoutingModule,
-    NgbModule
+    NgbModule,
+    NgbToastModule
   ]
 })
 export class PlexModule { }
