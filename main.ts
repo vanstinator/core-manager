@@ -9,90 +9,16 @@ import coreCheck from './main/handlers/coreCheck';
 import deleteCore from './main/handlers/deleteCore';
 import downloadCore from './main/handlers/downloadCore';
 import pmsLibraryCheck from './main/handlers/pmsLibraryCheck';
-import startup from './main/startup';
 import registerUpdates from './main/update';
 
 logger.transports.file.level = 'silly';
 
 const log = logger.scope('startup');
 
-if (handleSquirrelEvent()) {
-  // @ts-expect-error this is fine
-  return;
-}
-
-function handleSquirrelEvent() {
-  if (process.argv.length === 1) {
-    return false;
-  }
-
-  const ChildProcess = require('child_process');
-  const path = require('path');
-
-  const appFolder = path.resolve(process.execPath, '..');
-  const rootAtomFolder = path.resolve(appFolder, '..');
-  const updateDotExe = path.resolve(path.join(rootAtomFolder, 'Update.exe'));
-  const exeName = path.basename(process.execPath);
-
-  const spawn = function(command, args) {
-    let spawnedProcess, error;
-
-    try {
-      spawnedProcess = ChildProcess.spawn(command, args, { detached: true });
-    } catch (error) {
-      logger.error(error);
-    }
-
-    return spawnedProcess;
-  };
-
-  const spawnUpdate = function(args) {
-    return spawn(updateDotExe, args);
-  };
-
-  const squirrelEvent = process.argv[1];
-  switch (squirrelEvent) {
-    case '--squirrel-install':
-    case '--squirrel-updated':
-      // Optionally do things such as:
-      // - Add your .exe to the PATH
-      // - Write to the registry for things like file associations and
-      //   explorer context menus
-
-      // Install desktop and start menu shortcuts
-      spawnUpdate(['--createShortcut', exeName]);
-
-      // eslint-disable-next-line @typescript-eslint/unbound-method
-      setTimeout(app.quit, 1000);
-      return true;
-
-    case '--squirrel-uninstall':
-      // Undo anything you did in the --squirrel-install and
-      // --squirrel-updated handlers
-
-      // Remove desktop and start menu shortcuts
-      spawnUpdate(['--removeShortcut', exeName]);
-
-      // eslint-disable-next-line @typescript-eslint/unbound-method
-      setTimeout(app.quit, 1000);
-      return true;
-
-    case '--squirrel-obsolete':
-      // This is called on the outgoing version of your app before
-      // we update to the new version - it's the opposite of
-      // --squirrel-updated
-
-      app.quit();
-      return true;
-  }
-}
-
 if (squirrelStartup) {
   log.silly('squirrel statup mode. quitting.');
   app.quit();
 }
-
-registerUpdates();
 
 ipcMain.handle(MESSAGE_CHANNEL.coreCheck, coreCheck);
 ipcMain.handle(MESSAGE_CHANNEL.deleteCore, (event, args: string[]) => deleteCore(args?.[0]));
@@ -156,7 +82,10 @@ try {
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
   // Added 400 ms to fix the black background issue while using transparent window. More detais at https://github.com/electron/electron/issues/15947
-  app.on('ready', () => setTimeout(createWindow, 400));
+  app.on('ready', () => {
+    registerUpdates();
+    setTimeout(createWindow, 400);
+  });
 
   // Quit when all windows are closed.
   app.on('window-all-closed', () => {
