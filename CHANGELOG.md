@@ -1,6 +1,19 @@
+## <small>0.0.2 (2021-01-23)</small>
+
+* chore(build): cache node modules correctly ([2412789](https://github.com/vanstinator/project-xenomorph/commit/2412789))
+* chore(build): run releases on self-hosted hardware ([119e36b](https://github.com/vanstinator/project-xenomorph/commit/119e36b))
+* chore(build): try building on self-hosted mac ([fb6044d](https://github.com/vanstinator/project-xenomorph/commit/fb6044d))
+* feat(core): add a bunch more cores/platforms ([b7022d4](https://github.com/vanstinator/project-xenomorph/commit/b7022d4))
+* feat(ui): improve the UI and searchability for cores ([57edffe](https://github.com/vanstinator/project-xenomorph/commit/57edffe))
+* feat(ui): support some basic filtering ([f481df7](https://github.com/vanstinator/project-xenomorph/commit/f481df7))
+* fix(ui): remove dead toast code ([efefe9a](https://github.com/vanstinator/project-xenomorph/commit/efefe9a))
+
+
+
 ## <small>0.0.1 (2021-01-23)</small>
 
 * chore: change release scripts ([3f843d2](https://github.com/vanstinator/project-xenomorph/commit/3f843d2))
+* chore: release v0.0.1 ([853aaf1](https://github.com/vanstinator/project-xenomorph/commit/853aaf1))
 * chore(main): remove custom squirrel code ([dd7bb37](https://github.com/vanstinator/project-xenomorph/commit/dd7bb37))
 
 
