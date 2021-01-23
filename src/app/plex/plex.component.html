@@ -1,32 +1,37 @@
-<!-- <p *ngIf="pmsLibraryExists">plex library found and writeable!</p> -->
-<p *ngIf="pmsLibraryExists===false">couldn't find or write to a plex library! grab logs from here and send them to me: %USERPROFILE%\AppData\Roaming\project-xenomorph\logs\</p>
-<!-- <p *ngIf="pmsLibraryExists===undefined">checking for plex library...</p> -->
-<ngb-accordion *ngIf="pmsLibraryExists" #acc="ngbAccordion" [activeIds]="activeIds">
-  <ngb-panel *ngFor="let platform of platforms" title="{{platform.name}}" class="open">
-    <ng-template ngbPanelContent>
-      <div class="table-responsive">
-      <table class="table-striped">
-        <thead>
-          <tr>
-            <th style="width: 65%" scope="col">Core</th>
-            <th style="width: 35%" scope="col">Download</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let core of platform.cores">
-            <td>
-              {{ core.name }}
-            </td>
-            <td>
-              <button *ngIf="core.downloaded" type="button" class="btn btn-danger core-btn" (click)="delete(core)">X</button>
-              <button *ngIf="!core.downloaded" type="button" class="btn btn-primary core-btn" (click)="download(core)">Download</button>
-              <!-- <button *ngIf="core.downloaded && !core.needsUpdate" disabled="true" type="button" class="btn btn-light core-btn" (click)="update(core)">Downloaded</button> -->
-              <!-- <button *ngIf="core.downloaded && core.needsUpdate" type="button" class="btn btn-info core-btn" (click)="update(core)">Update</button> -->
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      </div>
-    </ng-template>
-  </ngb-panel>
-</ngb-accordion>
+<div class="container">
+  <!-- <p *ngIf="pmsLibraryExists">plex library found and writeable!</p> -->
+  <p *ngIf="pmsLibraryExists===false">couldn't find or write to a plex library! grab logs from here and send them to me: %USERPROFILE%\AppData\Roaming\project-xenomorph\logs\</p>
+  <!-- <p *ngIf="pmsLibraryExists===undefined">checking for plex library...</p> -->
+  <div class="input-group mb-3">
+    <input id="typeahead-config" type="text" class="form-control" placeholder="Filter" [(ngModel)]="model" [ngbTypeahead]="search" [editable]=false [selectItem]="select()"/>
+  </div>
+  <ngb-accordion *ngIf="pmsLibraryExists" #acc="ngbAccordion" [activeIds]="activeIds">
+    <ngb-panel *ngFor="let platform of platforms" title="{{platform.name}}" class="open">
+      <ng-template ngbPanelContent>
+        <div class="table-responsive">
+        <table class="table-striped">
+          <thead>
+            <tr>
+              <th style="width: 65%" scope="col"></th>
+              <th style="width: 35%" scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let core of platform.cores">
+              <td class="name">
+                {{ core.name }}
+              </td>
+              <td>
+                <button *ngIf="core.downloaded" type="button" class="btn btn-danger core-btn" (click)="delete(core)">X</button>
+                <button *ngIf="!core.downloaded" type="button" class="btn btn-primary core-btn" (click)="download(core)">Download</button>
+                <!-- <button *ngIf="core.downloaded && !core.needsUpdate" disabled="true" type="button" class="btn btn-light core-btn" (click)="update(core)">Downloaded</button> -->
+                <!-- <button *ngIf="core.downloaded && core.needsUpdate" type="button" class="btn btn-info core-btn" (click)="update(core)">Update</button> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+</div>
