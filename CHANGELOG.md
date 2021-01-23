@@ -1,5 +1,13 @@
+## <small>0.0.1 (2021-01-23)</small>
+
+* chore: change release scripts ([3f843d2](https://github.com/vanstinator/project-xenomorph/commit/3f843d2))
+* chore(main): remove custom squirrel code ([dd7bb37](https://github.com/vanstinator/project-xenomorph/commit/dd7bb37))
+
+
+
 ## <small>0.0.1-alpha.13 (2021-01-22)</small>
 
+* chore: release v0.0.1-alpha.13 ([0093c0b](https://github.com/vanstinator/project-xenomorph/commit/0093c0b))
 * fix(win32): updates still aren't taking properly ([5cc987b](https://github.com/vanstinator/project-xenomorph/commit/5cc987b))
 
 
