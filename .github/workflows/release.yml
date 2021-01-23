@@ -12,7 +12,7 @@ jobs:
       matrix:
 #         os: [macos-latest, ubuntu-latest, windows-latest]
         # os: [macos-latest, windows-latest]
-        os: [windows-latest]
+        os: [self-hosted-macOS, self-hosted-windows]
 
     steps:
       - name: Check out Git repository
@@ -31,7 +31,7 @@ jobs:
         shell: bash
 
       - name: Add Windows certificate
-        if: matrix.os == 'windows-latest'
+        if: matrix.os == 'self-hosted-windows'
         id: write_file
         uses: timheuer/base64-to-file@v1
         with:
@@ -62,7 +62,7 @@ jobs:
 
       # Upload build file to the release as an asset
       - name: Upload Windows Files
-        if: matrix.os == 'windows-latest'
+        if: matrix.os == 'self-hosted-windows'
         uses: svenstaro/upload-release-action@v1-release
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -72,7 +72,7 @@ jobs:
           overwrite: true
 
       - name: Upload Windows Files
-        if: matrix.os == 'macOS-latest'
+        if: matrix.os == 'self-hosted-macOS'
         uses: svenstaro/upload-release-action@v1-release
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
