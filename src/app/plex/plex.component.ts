@@ -3,8 +3,8 @@ import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
-import { CORES, MESSAGE_CHANNEL, PLATFORMS } from '../../../core/constants';
-import { PlatformCore, PlatformCoreMapping } from '../../../core/types';
+import { CORES, MESSAGE_CHANNEL } from '../../../core/constants';
+import { PlatformCore } from '../../../core/types';
 
 @Component({
   selector: 'app-plex',
@@ -64,6 +64,7 @@ export class PlexComponent implements OnInit {
     const results = [];
     if (term.length > 1) {
       results.push(...this.cores.filter(core => core.name.toLowerCase().startsWith(term)).map(core => core.name));
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       results.push(...this.cores.filter(core => core.platform.toLowerCase().startsWith(term)).map(core => core.platform).filter(this.onlyUnique));
     }
 
