@@ -2,6 +2,7 @@ import { ARCH, Platform } from './types';
 
 export const MESSAGE_CHANNEL = {
   coreCheck: 'coreCheck',
+  coreResponse: 'coreResponse',
   deleteCore: 'deleteCore',
   downloadCore: 'downloadCore',
   pmsLibraryCheck: 'pmsLibraryCheck',

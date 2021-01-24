@@ -20,7 +20,8 @@ if (squirrelStartup) {
   app.quit();
 }
 
-ipcMain.handle(MESSAGE_CHANNEL.coreCheck, coreCheck);
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
+ipcMain.on(MESSAGE_CHANNEL.coreCheck, coreCheck);
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 ipcMain.on(MESSAGE_CHANNEL.downloadCore, downloadCore);
 ipcMain.handle(MESSAGE_CHANNEL.deleteCore, (event, args: string[]) => deleteCore(args?.[0]));

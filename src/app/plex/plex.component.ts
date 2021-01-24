@@ -29,6 +29,7 @@ export class PlexComponent implements OnInit {
   activeIds = [];
 
   download($core: PlatformCore): void {
+    this.cores.map(c => c.disabled = true);
     window.api.electronIpcSend(MESSAGE_CHANNEL.downloadCore, $core.filename);
     // $core.needsUpdate = true;
   }
@@ -42,6 +43,7 @@ export class PlexComponent implements OnInit {
     await window.api.electronIpcInvoke(MESSAGE_CHANNEL.deleteCore, $core.filename);
     $core.isDownloaded = false;
     $core.needsUpdate = false;
+    this.coreCheck();
   }
 
   select(): void {
@@ -73,7 +75,30 @@ export class PlexComponent implements OnInit {
     return self.indexOf(value) === index;
   }
 
+  coreCheck() {
+    window.api.electronIpcSend(MESSAGE_CHANNEL.coreCheck, []);
+  }
+
   ngOnInit(): void {
+
+    this.coreCheck();
+
+    window.api.electronIpcOn(MESSAGE_CHANNEL.coreResponse, (event, data) => {
+      console.log(data);
+      this.zone.run(() => {
+        this.cores.map(core => {
+          core.isDownloaded = data.some(d => d.core === core.filename);
+        });
+        this.cores.map(core => {
+          core.disabled = this.cores.some(c => c.platform === core.platform && (c.isDownloaded || c.downloadProgress > 0));
+        });
+        // const core = this.cores.find(core => core.platform === result.platformName || core.filename === result.core);
+        // core.isDownloaded = true;
+        // if (this.cores.filter(core => core.platform === result.platformName && core.isDownloaded).length > 0) {
+        //   this.cores.filter(core => core.platform === result.platformName && !core.isDownloaded).map(core => core.disabled = true);
+      });
+    });
+
     window.api.electronIpcOn(MESSAGE_CHANNEL.downloadProgress, (event, data) => {
       this.zone.run(() => {
         if (data.progress >= 100) {
@@ -88,15 +113,6 @@ export class PlexComponent implements OnInit {
     window.api.electronIpcInvoke(MESSAGE_CHANNEL.pmsLibraryCheck).then((result: boolean) => {
       this.config.showHint = true;
       this.pmsLibraryExists = result;
-
-      window.api.electronIpcInvoke(MESSAGE_CHANNEL.coreCheck).then((results: PlatformCoreMapping[]) => {
-        if (results.length) {
-          for (const result of results) {
-            const core = this.cores.find(core => core.platform === result.platformName || core.filename === result.core);
-            core.isDownloaded = true;
-          }
-        }
-      });
     });
   }
 }

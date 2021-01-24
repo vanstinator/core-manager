@@ -8,6 +8,7 @@ import { promisify } from 'util';
 
 import { MESSAGE_CHANNEL } from '../../core/constants';
 import { LIBRETRO_PATH_MACOS, LIBRETRO_PATH_WIN32, PMS_GAME_CORES_PATH, PMS_LIBRARY_PATH } from '../constants';
+import { getAllCoresFromDisk } from '../utils';
 import generateMappings from '../xml';
 
 const pipeline = promisify(stream.pipeline);
@@ -65,6 +66,10 @@ export default async function downloadCore(event, args: string[]): Promise<void>
 
     // Re-generate RetroCores.xml mappings
     await generateMappings();
+
+    const cores = await getAllCoresFromDisk();
+
+    event.reply(MESSAGE_CHANNEL.coreResponse, cores);
 
   } catch (e) {
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions

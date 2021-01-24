@@ -9,6 +9,7 @@ export interface PlatformCore {
   needsUpdate?: boolean;
   isDownloaded?: boolean;
   downloadProgress?: number;
+  disabled?: boolean;
   arch?: ARCH[];
   url?: string;
 }
