@@ -1,7 +1,16 @@
+## <small>0.0.6 (2021-01-24)</small>
+
+* fix(build): fix ts compilation errors ([4dc8fa7](https://github.com/vanstinator/project-xenomorph/commit/4dc8fa7))
+* chore(build): update release scripts ([899af50](https://github.com/vanstinator/project-xenomorph/commit/899af50))
+* feat(core): improve download ui experience (#7) ([dca7252](https://github.com/vanstinator/project-xenomorph/commit/dca7252)), closes [#7](https://github.com/vanstinator/project-xenomorph/issues/7)
+
+
+
 ## <small>0.0.5 (2021-01-24)</small>
 
-* fix(mac): allow insecure update loading from nuts server ([242b9c9](https://github.com/vanstinator/project-xenomorph/commit/242b9c9))
+* chore: release v0.0.5 ([e9b195c](https://github.com/vanstinator/project-xenomorph/commit/e9b195c))
 * chore(core): log uncaught errors ([d0fab56](https://github.com/vanstinator/project-xenomorph/commit/d0fab56))
+* fix(mac): allow insecure update loading from nuts server ([242b9c9](https://github.com/vanstinator/project-xenomorph/commit/242b9c9))
 
 
 
