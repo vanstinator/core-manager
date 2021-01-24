@@ -41,12 +41,13 @@ jobs:
           fileName: 'win-certificate.pfx'
           encodedString: ${{ secrets.WINDOWS_PFX_CERT }}
 
-      - name: Add MacOS certs
-        if: matrix.os == 'self-hosted-macOS'
-        run: chmod +x bin/add-macos-cert.sh && ./bin/add-macos-cert.sh
-        env:
-          MACOS_PFX_CERT: ${{ secrets.MACOS_PFX_CERT }}
-          CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+      # Use on github actions cloud
+      # - name: Add MacOS certs
+      #   if: matrix.os == 'self-hosted-macOS'
+      #   run: chmod +x bin/add-macos-cert.sh && ./bin/add-macos-cert.sh
+      #   env:
+      #     MACOS_PFX_CERT: ${{ secrets.MACOS_PFX_CERT }}
+      #     CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
 
       - name: Build
         env:
