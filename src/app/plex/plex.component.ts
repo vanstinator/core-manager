@@ -31,7 +31,6 @@ export class PlexComponent implements OnInit {
   download($core: PlatformCore): void {
     this.cores.map(c => c.disabled = true);
     window.api.electronIpcSend(MESSAGE_CHANNEL.downloadCore, $core.filename);
-    // $core.needsUpdate = true;
   }
 
   // async update($core: PlatformCore): Promise<void> {
@@ -84,7 +83,6 @@ export class PlexComponent implements OnInit {
     this.coreCheck();
 
     window.api.electronIpcOn(MESSAGE_CHANNEL.coreResponse, (event, data) => {
-      console.log(data);
       this.zone.run(() => {
         this.cores.map(core => {
           core.isDownloaded = data.some(d => d.core === core.filename);
@@ -92,10 +90,6 @@ export class PlexComponent implements OnInit {
         this.cores.map(core => {
           core.disabled = this.cores.some(c => c.platform === core.platform && (c.isDownloaded || c.downloadProgress > 0));
         });
-        // const core = this.cores.find(core => core.platform === result.platformName || core.filename === result.core);
-        // core.isDownloaded = true;
-        // if (this.cores.filter(core => core.platform === result.platformName && core.isDownloaded).length > 0) {
-        //   this.cores.filter(core => core.platform === result.platformName && !core.isDownloaded).map(core => core.disabled = true);
       });
     });
 
