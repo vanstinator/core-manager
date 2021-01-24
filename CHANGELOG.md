@@ -1,7 +1,14 @@
+## <small>0.0.7 (2021-01-24)</small>
+
+* fix(ui): extra html fluff ([fd36141](https://github.com/vanstinator/project-xenomorph/commit/fd36141))
+
+
+
 ## <small>0.0.6 (2021-01-24)</small>
 
-* fix(build): fix ts compilation errors ([4dc8fa7](https://github.com/vanstinator/project-xenomorph/commit/4dc8fa7))
+* chore: release v0.0.6 ([8a159c9](https://github.com/vanstinator/project-xenomorph/commit/8a159c9))
 * chore(build): update release scripts ([899af50](https://github.com/vanstinator/project-xenomorph/commit/899af50))
+* fix(build): fix ts compilation errors ([4dc8fa7](https://github.com/vanstinator/project-xenomorph/commit/4dc8fa7))
 * feat(core): improve download ui experience (#7) ([dca7252](https://github.com/vanstinator/project-xenomorph/commit/dca7252)), closes [#7](https://github.com/vanstinator/project-xenomorph/issues/7)
 
 
