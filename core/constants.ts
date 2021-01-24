@@ -4,7 +4,8 @@ export const MESSAGE_CHANNEL = {
   coreCheck: 'coreCheck',
   deleteCore: 'deleteCore',
   downloadCore: 'downloadCore',
-  pmsLibraryCheck: 'pmsLibraryCheck'
+  pmsLibraryCheck: 'pmsLibraryCheck',
+  downloadProgress: 'downloadProgress'
 };
 
 export const PLATFORMS: Platform[] = [

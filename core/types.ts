@@ -7,7 +7,8 @@ export interface PlatformCore {
   name: string;
   filename: string;
   needsUpdate?: boolean;
-  downloaded?: boolean;
+  isDownloaded?: boolean;
+  downloadProgress?: number;
   arch?: ARCH[];
   url?: string;
 }

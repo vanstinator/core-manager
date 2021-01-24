@@ -6,6 +6,7 @@ import stream from 'stream';
 import unzipper from 'unzipper';
 import { promisify } from 'util';
 
+import { MESSAGE_CHANNEL } from '../../core/constants';
 import { LIBRETRO_PATH_MACOS, LIBRETRO_PATH_WIN32, PMS_GAME_CORES_PATH, PMS_LIBRARY_PATH } from '../constants';
 import generateMappings from '../xml';
 
@@ -13,7 +14,9 @@ const pipeline = promisify(stream.pipeline);
 
 const log = logger.scope('downloadCore');
 
-export default async function downloadCore(coreFilename: string): Promise<void> {
+export default async function downloadCore(event, args: string[]): Promise<void> {
+
+  const coreFilename = args?.[0];
 
   log.info(`attempting to get ${coreFilename}`);
 
@@ -36,9 +39,14 @@ export default async function downloadCore(coreFilename: string): Promise<void> 
   const downloadStream = got.stream(downloadPath);
   const fileWriterStream = fs.createWriteStream(pathToZip);
 
+  let lastReportedPercent;
   downloadStream.on('downloadProgress', ({ transferred, total, percent }: { transferred: string, total: string, percent: number}) => {
     const percentage = Math.round(percent * 100);
-    log.silly(`progress: ${transferred}/${total} (${percentage}%)`);
+    if (lastReportedPercent !== percentage) {
+      log.silly(`progress: ${transferred}/${total} (${percentage}%)`);
+      event.reply(MESSAGE_CHANNEL.downloadProgress, { name: coreFilename, progress: percentage });
+      lastReportedPercent = percentage;
+    }
   });
 
   try {

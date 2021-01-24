@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
@@ -19,7 +19,7 @@ export class PlexComponent implements OnInit {
 
   pmsLibraryExists = undefined;
 
-  constructor(private config: NgbTypeaheadConfig) { }
+  constructor(private config: NgbTypeaheadConfig, private zone: NgZone) { }
 
   downloaded = false;
   needsUpdate = false;
@@ -28,10 +28,9 @@ export class PlexComponent implements OnInit {
 
   activeIds = [];
 
-  async download($core: PlatformCore): Promise<void> {
-    await window.api.electronIpcInvoke(MESSAGE_CHANNEL.downloadCore, $core.filename);
-    $core.downloaded = true;
-    $core.needsUpdate = true;
+  download($core: PlatformCore): void {
+    window.api.electronIpcSend(MESSAGE_CHANNEL.downloadCore, $core.filename);
+    // $core.needsUpdate = true;
   }
 
   // async update($core: PlatformCore): Promise<void> {
@@ -41,8 +40,8 @@ export class PlexComponent implements OnInit {
 
   async delete($core: PlatformCore): Promise<void> {
     await window.api.electronIpcInvoke(MESSAGE_CHANNEL.deleteCore, $core.filename);
+    $core.isDownloaded = false;
     $core.needsUpdate = false;
-    $core.downloaded = false;
   }
 
   select(): void {
@@ -75,6 +74,17 @@ export class PlexComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.api.electronIpcOn(MESSAGE_CHANNEL.downloadProgress, (event, data) => {
+      this.zone.run(() => {
+        if (data.progress >= 100) {
+          this.cores.find(core => core.filename === data.name).isDownloaded = true;
+          this.cores.find(core => core.filename === data.name).downloadProgress = undefined;
+        } else {
+          this.cores.find(core => core.filename === data.name).downloadProgress = data.progress;
+        }
+      });
+    });
+
     window.api.electronIpcInvoke(MESSAGE_CHANNEL.pmsLibraryCheck).then((result: boolean) => {
       this.config.showHint = true;
       this.pmsLibraryExists = result;
@@ -83,11 +93,10 @@ export class PlexComponent implements OnInit {
         if (results.length) {
           for (const result of results) {
             const core = this.cores.find(core => core.platform === result.platformName || core.filename === result.core);
-            core.downloaded = true;
+            core.isDownloaded = true;
           }
         }
       });
     });
   }
-
 }
