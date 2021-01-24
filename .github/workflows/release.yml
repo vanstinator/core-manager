@@ -68,7 +68,7 @@ jobs:
           tag: ${{ github.ref }}
           overwrite: true
 
-      - name: Upload Windows Files
+      - name: Upload macOS Files
         if: matrix.os == 'self-hosted-macOS'
         uses: svenstaro/upload-release-action@v1-release
         with:
