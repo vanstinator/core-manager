@@ -1,7 +1,10 @@
-import { PlatformCoreMapping } from '../../core/types';
+import { MESSAGE_CHANNEL } from '../../core/constants';
 import { getAllCoresFromDisk } from '../utils';
 
-export default async function coreCheck(): Promise<PlatformCoreMapping[]> {
+export default async function coreCheck(event, args: string[]): Promise<void> {
 
-  return await getAllCoresFromDisk();
+  const cores = await getAllCoresFromDisk();
+
+  event.reply(MESSAGE_CHANNEL.coreResponse, cores);
+
 }
