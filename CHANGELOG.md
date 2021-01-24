@@ -1,5 +1,12 @@
+## <small>0.0.4 (2021-01-24)</small>
+
+* fix(ui): use new core structure to fix filtering bugs ([902bef9](https://github.com/vanstinator/project-xenomorph/commit/902bef9))
+
+
+
 ## <small>0.0.3 (2021-01-24)</small>
 
+* chore: release v0.0.3 ([41b637a](https://github.com/vanstinator/project-xenomorph/commit/41b637a))
 * chore(build): tweak release.yml ([6c64e0e](https://github.com/vanstinator/project-xenomorph/commit/6c64e0e))
 
 
