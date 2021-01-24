@@ -1,5 +1,13 @@
+## <small>0.0.5 (2021-01-24)</small>
+
+* fix(mac): allow insecure update loading from nuts server ([242b9c9](https://github.com/vanstinator/project-xenomorph/commit/242b9c9))
+* chore(core): log uncaught errors ([d0fab56](https://github.com/vanstinator/project-xenomorph/commit/d0fab56))
+
+
+
 ## <small>0.0.4 (2021-01-24)</small>
 
+* chore: release v0.0.4 ([c7171fe](https://github.com/vanstinator/project-xenomorph/commit/c7171fe))
 * fix(ui): use new core structure to fix filtering bugs ([902bef9](https://github.com/vanstinator/project-xenomorph/commit/902bef9))
 
 
