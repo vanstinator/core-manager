@@ -51,6 +51,7 @@
     "@angular/core": "11.0.3",
     "@angular/forms": "11.0.3",
     "@angular/language-service": "11.0.3",
+    "@angular/localize": "11.0.3",
     "@angular/platform-browser": "11.0.3",
     "@angular/platform-browser-dynamic": "11.0.3",
     "@angular/router": "11.0.3",
