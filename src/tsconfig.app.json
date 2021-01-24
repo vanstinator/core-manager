@@ -14,7 +14,7 @@
   ],
   "exclude": [
     "**/*.spec.ts",
-    "**/node_modules"
+    "node_modules"
   ],
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

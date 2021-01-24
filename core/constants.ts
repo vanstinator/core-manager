@@ -256,6 +256,8 @@ export const PLATFORMS: Platform[] = [
   }
 ];
 
+export const CORES = flatMap(PLATFORMS, platform => platform.cores.map(core => { return { ...core, platform: platform.name }; })).reverse();
+
 export const CORE_TO_PLATFORM_MAPPING: { [key: string]: string } = PLATFORMS.reduce((accumulated, platform) => {
 
   const cores = platform.cores;
@@ -266,3 +268,7 @@ export const CORE_TO_PLATFORM_MAPPING: { [key: string]: string } = PLATFORMS.red
 
   return accumulated;
 }, {});
+
+function flatMap<T, U>(array: T[], mapFunc: (x: T) => U[]) : U[] {
+  return array.reduce((cumulus: U[], next: T) => [...mapFunc(next), ...cumulus], <U[]> []);
+}

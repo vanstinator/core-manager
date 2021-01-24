@@ -3,7 +3,7 @@ import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
-import { MESSAGE_CHANNEL, PLATFORMS } from '../../../core/constants';
+import { CORES, MESSAGE_CHANNEL, PLATFORMS } from '../../../core/constants';
 import { PlatformCore, PlatformCoreMapping } from '../../../core/types';
 
 @Component({
@@ -24,7 +24,7 @@ export class PlexComponent implements OnInit {
   downloaded = false;
   needsUpdate = false;
 
-  platforms = PLATFORMS;
+  cores = CORES;
 
   activeIds = [];
 
@@ -47,10 +47,9 @@ export class PlexComponent implements OnInit {
 
   select(): void {
     if (this.model) {
-      this.platforms = PLATFORMS.filter(p => p.name === this.model || !!p.cores.some(c => c.name === this.model));
-      this.platforms.map(p => p.cores = p.cores.filter(c => c.name === this.model));
+      this.cores = CORES.filter(core => core.platform === this.model || core.name === this.model);
     } else {
-      this.platforms = PLATFORMS;
+      this.cores = CORES;
     }
   }
 
@@ -63,31 +62,19 @@ export class PlexComponent implements OnInit {
 
   filter(term: string): any[] {
     const results = [];
-
-    let platformResults;
-    let coreResults;
     if (term.length > 1) {
-      platformResults = this.platforms.filter(p => p.name.toLowerCase().startsWith(term)).map(p => p.name);
-      if (platformResults.length) {
-        results.push(...platformResults);
-      }
-      for (const platform of this.platforms) {
-        coreResults = platform.cores.filter(c => c.name.toLowerCase().startsWith(term)).map(c => c.name);
-        if (coreResults.length) {
-          results.push(...coreResults);
-        }
-      }
+      results.push(...this.cores.filter(core => core.name.toLowerCase().startsWith(term)).map(core => core.name));
+      results.push(...this.cores.filter(core => core.platform.toLowerCase().startsWith(term)).map(core => core.platform).filter(this.onlyUnique));
     }
 
     return results.splice(0, 10);
   }
 
-  ngOnInit(): void {
-    this.activeIds = [];
-    for (let i = 0; i < PLATFORMS.length; i++) {
-      this.activeIds.push(`ngb-panel-${i}`);
-    }
+  onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
 
+  ngOnInit(): void {
     window.api.electronIpcInvoke(MESSAGE_CHANNEL.pmsLibraryCheck).then((result: boolean) => {
       this.config.showHint = true;
       this.pmsLibraryExists = result;
@@ -95,7 +82,7 @@ export class PlexComponent implements OnInit {
       window.api.electronIpcInvoke(MESSAGE_CHANNEL.coreCheck).then((results: PlatformCoreMapping[]) => {
         if (results.length) {
           for (const result of results) {
-            const core = this.platforms.find(platform => platform.name === result.platformName)?.cores.find(core => core.filename === result.core);
+            const core = this.cores.find(core => core.platform === result.platformName || core.filename === result.core);
             core.downloaded = true;
           }
         }
