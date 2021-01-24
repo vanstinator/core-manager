@@ -27,7 +27,7 @@ export default function registerUpdater() {
       updateUrl = `${server}/update/win32/${app.getVersion()}`;
     } else if (process.platform === 'darwin') {
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      updateUrl = `${server}/update/osx/:currentVersion/${os.platform()}_${os.arch()}/${app.getVersion()}/`;
+      updateUrl = `${server}/update/${os.platform()}_${os.arch()}/${app.getVersion()}/`;
     }
 
     autoUpdater.setFeedURL({ url: updateUrl });
