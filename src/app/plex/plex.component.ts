@@ -48,7 +48,7 @@ export class PlexComponent implements OnInit {
   select(): void {
     if (this.model) {
       this.platforms = PLATFORMS.filter(p => p.name === this.model || !!p.cores.some(c => c.name === this.model));
-      this.platforms.map(p => p.cores = p.cores.filter(c => c.filename === this.model));
+      this.platforms.map(p => p.cores = p.cores.filter(c => c.name === this.model));
     } else {
       this.platforms = PLATFORMS;
     }
@@ -56,7 +56,7 @@ export class PlexComponent implements OnInit {
 
   search = (text$: Observable<string>) =>
     text$.pipe(
-      debounceTime(50),
+      debounceTime(10),
       distinctUntilChanged(),
       map(term => this.filter(term.toLocaleLowerCase()))
     );
@@ -72,7 +72,7 @@ export class PlexComponent implements OnInit {
         results.push(...platformResults);
       }
       for (const platform of this.platforms) {
-        coreResults = platform.cores.filter(c => c.filename.toLowerCase().startsWith(term)).map(c => c.filename);
+        coreResults = platform.cores.filter(c => c.name.toLowerCase().startsWith(term)).map(c => c.name);
         if (coreResults.length) {
           results.push(...coreResults);
         }
