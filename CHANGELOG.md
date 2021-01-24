@@ -1,12 +1,21 @@
-## <small>0.0.2 (2021-01-23)</small>
+## <small>0.0.2 (2021-01-24)</small>
 
+* chore: release v0.0.2 ([4d4e232](https://github.com/vanstinator/project-xenomorph/commit/4d4e232))
 * chore(build): cache node modules correctly ([2412789](https://github.com/vanstinator/project-xenomorph/commit/2412789))
+* chore(build): don't inject mac certs on self-hosted ([620fc50](https://github.com/vanstinator/project-xenomorph/commit/620fc50))
+* chore(build): run builds on push on self hosted runners ([1ea8e07](https://github.com/vanstinator/project-xenomorph/commit/1ea8e07))
 * chore(build): run releases on self-hosted hardware ([119e36b](https://github.com/vanstinator/project-xenomorph/commit/119e36b))
 * chore(build): try building on self-hosted mac ([fb6044d](https://github.com/vanstinator/project-xenomorph/commit/fb6044d))
+* fix(core): bump version back down ([06aec26](https://github.com/vanstinator/project-xenomorph/commit/06aec26))
+* fix(mac): use correct auto update url ([ad95d16](https://github.com/vanstinator/project-xenomorph/commit/ad95d16))
+* fix(ui): button margins were wrong ([88d59d8](https://github.com/vanstinator/project-xenomorph/commit/88d59d8))
+* fix(ui): incorrect core mapping ([9304ec9](https://github.com/vanstinator/project-xenomorph/commit/9304ec9))
+* fix(ui): properly implement core name filter ([5f1ac4c](https://github.com/vanstinator/project-xenomorph/commit/5f1ac4c))
+* fix(ui): remove dead toast code ([efefe9a](https://github.com/vanstinator/project-xenomorph/commit/efefe9a))
 * feat(core): add a bunch more cores/platforms ([b7022d4](https://github.com/vanstinator/project-xenomorph/commit/b7022d4))
+* feat(core): sign macOS builds on self-hosted hardware ([0a4eb36](https://github.com/vanstinator/project-xenomorph/commit/0a4eb36))
 * feat(ui): improve the UI and searchability for cores ([57edffe](https://github.com/vanstinator/project-xenomorph/commit/57edffe))
 * feat(ui): support some basic filtering ([f481df7](https://github.com/vanstinator/project-xenomorph/commit/f481df7))
-* fix(ui): remove dead toast code ([efefe9a](https://github.com/vanstinator/project-xenomorph/commit/efefe9a))
 
 
 
