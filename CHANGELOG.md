@@ -1,5 +1,12 @@
+## <small>0.0.3 (2021-01-24)</small>
+
+* chore(build): tweak release.yml ([6c64e0e](https://github.com/vanstinator/project-xenomorph/commit/6c64e0e))
+
+
+
 ## <small>0.0.2 (2021-01-24)</small>
 
+* chore: release v0.0.2 ([4e6bc01](https://github.com/vanstinator/project-xenomorph/commit/4e6bc01))
 * chore: release v0.0.2 ([4d4e232](https://github.com/vanstinator/project-xenomorph/commit/4d4e232))
 * chore(build): cache node modules correctly ([2412789](https://github.com/vanstinator/project-xenomorph/commit/2412789))
 * chore(build): don't inject mac certs on self-hosted ([620fc50](https://github.com/vanstinator/project-xenomorph/commit/620fc50))
