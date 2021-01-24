@@ -14,6 +14,7 @@ import registerUpdates from './main/update';
 logger.transports.file.level = 'silly';
 
 const log = logger.scope('startup');
+logger.catchErrors();
 
 if (squirrelStartup) {
   log.silly('squirrel statup mode. quitting.');
