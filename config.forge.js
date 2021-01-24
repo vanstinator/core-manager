@@ -16,7 +16,21 @@ module.exports = {
       osxNotarize: {
         appleId: process.env['APPLE_ID'],
         appleIdPassword: process.env['APPLE_ID_PASSWORD']
-      }
+      },
+      extendInfo: {
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": false,
+          "NSExceptionDomains": {
+            "project-xenomorph.herokuapp.com": {
+              "NSTemporaryExceptionAllowsInsecureHTTPSLoads": false,
+              "NSIncludesSubdomains": false,
+              "NSTemporaryExceptionAllowsInsecureHTTPLoads": true,
+              "NSTemporaryExceptionMinimumTLSVersion": "1.0",
+              "NSTemporaryExceptionRequiresForwardSecrecy": false
+            }
+          }
+        }
+    }
   },
   makers: [
     {
