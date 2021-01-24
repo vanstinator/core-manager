@@ -23,9 +23,9 @@
     "e2e": "npm run build:prod && cross-env TS_NODE_PROJECT='e2e/tsconfig.e2e.json' mocha --timeout 300000 --require ts-node/register e2e/**/*.e2e.ts",
     "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "lint": "ng lint",
-    "release:patch": "dotenv release-it -- patch",
-    "release:minor": "dotenv release-it -- minor",
-    "release": "dotenv release-it",
+    "release:patch": "dotenv release-it -- patch --ci",
+    "release:minor": "dotenv release-it -- minor --ci",
+    "release": "dotenv release-it --ci",
     "package": "dotenv electron-forge package",
     "make": "dotenv electron-forge make"
   },
