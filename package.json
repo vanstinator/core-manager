@@ -1,9 +1,9 @@
 {
-  "name": "project-xenomorph",
+  "name": "core-manager",
   "version": "0.0.8",
-  "author": "Xeno Morph",
-  "description": "My Electron app",
+  "author": "Justin Vanderhooft",
   "main": "serve/main.js",
+  "description": "A libretro game emulator core manager for Plex Media Server",
   "keywords": [
     "wut"
   ],
