@@ -23,6 +23,7 @@
     "preload.ts"
   ],
   "exclude": [
+    "dist",
     "node_modules",
     "**/*.spec.ts"
   ]

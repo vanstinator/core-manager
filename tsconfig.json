@@ -27,6 +27,7 @@
     "src/**/*.d.ts"
   ],
   "exclude": [
+    "dist",
     "node_modules"
   ]
 }
