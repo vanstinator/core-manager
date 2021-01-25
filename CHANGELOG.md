@@ -1,5 +1,13 @@
+## <small>0.0.8 (2021-01-25)</small>
+
+* chore(core): ignore dist in tsconfig ([4514cd2](https://github.com/vanstinator/project-xenomorph/commit/4514cd2))
+* feat(build): build and ship dmg ([062dee5](https://github.com/vanstinator/project-xenomorph/commit/062dee5))
+
+
+
 ## <small>0.0.7 (2021-01-24)</small>
 
+* chore: release v0.0.7 ([f6396d1](https://github.com/vanstinator/project-xenomorph/commit/f6396d1))
 * fix(ui): extra html fluff ([fd36141](https://github.com/vanstinator/project-xenomorph/commit/fd36141))
 
 
