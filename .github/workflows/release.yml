@@ -74,6 +74,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file_glob: true
-          file: ./out/make/zip/darwin/x64/**
+          file: ./out/make/**
           tag: ${{ github.ref }}
           overwrite: true
