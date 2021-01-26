@@ -1,6 +1,9 @@
-<div class="container">
-    <!-- <p *ngIf="pmsLibraryExists">plex library found and writeable!</p> -->
-    <p *ngIf="pmsLibraryExists===false">couldn't find or write to a plex library! grab logs from here and send them to me: %USERPROFILE%\AppData\Roaming\project-xenomorph\logs\</p>
+<div *ngIf="!pmsLibraryExists" class="container">
+  <h4>Core Manager could not find a Plex Media Server directory. Is Plex installed on this machine?</h4>
+  <p>Installing Core Manager on a network machine is not yet supported. Custom paths will be a feature in a future release</p>
+</div>
+<div *ngIf="pmsLibraryExists" class="container">
+  <!-- <p *ngIf="pmsLibraryExists">plex library found and writeable!</p> -->
     <!-- <p *ngIf="pmsLibraryExists===undefined">checking for plex library...</p> -->
     <div class="input-group mb-3">
       <input id="typeahead-config" type="text" class="form-control" placeholder="Filter" [(ngModel)]="model" [ngbTypeahead]="search" [editable]=false [attr.selectItem]="select()"/>
