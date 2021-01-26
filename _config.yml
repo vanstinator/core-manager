@@ -1,0 +1,8 @@
+
+theme: jekyll-theme-cayman
+page:
+  title: Core Manager for Plex
+show_downloads: true
+github:
+  exe_url: https://downloads.coremanager.app/download/win
+  dmg_url: https://downloads.coremanager.app/download/osx
