@@ -9,3 +9,6 @@ The latest release are available [on our releases page](https://github.com/vanst
 
 #### Screenshots
 <img src="https://i.imgur.com/fWuVALj.png " data-canonical-src="https://i.imgur.com/fWuVALj.png " width="400"/>
+
+<p>Like what you see?</p>
+<a href="https://www.buymeacoffee.com/vanstinator"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a pizza&emoji=🍕&slug=vanstinator&button_colour=FFDD00&font_colour=000000&font_family=Lato&outline_colour=000000&coffee_colour=ffffff"></a>
