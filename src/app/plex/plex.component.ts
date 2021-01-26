@@ -3,8 +3,8 @@ import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
-import { CORES, MESSAGE_CHANNEL, PLATFORMS } from '../../../core/constants';
-import { PlatformCore, PlatformCoreMapping } from '../../../core/types';
+import { CORES, MESSAGE_CHANNEL } from '../../../core/constants';
+import { Core, PlatformCore } from '../../../core/types';
 
 @Component({
   selector: 'app-plex',
@@ -64,6 +64,7 @@ export class PlexComponent implements OnInit {
     const results = [];
     if (term.length > 1) {
       results.push(...this.cores.filter(core => core.name.toLowerCase().startsWith(term)).map(core => core.name));
+      // eslint-disable-next-line @typescript-eslint/unbound-method
       results.push(...this.cores.flatMap(core => core.platforms).filter(platform => platform.toLowerCase().startsWith(term)).filter(this.onlyUnique));
     }
 
@@ -74,15 +75,20 @@ export class PlexComponent implements OnInit {
     return self.indexOf(value) === index;
   }
 
-  coreCheck() {
-    window.api.electronIpcSend(MESSAGE_CHANNEL.coreCheck, []);
+  coreCheck(): void {
+    window.api.electronIpcSend(MESSAGE_CHANNEL.coreCheck);
+  }
+
+  openLink(core: Core): void {
+    console.log(core.filename)
+    window.api.electronIpcInvoke(MESSAGE_CHANNEL.openLink, core.filename)
   }
 
   ngOnInit(): void {
 
     this.coreCheck();
 
-    window.api.electronIpcOn(MESSAGE_CHANNEL.coreResponse, (event, data: PlatformCoreMapping[]) => {
+    window.api.electronIpcOn(MESSAGE_CHANNEL.coreResponse, (event, data: Core[]) => {
       this.zone.run(() => {
         this.cores.map(core => {
           core.isDownloaded = data.some(d => d.filename === core.filename);

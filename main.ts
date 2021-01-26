@@ -1,10 +1,10 @@
-import { app, BrowserWindow, ipcMain, screen } from 'electron';
+import { app, BrowserWindow, ipcMain, shell } from 'electron';
 import logger from 'electron-log';
 import squirrelStartup from 'electron-squirrel-startup';
 import * as path from 'path';
 import * as url from 'url';
 
-import { MESSAGE_CHANNEL } from './core/constants';
+import { CORES, MESSAGE_CHANNEL } from './core/constants';
 import coreCheck from './main/handlers/coreCheck';
 import deleteCore from './main/handlers/deleteCore';
 import downloadCore from './main/handlers/downloadCore';
@@ -27,15 +27,15 @@ ipcMain.on(MESSAGE_CHANNEL.coreCheck, coreCheck);
 ipcMain.on(MESSAGE_CHANNEL.downloadCore, downloadCore);
 ipcMain.handle(MESSAGE_CHANNEL.deleteCore, (event, args: string[]) => deleteCore(args?.[0]));
 ipcMain.handle(MESSAGE_CHANNEL.pmsLibraryCheck, pmsLibraryCheck);
+ipcMain.handle(MESSAGE_CHANNEL.openLink, (event, args: string[]) => {
+  shell.openExternal(CORES.find(core => core.filename === args?.[0]).infoUrl);
+});
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
 
 function createWindow(): BrowserWindow {
-
-  const electronScreen = screen;
-  const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
   // Create the browser window.
   win = new BrowserWindow({
@@ -49,7 +49,7 @@ function createWindow(): BrowserWindow {
       contextIsolation: true,  // false if you want to run 2e2 test with Spectron
       enableRemoteModule : true, // true if you want to run 2e2 test  with Spectron or use remote module in renderer context (ie. Angular),
       preload: path.join(__dirname, 'preload.js')
-    },
+    }
   });
 
   if (serve) {

@@ -9,7 +9,7 @@ export interface Core {
   downloadProgress?: number;
   disabled?: boolean;
   arch?: ARCH[];
-  url?: string;
+  infoUrl?: string;
 }
 export interface PlatformCore {
   name: string;
@@ -20,11 +20,6 @@ export interface PlatformCore {
   disabled?: boolean;
   arch?: ARCH[];
   url?: string;
-}
-
-export interface PlatformCoreMapping {
-  filename: string,
-  platforms: PLATFORMS[]
 }
 
 export enum ARCH {
