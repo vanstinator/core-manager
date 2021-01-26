@@ -1,7 +1,21 @@
+## <small>0.0.11 (2021-01-26)</small>
+
+* chore(build): build delta updates for win32 ([54c8ab3](https://github.com/vanstinator/project-xenomorph/commit/54c8ab3))
+* chore(build): remove nsexceptions for old domain ([d560d5f](https://github.com/vanstinator/project-xenomorph/commit/d560d5f))
+* fix(ui): better error message when PMS is not detected ([90d9137](https://github.com/vanstinator/project-xenomorph/commit/90d9137))
+* Create README.md ([df662a5](https://github.com/vanstinator/project-xenomorph/commit/df662a5))
+
+
+
 ## <small>0.0.10 (2021-01-26)</small>
 
+* chore: release v0.0.10 ([1c0ad3a](https://github.com/vanstinator/project-xenomorph/commit/1c0ad3a))
 * fix(ui): mac icns was corrupted for whatever reason ([85b145f](https://github.com/vanstinator/project-xenomorph/commit/85b145f))
-* fix(ui): make multi-platform cores look better ([060c888](https://github.com/vanstinator/project-xenomorph/commit/060c888))
+
+
+
+## <small>0.0.9 (2021-01-26)</small>
+
 * chore: release v0.0.9 ([96a9332](https://github.com/vanstinator/project-xenomorph/commit/96a9332))
 * chore(build): use the correct binary name ([b78cd55](https://github.com/vanstinator/project-xenomorph/commit/b78cd55))
 * chore(core): remove useless keywords from package.json ([82e17a2](https://github.com/vanstinator/project-xenomorph/commit/82e17a2))
@@ -10,6 +24,7 @@
 * chore(core): update branding metadata (#8) ([1635e8c](https://github.com/vanstinator/project-xenomorph/commit/1635e8c)), closes [#8](https://github.com/vanstinator/project-xenomorph/issues/8)
 * chore(core): use new domain for update server ([0c22ff4](https://github.com/vanstinator/project-xenomorph/commit/0c22ff4))
 * feat(ui): add button linking out to core info page where applicable ([e1069c5](https://github.com/vanstinator/project-xenomorph/commit/e1069c5))
+* fix(ui): make multi-platform cores look better ([060c888](https://github.com/vanstinator/project-xenomorph/commit/060c888))
 
 
 
