@@ -180,6 +180,13 @@ export const CORES: Core[] = [
 
   },
   {
+    platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
+    name: 'higan Accuracy',
+    filename: 'higan_sfc_libretro',
+    arch: [ARCH.macOS],
+    infoUrl: 'https://docs.libretro.com/library/higan_accuracy/'
+  },
+  {
     platforms: [PLATFORMS.Nintendo64],
     name: 'Mupen64Plus',
     filename: 'mupen64plus_next_libretro',
