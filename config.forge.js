@@ -6,7 +6,7 @@ module.exports = {
       asar: true,
       darwinDarkModeSupport: 'true',
       // icon: 'electron-app/resources/icon',
-      name: 'project-xenomorph',
+      name: 'Core Manager',
       osxSign: {
         entitlements: './bin/entitlements.plist',
         'entitlements-inherit': './bin/entitlements.plist',
