@@ -28,6 +28,13 @@ module.exports = {
               "NSTemporaryExceptionAllowsInsecureHTTPLoads": true,
               "NSTemporaryExceptionMinimumTLSVersion": "1.0",
               "NSTemporaryExceptionRequiresForwardSecrecy": false
+            },
+            "downloads.coremanager.app": {
+              "NSTemporaryExceptionAllowsInsecureHTTPSLoads": false,
+              "NSIncludesSubdomains": false,
+              "NSTemporaryExceptionAllowsInsecureHTTPLoads": true,
+              "NSTemporaryExceptionMinimumTLSVersion": "1.0",
+              "NSTemporaryExceptionRequiresForwardSecrecy": false
             }
           }
         }

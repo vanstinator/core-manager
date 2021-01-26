@@ -20,7 +20,7 @@ autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
 
 export default function registerUpdater() {
   try {
-    const server = 'https://project-xenomorph.herokuapp.com';
+    const server = 'https://downloads.coremanager.app';
 
     let updateUrl;
     if (process.platform === 'win32') {
