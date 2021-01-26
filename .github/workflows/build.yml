@@ -63,4 +63,4 @@ jobs:
         if: matrix.os == 'macOS-latest'
         with:
           name: macOS.zip
-          path: ./out/make/zip/darwin/x64/
+          path: ./out/make/
