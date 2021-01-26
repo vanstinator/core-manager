@@ -1,5 +1,12 @@
+## <small>1.0.1 (2021-01-26)</small>
+
+* fix(build): do not generate deltas ([00a54c6](https://github.com/vanstinator/project-xenomorph/commit/00a54c6))
+
+
+
 ## 1.0.0 (2021-01-26)
 
+* chore: release v1.0.0 ([986dbaa](https://github.com/vanstinator/project-xenomorph/commit/986dbaa))
 
 
 
