@@ -31,7 +31,7 @@ export enum PLATFORMS {
 
   // Sega
   Sega32x = 'Sega 32X',
-  SegaGameGear = 'Game Gear',
+  SegaGameGear = 'Sega Game Gear',
   SegaGenesis = 'Sega Genesis',
   SegaMasterSystem = 'Sega Master System',
 }
@@ -190,7 +190,7 @@ export const CORES: Core[] = [
     platforms: [PLATFORMS.Nintendo64],
     name: 'parallel_n64_libretro',
     filename: 'parallel_n64_libretro',
-    arch: [ARCH.win32],
+    arch: [ARCH.win32]
   },
   {
     platforms: [PLATFORMS.GameBoy, PLATFORMS.GameBoyColor],
