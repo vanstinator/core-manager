@@ -1,5 +1,11 @@
+## 1.0.0 (2021-01-26)
+
+
+
+
 ## <small>0.0.11 (2021-01-26)</small>
 
+* chore: release v0.0.11 ([78e1394](https://github.com/vanstinator/project-xenomorph/commit/78e1394))
 * chore(build): build delta updates for win32 ([54c8ab3](https://github.com/vanstinator/project-xenomorph/commit/54c8ab3))
 * chore(build): remove nsexceptions for old domain ([d560d5f](https://github.com/vanstinator/project-xenomorph/commit/d560d5f))
 * fix(ui): better error message when PMS is not detected ([90d9137](https://github.com/vanstinator/project-xenomorph/commit/90d9137))
