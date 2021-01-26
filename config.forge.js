@@ -19,22 +19,15 @@ module.exports = {
         appleIdPassword: process.env['APPLE_ID_PASSWORD']
       },
       extendInfo: {
-        "NSAppTransportSecurity": {
-          "NSAllowsArbitraryLoads": false,
-          "NSExceptionDomains": {
-            "project-xenomorph.herokuapp.com": {
-              "NSTemporaryExceptionAllowsInsecureHTTPSLoads": false,
-              "NSIncludesSubdomains": false,
-              "NSTemporaryExceptionAllowsInsecureHTTPLoads": true,
-              "NSTemporaryExceptionMinimumTLSVersion": "1.0",
-              "NSTemporaryExceptionRequiresForwardSecrecy": false
-            },
-            "downloads.coremanager.app": {
-              "NSTemporaryExceptionAllowsInsecureHTTPSLoads": false,
-              "NSIncludesSubdomains": false,
-              "NSTemporaryExceptionAllowsInsecureHTTPLoads": true,
-              "NSTemporaryExceptionMinimumTLSVersion": "1.0",
-              "NSTemporaryExceptionRequiresForwardSecrecy": false
+        NSAppTransportSecurity: {
+          NSAllowsArbitraryLoads: false,
+          NSExceptionDomains: {
+            'downloads.coremanager.app': {
+              NSTemporaryExceptionAllowsInsecureHTTPSLoads: false,
+              NSIncludesSubdomains: false,
+              NSTemporaryExceptionAllowsInsecureHTTPLoads: true,
+              NSTemporaryExceptionMinimumTLSVersion: "1.0",
+              NSTemporaryExceptionRequiresForwardSecrecy: false
             }
           }
         }
