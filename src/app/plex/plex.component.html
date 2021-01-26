@@ -21,7 +21,9 @@
               {{ core.name }}
             </td>
             <td>
-              {{ core.platform }}
+              <p id="platformName" *ngFor="let platform of core.platforms">
+                {{ platform }}
+              </p>
             </td>
             <td>
               <button *ngIf="core.isDownloaded" type="button" class="btn btn-outline-danger core-btn" (click)="delete(core)">
