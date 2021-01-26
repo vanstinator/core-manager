@@ -35,7 +35,7 @@ export default function registerUpdater() {
 
     setInterval(() => {
       autoUpdater.checkForUpdates();
-    }, 60000);
+    }, 60 * 1000 * 10); // every 10 minutes
   } catch (e) {
     log.error('there was a problem registering the updater. bailing out.', e);
   }
