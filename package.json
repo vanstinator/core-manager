@@ -1,6 +1,6 @@
 {
   "name": "core-manager",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": "Justin Vanderhooft",
   "main": "serve/main.js",
   "description": "A libretro game emulator core manager for Plex Media Server",

@@ -1,5 +1,19 @@
+## <small>0.0.9 (2021-01-26)</small>
+
+* chore(build): use the correct binary name ([b78cd55](https://github.com/vanstinator/project-xenomorph/commit/b78cd55))
+* chore(core): remove useless keywords from package.json ([82e17a2](https://github.com/vanstinator/project-xenomorph/commit/82e17a2))
+* chore(core): simplify game core representation ([5ceebc1](https://github.com/vanstinator/project-xenomorph/commit/5ceebc1))
+* chore(core): transpile to es2020 ([c0fd846](https://github.com/vanstinator/project-xenomorph/commit/c0fd846))
+* chore(core): update branding metadata (#8) ([1635e8c](https://github.com/vanstinator/project-xenomorph/commit/1635e8c)), closes [#8](https://github.com/vanstinator/project-xenomorph/issues/8)
+* chore(core): use new domain for update server ([0c22ff4](https://github.com/vanstinator/project-xenomorph/commit/0c22ff4))
+* feat(ui): add button linking out to core info page where applicable ([e1069c5](https://github.com/vanstinator/project-xenomorph/commit/e1069c5))
+* fix(ui): make multi-platform cores look better ([060c888](https://github.com/vanstinator/project-xenomorph/commit/060c888))
+
+
+
 ## <small>0.0.8 (2021-01-25)</small>
 
+* chore: release v0.0.8 ([fc92e7c](https://github.com/vanstinator/project-xenomorph/commit/fc92e7c))
 * chore(core): ignore dist in tsconfig ([4514cd2](https://github.com/vanstinator/project-xenomorph/commit/4514cd2))
 * feat(build): build and ship dmg ([062dee5](https://github.com/vanstinator/project-xenomorph/commit/062dee5))
 
