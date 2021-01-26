@@ -6,3 +6,5 @@ The latest release are available [on our releases page](https://github.com/vanst
 #### Installation Notes
 _You're going to get scary download warnings from both Chrome and Microsoft Smartscreen. The domain name and signing certificates for this project are both brand new. As more users download and use the tool these warnings will go away._
 
+<p>Like what you see?</p>
+<a href="https://www.buymeacoffee.com/vanstinator"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a pizza&emoji=🍕&slug=vanstinator&button_colour=FFDD00&font_colour=000000&font_family=Lato&outline_colour=000000&coffee_colour=ffffff"></a>
