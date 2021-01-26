@@ -25,7 +25,8 @@
     "release:minor": "dotenv release-it -- minor --ci",
     "release": "dotenv release-it --ci",
     "package": "dotenv electron-forge package",
-    "make": "dotenv electron-forge make"
+    "make": "dotenv electron-forge make",
+    "clean:releases": "node ./bin/clean.js"
   },
   "dependencies": {
     "electron-log": "4.3.1",
