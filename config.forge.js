@@ -37,7 +37,6 @@ module.exports = {
     {
       name: "@electron-forge/maker-squirrel",
       config: {
-        remoteReleases: `https://downloads.coremanager.app/update/win32/0.0.0`,
         signWithParams: `/f ${process.env['WINDOWS_PFX_FILE']} /p ${process.env['CERTIFICATE_PASSWORD']} /tr http://timestamp.comodoca.com /td sha256`
       }
     },
