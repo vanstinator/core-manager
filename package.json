@@ -4,9 +4,6 @@
   "author": "Justin Vanderhooft",
   "main": "serve/main.js",
   "description": "A libretro game emulator core manager for Plex Media Server",
-  "keywords": [
-    "wut"
-  ],
   "scripts": {
     "ng": "ng",
     "start": "npm-run-all -p electron:serve ng:serve",
