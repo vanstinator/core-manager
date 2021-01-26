@@ -1,5 +1,12 @@
+## <small>1.0.2 (2021-01-26)</small>
+
+* fix(core): game gear mapping was incorrect ([8e195bd](https://github.com/vanstinator/project-xenomorph/commit/8e195bd))
+
+
+
 ## <small>1.0.1 (2021-01-26)</small>
 
+* chore: release v1.0.1 ([d2742e3](https://github.com/vanstinator/project-xenomorph/commit/d2742e3))
 * fix(build): do not generate deltas ([00a54c6](https://github.com/vanstinator/project-xenomorph/commit/00a54c6))
 
 
