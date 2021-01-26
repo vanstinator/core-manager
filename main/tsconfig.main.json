@@ -2,7 +2,6 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../core",
-    "module": "es2015",
     "baseUrl": "",
     "types": []
   },
