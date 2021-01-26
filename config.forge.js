@@ -1,7 +1,8 @@
 module.exports = {
   packagerConfig: {
     asar: true,
-    ignore: "\\.git(ignore|modules)|node_modules/(.cache|.cli-ngcc)|.vscode|e2e|.editorconfig|.eslintrc.json|.npmrc|angular.json|angular.webpack.js|main.js.map|main.ts|tsconfig.json|tsconfig.serve.json|.env",
+    icon: "./icons/icon",
+    ignore: "\\.git(ignore|modules)|node_modules/(.cache|.cli-ngcc)|.vscode|e2e|.editorconfig|.eslintrc.json|.npmrc|angular.json|angular.webpack.js|main.js.map|main.ts|tsconfig.json|tsconfig.serve.json|.env|icons",
       asar: true,
       darwinDarkModeSupport: 'true',
       // icon: 'electron-app/resources/icon',
@@ -36,7 +37,7 @@ module.exports = {
     {
       name: "@electron-forge/maker-squirrel",
       config: {
-        name: "project_xenomorph",
+        // name: "project_xenomorph",
         signWithParams: `/f ${process.env['WINDOWS_PFX_FILE']} /p ${process.env['CERTIFICATE_PASSWORD']} /tr http://timestamp.comodoca.com /td sha256`
       }
     },
