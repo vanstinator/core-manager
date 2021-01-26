@@ -1,4 +1,4 @@
-name: Build Executables
+name: Build on Push
 
 on: push
 
