@@ -3,8 +3,8 @@ import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
-import { CORES, MESSAGE_CHANNEL } from '../../../core/constants';
-import { PlatformCore } from '../../../core/types';
+import { CORES, MESSAGE_CHANNEL, PLATFORMS } from '../../../core/constants';
+import { PlatformCore, PlatformCoreMapping } from '../../../core/types';
 
 @Component({
   selector: 'app-plex',
@@ -47,7 +47,7 @@ export class PlexComponent implements OnInit {
 
   select(): void {
     if (this.model) {
-      this.cores = CORES.filter(core => core.platform === this.model || core.name === this.model);
+      this.cores = CORES.filter(core => core.platforms.includes(this.model) || core.name === this.model);
     } else {
       this.cores = CORES;
     }
@@ -64,14 +64,13 @@ export class PlexComponent implements OnInit {
     const results = [];
     if (term.length > 1) {
       results.push(...this.cores.filter(core => core.name.toLowerCase().startsWith(term)).map(core => core.name));
-      // eslint-disable-next-line @typescript-eslint/unbound-method
-      results.push(...this.cores.filter(core => core.platform.toLowerCase().startsWith(term)).map(core => core.platform).filter(this.onlyUnique));
+      results.push(...this.cores.flatMap(core => core.platforms).filter(platform => platform.toLowerCase().startsWith(term)).filter(this.onlyUnique));
     }
 
     return results.splice(0, 10);
   }
 
-  onlyUnique(value, index, self) {
+  onlyUnique(value, index, self): boolean {
     return self.indexOf(value) === index;
   }
 
@@ -83,13 +82,13 @@ export class PlexComponent implements OnInit {
 
     this.coreCheck();
 
-    window.api.electronIpcOn(MESSAGE_CHANNEL.coreResponse, (event, data) => {
+    window.api.electronIpcOn(MESSAGE_CHANNEL.coreResponse, (event, data: PlatformCoreMapping[]) => {
       this.zone.run(() => {
         this.cores.map(core => {
-          core.isDownloaded = data.some(d => d.core === core.filename);
+          core.isDownloaded = data.some(d => d.filename === core.filename);
         });
         this.cores.map(core => {
-          core.disabled = this.cores.some(c => c.platform === core.platform && (c.isDownloaded || c.downloadProgress > 0));
+          core.disabled = this.cores.some(c => c.platforms.includes(core.platforms[0]) && (c.isDownloaded || c.downloadProgress > 0));
         });
       });
     });

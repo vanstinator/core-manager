@@ -1,8 +1,16 @@
-export interface Platform {
-  name: string,
-  cores: PlatformCore[],
-}
+import { PLATFORMS } from './constants';
 
+export interface Core {
+  platforms: PLATFORMS[],
+  name: string;
+  filename: string;
+  needsUpdate?: boolean;
+  isDownloaded?: boolean;
+  downloadProgress?: number;
+  disabled?: boolean;
+  arch?: ARCH[];
+  url?: string;
+}
 export interface PlatformCore {
   name: string;
   filename: string;
@@ -15,8 +23,8 @@ export interface PlatformCore {
 }
 
 export interface PlatformCoreMapping {
-  core: string,
-  platformName: string
+  filename: string,
+  platforms: PLATFORMS[]
 }
 
 export enum ARCH {

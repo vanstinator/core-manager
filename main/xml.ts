@@ -13,14 +13,19 @@ export default async function generateMappings(): Promise<void> {
     // do nothing
   }
 
+  const coresByPlatform = [];
+  for (const core of cores) {
+    for (const platform of core.platforms) {
+      coresByPlatform.push({
+        '@platform': platform,
+        '@core': core.filename
+      });
+    }
+  }
+
   const mappings = {
     Mappings: {
-      Mapping: cores.map(mapping => {
-        return {
-          '@platform': mapping.platformName,
-          '@core': mapping.core
-        };
-      })
+      Mapping: coresByPlatform
     }
   };
 
