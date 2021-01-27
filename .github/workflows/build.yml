@@ -1,4 +1,4 @@
-name: Build Executables
+name: Build on Push
 
 on: push
 
@@ -8,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [self-hosted-macOS, self-hosted-windows]
+        os: [macOS-latest, windows-latest]
 
     steps:
       - name: Check out Git repository
@@ -16,10 +16,6 @@ jobs:
 
       - name: Install Volta
         uses: volta-cli/action@v1
-
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
 
       - uses: actions/cache@v2
         with:
@@ -32,7 +28,7 @@ jobs:
         run: "npm install"
 
       - name: Add Windows certificate
-        if: matrix.os == 'self-hosted-windows'
+        if: matrix.os == 'windows-latest'
         id: write_file
         uses: timheuer/base64-to-file@v1
         with:
@@ -40,12 +36,12 @@ jobs:
           encodedString: ${{ secrets.WINDOWS_PFX_CERT }}
 
       # Use on github actions cloud
-      # - name: Add MacOS certs
-      #   if: matrix.os == 'self-hosted-macOS'
-      #   run: chmod +x bin/add-macos-cert.sh && ./bin/add-macos-cert.sh
-      #   env:
-      #     MACOS_PFX_CERT: ${{ secrets.MACOS_PFX_CERT }}
-      #     CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
+      - name: Add MacOS certs
+        if: matrix.os == 'macOS-latest'
+        run: chmod +x bin/add-macos-cert.sh && ./bin/add-macos-cert.sh
+        env:
+          MACOS_PFX_CERT: ${{ secrets.MACOS_PFX_CERT }}
+          CERTIFICATE_PASSWORD: ${{ secrets.CERTIFICATE_PASSWORD }}
 
       - name: Build
         env:
@@ -57,14 +53,14 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         name: Upload Windows artifacts
-        if: matrix.os == 'self-hosted-windows'
+        if: matrix.os == 'windows-latest'
         with:
           name: windows.zip
           path: ./out/make/squirrel.windows/x64/
 
       - uses: actions/upload-artifact@v2
         name: Upload macOS artifacts
-        if: matrix.os == 'self-hosted-macOS'
+        if: matrix.os == 'macOS-latest'
         with:
           name: macOS.zip
-          path: ./out/make/zip/darwin/x64/
+          path: ./out/make/
