@@ -8,5 +8,5 @@ const formatted = releases.replace(/(http:\/\/downloads\.coremanager\.app\/downl
 
 fs.writeFileSync(path.resolve('./out/make/squirrel.windows/x64/RELEASES'), formatted, 'utf-8');
 } catch (e) {
-  console.errer('could not clean RELEASES (maybe mac?)', e);
+  console.error('could not clean RELEASES (maybe mac?)', e);
 }
