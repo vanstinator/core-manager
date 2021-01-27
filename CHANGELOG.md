@@ -1,5 +1,18 @@
+## <small>1.0.3 (2021-01-27)</small>
+
+* chore(build): check for updates every 10 minutes rather than minute ([9c81058](https://github.com/vanstinator/project-xenomorph/commit/9c81058))
+* chore(build): make use of delta updates on windows (#9) ([370ea51](https://github.com/vanstinator/project-xenomorph/commit/370ea51)), closes [#9](https://github.com/vanstinator/project-xenomorph/issues/9)
+* chore(build): turn on cloud builds now that we're open source (#10) ([8b2dbd3](https://github.com/vanstinator/project-xenomorph/commit/8b2dbd3)), closes [#10](https://github.com/vanstinator/project-xenomorph/issues/10)
+* chore(license): add mit license ([79dd822](https://github.com/vanstinator/project-xenomorph/commit/79dd822))
+* feat(core): add higan_sfc for mac ([d3d6e4a](https://github.com/vanstinator/project-xenomorph/commit/d3d6e4a))
+* fix(ui): remove jank on startup ([22f2e41](https://github.com/vanstinator/project-xenomorph/commit/22f2e41))
+* Update README.md ([139f732](https://github.com/vanstinator/project-xenomorph/commit/139f732))
+
+
+
 ## <small>1.0.2 (2021-01-26)</small>
 
+* chore: release v1.0.2 ([51473e4](https://github.com/vanstinator/project-xenomorph/commit/51473e4))
 * fix(core): game gear mapping was incorrect ([8e195bd](https://github.com/vanstinator/project-xenomorph/commit/8e195bd))
 
 
