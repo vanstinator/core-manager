@@ -7,6 +7,7 @@ module.exports = {
       darwinDarkModeSupport: 'true',
       // icon: 'electron-app/resources/icon',
       name: 'Core Manager',
+      executableName: 'CoreManager',
       osxSign: {
         entitlements: './bin/entitlements.plist',
         'entitlements-inherit': './bin/entitlements.plist',
@@ -37,6 +38,7 @@ module.exports = {
     {
       name: "@electron-forge/maker-squirrel",
       config: {
+        exe: 'CoreManager.exe',
         remoteReleases: `https://downloads.coremanager.app/update/win32/0.0.0`,
         signWithParams: `/f ${process.env['WINDOWS_PFX_FILE']} /p ${process.env['CERTIFICATE_PASSWORD']} /tr http://timestamp.comodoca.com /td sha256`
       }
