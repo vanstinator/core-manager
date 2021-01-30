@@ -1,5 +1,16 @@
+## <small>1.0.4 (2021-01-30)</small>
+
+* feat(ui): show helpful error when rom unavailable ([103244d](https://github.com/vanstinator/project-xenomorph/commit/103244d))
+* fix(build): don't generate deltas unless we're explicitly releasing (#20) ([18538bb](https://github.com/vanstinator/project-xenomorph/commit/18538bb)), closes [#20](https://github.com/vanstinator/project-xenomorph/issues/20)
+* fix(build): rename win32 binary. fixes delta updates ([1e8cf6c](https://github.com/vanstinator/project-xenomorph/commit/1e8cf6c))
+* fix(core): log successful path detection correctly ([44667e5](https://github.com/vanstinator/project-xenomorph/commit/44667e5))
+* chore(ui): move electron logic to service ([bf1fba8](https://github.com/vanstinator/project-xenomorph/commit/bf1fba8))
+
+
+
 ## <small>1.0.3 (2021-01-27)</small>
 
+* chore: release v1.0.3 ([a255318](https://github.com/vanstinator/project-xenomorph/commit/a255318))
 * chore(build): check for updates every 10 minutes rather than minute ([9c81058](https://github.com/vanstinator/project-xenomorph/commit/9c81058))
 * chore(build): make use of delta updates on windows (#9) ([370ea51](https://github.com/vanstinator/project-xenomorph/commit/370ea51)), closes [#9](https://github.com/vanstinator/project-xenomorph/issues/9)
 * chore(build): turn on cloud builds now that we're open source (#10) ([8b2dbd3](https://github.com/vanstinator/project-xenomorph/commit/8b2dbd3)), closes [#10](https://github.com/vanstinator/project-xenomorph/issues/10)
