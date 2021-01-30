@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 import { CORES, MESSAGE_CHANNEL } from '../../../core/constants';
-import { Core, PlatformCore } from '../../../core/types';
+import { Core } from '../../../core/types';
 import { ElectronApiService } from '../core/services/electron-api.service';
 
 @Component({
@@ -22,20 +22,19 @@ export class PlexComponent implements OnInit {
 
   constructor(
     private config: NgbTypeaheadConfig,
-    private electronService: ElectronApiService,
-    private zone: NgZone
+    private electronService: ElectronApiService
   ) { }
 
   downloaded = false;
   needsUpdate = false;
 
-  cores = [];
+  cores: Core[] = [];
 
   activeIds = [];
 
-  download($core: PlatformCore): void {
+  download($core: Core): void {
     this.cores.map(c => c.disabled = true);
-    this.electronService.ipcSend(MESSAGE_CHANNEL.downloadCore, $core.filename);
+    this.electronService.ipcSend<Core>(MESSAGE_CHANNEL.downloadCore, $core);
   }
 
   // async update($core: PlatformCore): Promise<void> {
@@ -43,8 +42,8 @@ export class PlexComponent implements OnInit {
   //   $core.needsUpdate = false;
   // }
 
-  async delete($core: PlatformCore): Promise<void> {
-    await this.electronService.ipcInvoke(MESSAGE_CHANNEL.deleteCore, $core.filename);
+  async delete($core: Core): Promise<void> {
+    await this.electronService.ipcInvoke(MESSAGE_CHANNEL.deleteCore, $core);
     $core.isDownloaded = false;
     $core.needsUpdate = false;
     this.coreCheck();
@@ -93,23 +92,19 @@ export class PlexComponent implements OnInit {
     this.coreCheck();
 
     this.electronService.ipcOn(MESSAGE_CHANNEL.coreResponse, (event, data: Core[]) => {
-      console.log(data);
-      // this.cores.map(core => {
-      //   core.isDownloaded = data.some(d => d.filename === core.filename);
-      // });
       this.cores = data;
-
       this.cores.map(core => {
         core.disabled = this.cores.some(c => c.platforms.includes(core.platforms[0]) && (c.isDownloaded || c.downloadProgress > 0));
       });
     });
 
     this.electronService.ipcOn(MESSAGE_CHANNEL.downloadProgress, (event, data) => {
+      const core = this.cores.find(core => core.filename === data.filename && core.platforms[0] === data.platform);
       if (data.progress >= 100) {
-        this.cores.find(core => core.filename === data.name).isDownloaded = true;
-        this.cores.find(core => core.filename === data.name).downloadProgress = undefined;
+        core.isDownloaded = true;
+        core.downloadProgress = undefined;
       } else {
-        this.cores.find(core => core.filename === data.name).downloadProgress = data.progress;
+        core.downloadProgress = data.progress;
       }
     });
 

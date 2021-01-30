@@ -2,36 +2,48 @@ import logger from 'electron-log';
 import * as fs from 'fs';
 import * as path from 'path';
 
+import { MESSAGE_CHANNEL } from '../../core/constants';
+import { Core } from '../../core/types';
 import { PMS_GAME_CORES_PATH } from '../constants';
+import { getCores } from '../services/cores';
 import generateMappings from '../xml';
 
 const log = logger.scope('deleteCore');
 
-export default async function deleteCore(coreFilename: string): Promise<void> {
+export default async function deleteCore(event, args: Core[]): Promise<void> {
 
-  log.info(`attempting to get ${coreFilename}`);
+  const core = args[0];
+
+  log.info(`attempting to get ${core.filename}`);
 
   let filename: string;
 
   if (process.platform === 'win32') {
-    filename = `${coreFilename}.dll`;
+    filename = `${core.filename}.dll`;
   } else if (process.platform === 'darwin') {
-    filename = `${coreFilename}.dylib`;
+    filename = `${core.filename}.dylib`;
   }
 
   const pathToCore = path.resolve(`${PMS_GAME_CORES_PATH}/${filename}`);
 
-  try {
+  const cores = await getCores();
+  if (cores.filter(c => c.filename === core.filename && c.isDownloaded).length > 1) {
+    log.warn(`only deleting mapping for ${core.filename} - ${core.platforms[0]}. another mapping is using this core lib`);
+    await generateMappings(core, { delete: true });
+  } else {
 
-    // Delete the zip
-    await fs.promises.unlink(pathToCore);
-    log.debug(`deleted file: ${coreFilename}`);
+    try {
 
-    // Re-generate RetroCores.xml mappings
-    await generateMappings();
+      // Delete the zip
+      await fs.promises.unlink(pathToCore);
+      log.debug(`deleted file: ${core.filename}`);
 
-  } catch (e) {
+      // Re-generate RetroCores.xml mappings
+      await generateMappings(core, { delete: true });
+
+    } catch (e) {
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    log.error(`Something went wrong. ${e.message}`);
+      log.error(`Something went wrong. ${e.message}`);
+    }
   }
 }

@@ -36,7 +36,7 @@ export enum PLATFORMS {
   SegaMasterSystem = 'Sega Master System',
 }
 
-export const CORES: Core[] = [
+export const CORE_MAPPING: Core[] = [
   {
     platforms: [PLATFORMS.Arcade],
     name: 'MAME',
@@ -180,13 +180,6 @@ export const CORES: Core[] = [
 
   },
   {
-    platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
-    name: 'higan Accuracy',
-    filename: 'higan_sfc_libretro',
-    arch: [ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/higan_accuracy/'
-  },
-  {
     platforms: [PLATFORMS.Nintendo64],
     name: 'Mupen64Plus',
     filename: 'mupen64plus_next_libretro',
@@ -277,3 +270,14 @@ export const CORES: Core[] = [
     infoUrl: 'https://docs.libretro.com/library/picodrive/'
   }
 ];
+
+export const CORES = [];
+
+for (const core of CORE_MAPPING) {
+  for (const platform of core.platforms) {
+    CORES.push({
+      ...core,
+      platforms: [platform]
+    });
+  }
+}

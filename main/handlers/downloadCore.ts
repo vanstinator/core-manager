@@ -7,19 +7,20 @@ import unzipper from 'unzipper';
 import { promisify } from 'util';
 
 import { MESSAGE_CHANNEL } from '../../core/constants';
-import { LIBRETRO_PATH_MACOS, LIBRETRO_PATH_WIN32, PMS_GAME_CORES_PATH, PMS_LIBRARY_PATH } from '../constants';
-import { getAllCoresFromDisk } from '../utils';
+import { Core } from '../../core/types';
+import { LIBRETRO_PATH_MACOS, LIBRETRO_PATH_WIN32, PMS_GAME_CORES_PATH } from '../constants';
+import { getCores } from '../services/cores';
 import generateMappings from '../xml';
 
 const pipeline = promisify(stream.pipeline);
 
 const log = logger.scope('downloadCore');
 
-export default async function downloadCore(event, args: string[]): Promise<void> {
+export default async function downloadCore(event, args: Core[]): Promise<void> {
 
-  const coreFilename = args?.[0];
+  const core = args[0];
 
-  log.info(`attempting to get ${coreFilename}`);
+  log.info(`attempting to get ${core.filename}`);
 
   let filename: string;
   let downloadPath: string;
@@ -29,10 +30,10 @@ export default async function downloadCore(event, args: string[]): Promise<void>
   }
 
   if (process.platform === 'win32') {
-    filename = `${coreFilename}.dll.zip`;
+    filename = `${core.filename}.dll.zip`;
     downloadPath = `${LIBRETRO_PATH_WIN32}${filename}`;
   } else if (process.platform === 'darwin') {
-    filename = `${coreFilename}.dylib.zip`;
+    filename = `${core.filename}.dylib.zip`;
     downloadPath = `${LIBRETRO_PATH_MACOS}${filename}`;
   }
 
@@ -45,7 +46,7 @@ export default async function downloadCore(event, args: string[]): Promise<void>
     const percentage = Math.round(percent * 100);
     if (lastReportedPercent !== percentage) {
       log.silly(`progress: ${transferred}/${total} (${percentage}%)`);
-      event.reply(MESSAGE_CHANNEL.downloadProgress, { name: coreFilename, progress: percentage });
+      event.reply(MESSAGE_CHANNEL.downloadProgress, { filename: core.filename, platform: core.platforms[0], progress: percentage });
       lastReportedPercent = percentage;
     }
   });
@@ -65,9 +66,9 @@ export default async function downloadCore(event, args: string[]): Promise<void>
     log.debug('deleted file');
 
     // Re-generate RetroCores.xml mappings
-    await generateMappings();
+    await generateMappings(core);
 
-    const cores = await getAllCoresFromDisk();
+    const cores = await getCores();
 
     event.reply(MESSAGE_CHANNEL.coreResponse, cores);
 

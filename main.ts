@@ -5,6 +5,7 @@ import * as path from 'path';
 import * as url from 'url';
 
 import { CORES, MESSAGE_CHANNEL } from './core/constants';
+import { Core } from './core/types';
 import coreCheck from './main/handlers/coreCheck';
 import deleteCore from './main/handlers/deleteCore';
 import downloadCore from './main/handlers/downloadCore';
@@ -25,7 +26,7 @@ if (squirrelStartup) {
 ipcMain.on(MESSAGE_CHANNEL.coreCheck, coreCheck);
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 ipcMain.on(MESSAGE_CHANNEL.downloadCore, downloadCore);
-ipcMain.handle(MESSAGE_CHANNEL.deleteCore, (event, args: string[]) => deleteCore(args?.[0]));
+ipcMain.handle(MESSAGE_CHANNEL.deleteCore, deleteCore);
 ipcMain.handle(MESSAGE_CHANNEL.pmsLibraryCheck, pmsLibraryCheck);
 ipcMain.handle(MESSAGE_CHANNEL.openLink, (event, args: string[]) => {
   shell.openExternal(CORES.find(core => core.filename === args?.[0]).infoUrl);

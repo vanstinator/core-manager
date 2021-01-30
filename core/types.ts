@@ -11,15 +11,16 @@ export interface Core {
   arch?: ARCH[];
   infoUrl?: string;
 }
-export interface PlatformCore {
-  name: string;
-  filename: string;
-  needsUpdate?: boolean;
-  isDownloaded?: boolean;
-  downloadProgress?: number;
-  disabled?: boolean;
-  arch?: ARCH[];
-  url?: string;
+
+export interface XmlMapping {
+  Mappings: {
+    Mapping: [{
+      $: {
+        platform: string,
+        core: string
+      }
+    }]
+  }
 }
 
 export enum ARCH {
