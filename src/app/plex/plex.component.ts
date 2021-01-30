@@ -29,7 +29,7 @@ export class PlexComponent implements OnInit {
   downloaded = false;
   needsUpdate = false;
 
-  cores = CORES;
+  cores = [];
 
   activeIds = [];
 
@@ -53,8 +53,8 @@ export class PlexComponent implements OnInit {
   select(): void {
     if (this.model) {
       this.cores = CORES.filter(core => core.platforms.includes(this.model) || core.name === this.model);
-    } else {
-      this.cores = CORES;
+    } else if (this.cores.length !== CORES.length) {
+      this.coreCheck();
     }
   }
 
@@ -93,9 +93,12 @@ export class PlexComponent implements OnInit {
     this.coreCheck();
 
     this.electronService.ipcOn(MESSAGE_CHANNEL.coreResponse, (event, data: Core[]) => {
-      this.cores.map(core => {
-        core.isDownloaded = data.some(d => d.filename === core.filename);
-      });
+      console.log(data);
+      // this.cores.map(core => {
+      //   core.isDownloaded = data.some(d => d.filename === core.filename);
+      // });
+      this.cores = data;
+
       this.cores.map(core => {
         core.disabled = this.cores.some(c => c.platforms.includes(core.platforms[0]) && (c.isDownloaded || c.downloadProgress > 0));
       });

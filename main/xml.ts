@@ -14,7 +14,7 @@ export default async function generateMappings(): Promise<void> {
   }
 
   const coresByPlatform = [];
-  for (const core of cores) {
+  for (const core of cores.filter(core => core.isDownloaded)) {
     for (const platform of core.platforms) {
       coresByPlatform.push({
         '@platform': platform,
