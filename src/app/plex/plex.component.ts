@@ -5,6 +5,7 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 import { CORES, MESSAGE_CHANNEL } from '../../../core/constants';
 import { Core, PlatformCore } from '../../../core/types';
+import { ElectronApiService } from '../core/services/electron-api.service';
 
 @Component({
   selector: 'app-plex',
@@ -19,7 +20,11 @@ export class PlexComponent implements OnInit {
 
   pmsLibraryExists = undefined;
 
-  constructor(private config: NgbTypeaheadConfig, private zone: NgZone) { }
+  constructor(
+    private config: NgbTypeaheadConfig,
+    private electronService: ElectronApiService,
+    private zone: NgZone
+  ) { }
 
   downloaded = false;
   needsUpdate = false;
@@ -30,7 +35,7 @@ export class PlexComponent implements OnInit {
 
   download($core: PlatformCore): void {
     this.cores.map(c => c.disabled = true);
-    window.api.electronIpcSend(MESSAGE_CHANNEL.downloadCore, $core.filename);
+    this.electronService.ipcSend(MESSAGE_CHANNEL.downloadCore, $core.filename);
   }
 
   // async update($core: PlatformCore): Promise<void> {
@@ -39,7 +44,7 @@ export class PlexComponent implements OnInit {
   // }
 
   async delete($core: PlatformCore): Promise<void> {
-    await window.api.electronIpcInvoke(MESSAGE_CHANNEL.deleteCore, $core.filename);
+    await this.electronService.ipcInvoke(MESSAGE_CHANNEL.deleteCore, $core.filename);
     $core.isDownloaded = false;
     $core.needsUpdate = false;
     this.coreCheck();
@@ -76,41 +81,36 @@ export class PlexComponent implements OnInit {
   }
 
   coreCheck(): void {
-    window.api.electronIpcSend(MESSAGE_CHANNEL.coreCheck);
+    this.electronService.ipcSend(MESSAGE_CHANNEL.coreCheck);
   }
 
   openLink(core: Core): void {
-    console.log(core.filename)
-    window.api.electronIpcInvoke(MESSAGE_CHANNEL.openLink, core.filename)
+    this.electronService.ipcInvoke(MESSAGE_CHANNEL.openLink, core.filename);
   }
 
   ngOnInit(): void {
 
     this.coreCheck();
 
-    window.api.electronIpcOn(MESSAGE_CHANNEL.coreResponse, (event, data: Core[]) => {
-      this.zone.run(() => {
-        this.cores.map(core => {
-          core.isDownloaded = data.some(d => d.filename === core.filename);
-        });
-        this.cores.map(core => {
-          core.disabled = this.cores.some(c => c.platforms.includes(core.platforms[0]) && (c.isDownloaded || c.downloadProgress > 0));
-        });
+    this.electronService.ipcOn(MESSAGE_CHANNEL.coreResponse, (event, data: Core[]) => {
+      this.cores.map(core => {
+        core.isDownloaded = data.some(d => d.filename === core.filename);
+      });
+      this.cores.map(core => {
+        core.disabled = this.cores.some(c => c.platforms.includes(core.platforms[0]) && (c.isDownloaded || c.downloadProgress > 0));
       });
     });
 
-    window.api.electronIpcOn(MESSAGE_CHANNEL.downloadProgress, (event, data) => {
-      this.zone.run(() => {
-        if (data.progress >= 100) {
-          this.cores.find(core => core.filename === data.name).isDownloaded = true;
-          this.cores.find(core => core.filename === data.name).downloadProgress = undefined;
-        } else {
-          this.cores.find(core => core.filename === data.name).downloadProgress = data.progress;
-        }
-      });
+    this.electronService.ipcOn(MESSAGE_CHANNEL.downloadProgress, (event, data) => {
+      if (data.progress >= 100) {
+        this.cores.find(core => core.filename === data.name).isDownloaded = true;
+        this.cores.find(core => core.filename === data.name).downloadProgress = undefined;
+      } else {
+        this.cores.find(core => core.filename === data.name).downloadProgress = data.progress;
+      }
     });
 
-    window.api.electronIpcInvoke(MESSAGE_CHANNEL.pmsLibraryCheck).then((result: boolean) => {
+    this.electronService.ipcInvoke<boolean>(MESSAGE_CHANNEL.pmsLibraryCheck).then((result: boolean) => {
       this.config.showHint = true;
       this.pmsLibraryExists = result;
     });
