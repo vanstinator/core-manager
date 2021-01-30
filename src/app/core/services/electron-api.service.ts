@@ -17,7 +17,7 @@ export class ElectronApiService {
     window.api.electronIpcOn(channel, (event: any, data: any) => this.zone.run(() => { listener(event, data); }));
   }
 
-  ipcSend(channel: string, any?: any): void {
+  ipcSend<T>(channel: string, any?: T): void {
     window.api.electronIpcSend(channel, any);
   }
 
