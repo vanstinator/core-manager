@@ -10,10 +10,10 @@ import { PlexRoutingModule } from './plex-routing.module';
   declarations: [PlexComponent],
   imports: [
     CommonModule,
-    SharedModule,
-    PlexRoutingModule,
     NgbModule,
-    NgbToastModule
+    NgbToastModule,
+    PlexRoutingModule,
+    SharedModule
   ]
 })
 export class PlexModule { }
