@@ -7,7 +7,8 @@ export const MESSAGE_CHANNEL = {
   downloadCore: 'downloadCore',
   pmsLibraryCheck: 'pmsLibraryCheck',
   downloadProgress: 'downloadProgress',
-  openLink: 'openLink'
+  openLink: 'openLink',
+  pmsPath: 'pmsPath'
 };
 
 export enum PLATFORMS {

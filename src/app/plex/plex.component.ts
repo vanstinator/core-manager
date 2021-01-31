@@ -1,5 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -23,16 +24,20 @@ export class PlexComponent implements OnInit {
   cores: Core[] = [];
   dataSource = new MatTableDataSource(this.cores);
 
+  pmsPath;
+
   uniqueCorePlatforms: string[] = [];
 
   pmsLibraryExists = undefined;
 
   myControl = new FormControl();
+  plexDataPathControl = new FormControl();
+
   filteredOptions: Observable<string[]>;
   filter: string;
 
   constructor(
-    private _changeDetectorRefs: ChangeDetectorRef,
+    public dialog: MatDialog,
     private _electronService: ElectronApiService,
     private _snackBar: MatSnackBar
   ) { }
@@ -84,9 +89,27 @@ export class PlexComponent implements OnInit {
     });
   }
 
+  async updatePath() {
+    await this._electronService.ipcInvoke<string>(MESSAGE_CHANNEL.pmsPath, this.plexDataPathControl.value);
+    this.testPlexDataPath();
+  }
+
+  testPlexDataPath() {
+    this._electronService.ipcInvoke<boolean>(MESSAGE_CHANNEL.pmsLibraryCheck).then((result: boolean) => {
+      this.pmsLibraryExists = result;
+    });
+  }
+
   ngOnInit(): void {
 
     this.coreCheck();
+
+    this.testPlexDataPath();
+
+    this._electronService.ipcInvoke<string>(MESSAGE_CHANNEL.pmsPath).then((result: string) => {
+      console.log('######################');
+      this.plexDataPathControl.setValue(result);
+    });
 
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
@@ -133,9 +156,10 @@ export class PlexComponent implements OnInit {
         core.downloadProgress = data.progress;
       }
     });
-
-    this._electronService.ipcInvoke<boolean>(MESSAGE_CHANNEL.pmsLibraryCheck).then((result: boolean) => {
-      this.pmsLibraryExists = result;
-    });
   }
+}
+
+export interface DialogData {
+  animal: string;
+  name: string;
 }

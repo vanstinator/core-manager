@@ -1,6 +1,26 @@
 <div *ngIf="pmsLibraryExists===false" class="container">
-  <h4>Core Manager could not find a Plex Media Server directory. Is Plex installed on this machine?</h4>
-  <p>Installing Core Manager on a network machine is not yet supported. Custom paths will be a feature in a future release</p>
+  <mat-card>
+    <mat-card-title>
+      Uh oh
+    </mat-card-title>
+    <mat-card-subtitle>
+      There was a problem with the default Plex Media Server path.
+    </mat-card-subtitle>
+    <mat-card-content>
+      <mat-form-field appearance="outline" class="filter_box" (onBlur)="onSubmit()">
+        <mat-label>Plex Media Server data path</mat-label>
+        <input
+          matInput
+          [formControl]="plexDataPathControl"
+          [value]="pmsPath"
+        >
+        <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-stroked-button (click)="updatePath()">Test</button>
+    </mat-card-actions>
+  </mat-card>
 </div>
 <div *ngIf="pmsLibraryExists" class="container">
 <!-- <p *ngIf="pmsLibraryExists">plex library found and writeable!</p> -->

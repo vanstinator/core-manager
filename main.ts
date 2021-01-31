@@ -5,11 +5,12 @@ import * as path from 'path';
 import * as url from 'url';
 
 import { CORES, MESSAGE_CHANNEL } from './core/constants';
-import { Core } from './core/types';
+import { PMS_LIBRARY_PATH } from './main/constants';
 import coreCheck from './main/handlers/coreCheck';
 import deleteCore from './main/handlers/deleteCore';
 import downloadCore from './main/handlers/downloadCore';
 import pmsLibraryCheck from './main/handlers/pmsLibraryCheck';
+import settings from './main/settings';
 import registerUpdates from './main/update';
 
 logger.transports.file.level = 'silly';
@@ -28,6 +29,17 @@ ipcMain.on(MESSAGE_CHANNEL.coreCheck, coreCheck);
 ipcMain.on(MESSAGE_CHANNEL.downloadCore, downloadCore);
 ipcMain.handle(MESSAGE_CHANNEL.deleteCore, deleteCore);
 ipcMain.handle(MESSAGE_CHANNEL.pmsLibraryCheck, pmsLibraryCheck);
+ipcMain.handle(MESSAGE_CHANNEL.pmsPath, (event, args) => {
+  log.silly(JSON.stringify(args, null, 2));
+  log.silly(args[0]);
+  if (typeof(args[0]) !== 'string') {
+    log.silly('grabbing library path for UI');
+    return PMS_LIBRARY_PATH();
+  } else {
+    settings.set('pmsDataPath', args[0]);
+    log.silly('hi there buddy');
+  }
+});
 ipcMain.handle(MESSAGE_CHANNEL.openLink, (event, args: string[]) => {
   shell.openExternal(CORES.find(core => core.filename === args?.[0]).infoUrl);
 });
