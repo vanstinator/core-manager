@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NgbModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSortModule } from '@angular/material/sort';
 
+import { MaterialModule } from '../material-module';
 import { SharedModule } from '../shared/shared.module';
 import { PlexComponent } from './plex.component';
 import { PlexRoutingModule } from './plex-routing.module';
@@ -10,8 +12,10 @@ import { PlexRoutingModule } from './plex-routing.module';
   declarations: [PlexComponent],
   imports: [
     CommonModule,
-    NgbModule,
-    NgbToastModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSortModule,
     PlexRoutingModule,
     SharedModule
   ]

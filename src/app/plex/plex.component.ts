@@ -1,40 +1,45 @@
-import { Component, NgZone, OnInit } from '@angular/core';
-import { NgbTypeaheadConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
-import { CORES, MESSAGE_CHANNEL } from '../../../core/constants';
+import { MESSAGE_CHANNEL } from '../../../core/constants';
 import { Core } from '../../../core/types';
 import { ElectronApiService } from '../core/services/electron-api.service';
 
 @Component({
   selector: 'app-plex',
   templateUrl: './plex.component.html',
-  styleUrls: ['./plex.component.scss'],
-  providers: [NgbTypeaheadConfig] // add NgbTypeaheadConfig to the component providers
+  styleUrls: ['./plex.component.scss']
 })
 
 export class PlexComponent implements OnInit {
 
-  public model: any;
+  @ViewChild(MatSort) sort: MatSort;
+
+  cores: Core[] = [];
+  dataSource = new MatTableDataSource(this.cores);
+
+  uniqueCorePlatforms: string[] = [];
 
   pmsLibraryExists = undefined;
 
+  myControl = new FormControl();
+  filteredOptions: Observable<string[]>;
+  filter: string;
+
   constructor(
-    private config: NgbTypeaheadConfig,
-    private electronService: ElectronApiService
+    private _changeDetectorRefs: ChangeDetectorRef,
+    private _electronService: ElectronApiService,
+    private _snackBar: MatSnackBar
   ) { }
-
-  downloaded = false;
-  needsUpdate = false;
-
-  cores: Core[] = [];
-
-  activeIds = [];
 
   download($core: Core): void {
     this.cores.map(c => c.disabled = true);
-    this.electronService.ipcSend<Core>(MESSAGE_CHANNEL.downloadCore, $core);
+    this._electronService.ipcSend<Core>(MESSAGE_CHANNEL.downloadCore, $core);
   }
 
   // async update($core: PlatformCore): Promise<void> {
@@ -43,64 +48,85 @@ export class PlexComponent implements OnInit {
   // }
 
   async delete($core: Core): Promise<void> {
-    await this.electronService.ipcInvoke(MESSAGE_CHANNEL.deleteCore, $core);
+    await this._electronService.ipcInvoke(MESSAGE_CHANNEL.deleteCore, $core);
     $core.isDownloaded = false;
     $core.needsUpdate = false;
     this.coreCheck();
   }
 
-  select(): void {
-    if (this.model) {
-      this.cores = CORES.filter(core => core.platforms.includes(this.model) || core.name === this.model);
-    } else if (this.cores.length !== CORES.length) {
-      this.coreCheck();
-    }
-  }
-
-  search = (text$: Observable<string>) =>
-    text$.pipe(
-      debounceTime(10),
-      distinctUntilChanged(),
-      map(term => this.filter(term.toLocaleLowerCase()))
-    );
-
-  filter(term: string): any[] {
-    const results = [];
-    if (term.length > 1) {
-      results.push(...this.cores.filter(core => core.name.toLowerCase().startsWith(term)).map(core => core.name));
-      // eslint-disable-next-line @typescript-eslint/unbound-method
-      results.push(...this.cores.flatMap(core => core.platforms).filter(platform => platform.toLowerCase().startsWith(term)).filter(this.onlyUnique));
-    }
-
-    return results.splice(0, 10);
-  }
-
-  onlyUnique(value, index, self): boolean {
-    return self.indexOf(value) === index;
-  }
-
   coreCheck(): void {
-    this.electronService.ipcSend(MESSAGE_CHANNEL.coreCheck);
+    this._electronService.ipcSend(MESSAGE_CHANNEL.coreCheck);
   }
 
   openLink(core: Core): void {
-    this.electronService.ipcInvoke(MESSAGE_CHANNEL.openLink, core.filename);
+    this._electronService.ipcInvoke(MESSAGE_CHANNEL.openLink, core.filename);
+  }
+
+  private _filter(platform: string): string[] {
+    const filterValue = platform.toLowerCase();
+
+    return this.uniqueCorePlatforms.filter(p =>
+      p.toLowerCase().includes(filterValue)
+    );
+  }
+
+  filterUnique(value, index, self): boolean {
+    return self.indexOf(value) === index;
+  }
+
+  onSubmit() {
+    console.log('hi');
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000
+    });
   }
 
   ngOnInit(): void {
 
     this.coreCheck();
 
-    this.electronService.ipcOn(MESSAGE_CHANNEL.coreResponse, (event, data: Core[]) => {
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        map(value => value ? this._filter(value) : this.uniqueCorePlatforms.slice())
+      );
+
+    this.myControl.valueChanges.subscribe(value => {
+      if (this.uniqueCorePlatforms.includes(value) || !value) {
+        this.filter = value;
+        this.coreCheck();
+      }
+    });
+
+    this._electronService.ipcOn(MESSAGE_CHANNEL.coreResponse, (event, data: Core[]) => {
       this.cores = data;
       this.cores.map(core => {
         core.disabled = this.cores.some(c => c.platforms.includes(core.platforms[0]) && (c.isDownloaded || c.downloadProgress > 0));
       });
+
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      this.uniqueCorePlatforms = this.cores.map(core => core.platforms[0]).filter(this.filterUnique);
+
+      if (this.filter) {
+        this.cores = this.cores.filter(core => core.platforms[0] === this.filter);
+      }
+
+      this.dataSource = new MatTableDataSource(this.cores);
+      this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: string): string => {
+        if (typeof data[sortHeaderId] === 'string') {
+          return data[sortHeaderId].toLocaleLowerCase();
+        }
+
+        return data[sortHeaderId];
+      };
+      this.dataSource.sort = this.sort;
     });
 
-    this.electronService.ipcOn(MESSAGE_CHANNEL.downloadProgress, (event, data) => {
+    this._electronService.ipcOn(MESSAGE_CHANNEL.downloadProgress, (event, data) => {
       const core = this.cores.find(core => core.filename === data.filename && core.platforms[0] === data.platform);
-      if (data.progress >= 100) {
+      if (data.progress > 100) {
         core.isDownloaded = true;
         core.downloadProgress = undefined;
       } else {
@@ -108,8 +134,7 @@ export class PlexComponent implements OnInit {
       }
     });
 
-    this.electronService.ipcInvoke<boolean>(MESSAGE_CHANNEL.pmsLibraryCheck).then((result: boolean) => {
-      this.config.showHint = true;
+    this._electronService.ipcInvoke<boolean>(MESSAGE_CHANNEL.pmsLibraryCheck).then((result: boolean) => {
       this.pmsLibraryExists = result;
     });
   }

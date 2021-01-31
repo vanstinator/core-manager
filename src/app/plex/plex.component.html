@@ -3,62 +3,96 @@
   <p>Installing Core Manager on a network machine is not yet supported. Custom paths will be a feature in a future release</p>
 </div>
 <div *ngIf="pmsLibraryExists" class="container">
-  <!-- <p *ngIf="pmsLibraryExists">plex library found and writeable!</p> -->
-    <!-- <p *ngIf="pmsLibraryExists===undefined">checking for plex library...</p> -->
-    <div class="input-group mb-3">
-      <input id="typeahead-config" type="text" class="form-control" placeholder="Filter" [(ngModel)]="model" [ngbTypeahead]="search" [editable]=false [attr.selectItem]="select()"/>
-    </div>
-    <div class="card">
-      <div class="table-responsive scroll">
-      <table class="table-striped">
-        <thead>
-          <tr>
-            <th style="width: 40%" scope="col">Core</th>
-            <th style="width: 50%" scope="col">Platform</th>
-            <th style="width: 10%" scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let core of cores">
-            <td class="name">
-             <p style="float: left;">{{ core.name }}</p>
-             <p *ngIf="!!core.infoUrl" (click)="openLink(core)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
-                  <path d="M4.715 6.542L3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.001 1.001 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
-                  <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 0 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 0 0-4.243-4.243L6.586 4.672z"/>
-                </svg>
-              </p>
-            </td>
-            <td>
-              <p id="platformName" *ngFor="let platform of core.platforms">
-                {{ platform }}
-              </p>
-            </td>
-            <td>
-              <button *ngIf="core.isDownloaded" type="button" class="btn btn-outline-danger core-btn" (click)="delete(core)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                </svg>
-              </button>
-              <button *ngIf="(!core.isDownloaded && !core.downloadProgress) && core.supportedPlatform" type="button" class="btn btn-outline-primary core-btn" (click)="download(core)" [disabled]="core.disabled">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                </svg>
-              </button>
-              <button *ngIf="!core.supportedPlatform" type="button" class="btn btn-outline-secondary core-btn" placement="left"
-                      ngbPopover="This rom is temporarily unavailable from Libretro on your OS." popoverTitle="Unsupported">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                </svg>
-              </button>
-              <p *ngIf="!!core.downloadProgress" class="progressbar"><ngb-progressbar [striped]="true" [animated]="true" type="success" textType="white" max="100" [value]="core.downloadProgress" [showValue]="true"></ngb-progressbar></p>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      </div>
-  </div>
+<!-- <p *ngIf="pmsLibraryExists">plex library found and writeable!</p> -->
+  <!-- <p *ngIf="pmsLibraryExists===undefined">checking for plex library...</p> -->
+  <mat-card>
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let platform of filteredOptions | async" [value]="platform">
+        {{platform}}
+      </mat-option>
+    </mat-autocomplete>
+
+    <mat-form-field appearance="outline" class="filter_box" (onBlur)="onSubmit()">
+      <mat-label>Filter</mat-label>
+      <input
+        matInput
+        placeholder="Nintendo Entertainment System"
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+      >
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+    </mat-form-field>
+  </mat-card>
+  <mat-card>
+    <table mat-table matSort [dataSource]="dataSource">
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Core </th>
+        <td mat-cell *matCellDef="let core"> {{core.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="platform">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Platform </th>
+        <td mat-cell *matCellDef="let core"> {{core.platforms[0]}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="info">
+        <th mat-header-cell *matHeaderCellDef> Info </th>
+        <td mat-cell *matCellDef="let core">
+          <button
+            *ngIf="!!core.infoUrl"
+            mat-icon-button
+            (click)="openLink(core)"
+          >
+            <mat-icon>open_in_new</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let core">
+
+          <!-- Download -->
+          <button
+            *ngIf="!core.isDownloaded && !core.downloadProgress && core.supportedPlatform"
+            color="primary"
+            mat-icon-button
+            (click)="download(core)"
+            [disabled]="core.disabled"
+          >
+            <mat-icon>download</mat-icon>
+          </button>
+
+          <button
+            *ngIf="!core.isDownloaded && !core.downloadProgress && !core.supportedPlatform"
+            color="gray"
+            mat-icon-button
+            (click)="openSnackBar('Core temporarily unavailable on this OS', 'Ok')"
+          >
+            <mat-icon>download</mat-icon>
+          </button>
+
+          <!-- Delete -->
+          <button
+            *ngIf="core.isDownloaded && !core.downloadProgress"
+            color="warn"
+            mat-icon-button
+            (click)="delete(core)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+
+          <!-- Progress Spinner -->
+          <button *ngIf="core.downloadProgress"  mat-icon-button>
+            <mat-spinner [diameter]="24" mode="determinate" [value]="core.downloadProgress"></mat-spinner>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['name', 'platform', 'info', 'action']"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: ['name', 'platform', 'info', 'action']"></tr>
+
+    </table>
+  </mat-card>
 </div>

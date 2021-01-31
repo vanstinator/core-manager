@@ -1,39 +1,34 @@
 .container {
   max-width: 100%;
-
-  .card {
-    padding: 10px;
-
-    .scroll {
-      max-height: calc(100vh - 100px);
-      overflow-y: auto;
-    }
-  }
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-.core-btn {
-  margin: 5px
+mat-card {
+  margin-top: 10px
 }
 
-.input-group {
-  margin-top: 10px;
+.filter_box {
+  margin-top: -10px;
+  height: 60px;
+  width: 100%
+}
+
+.mat-row:nth-child(even){
+  background-color: #f2f2f2;
+}
+
+.mat-row:nth-child(odd){
+  background-color: white;
 }
 
 table {
   width: 100%
 }
 
-.name {
-  padding: 10px;
-}
-
-.progressbar {
-  margin-right: 50px;
-  margin-left: -50px;
-  margin-top: 1rem;
-}
-
-#platformName {
-  margin-top: 5px;
-  margin-bottom: 5px;
+mat-spinner {
+  float:left;
+  width: 24px;
+  height: 24px;
+  margin: 5px 10px 0px 0px;
 }
