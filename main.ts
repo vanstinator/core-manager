@@ -10,8 +10,10 @@ import coreCheck from './main/handlers/coreCheck';
 import deleteCore from './main/handlers/deleteCore';
 import downloadCore from './main/handlers/downloadCore';
 import pmsLibraryCheck from './main/handlers/pmsLibraryCheck';
-import settings from './main/settings';
+import settings, { initialize } from './main/settings';
 import registerUpdates from './main/update';
+
+initialize().then().catch();
 
 logger.transports.file.level = 'silly';
 
@@ -30,14 +32,11 @@ ipcMain.on(MESSAGE_CHANNEL.downloadCore, downloadCore);
 ipcMain.handle(MESSAGE_CHANNEL.deleteCore, deleteCore);
 ipcMain.handle(MESSAGE_CHANNEL.pmsLibraryCheck, pmsLibraryCheck);
 ipcMain.handle(MESSAGE_CHANNEL.pmsPath, (event, args) => {
-  log.silly(JSON.stringify(args, null, 2));
-  log.silly(args[0]);
-  if (typeof(args[0]) !== 'string') {
+  if (typeof (args[0]) !== 'string') {
     log.silly('grabbing library path for UI');
     return PMS_LIBRARY_PATH();
   } else {
-    settings.set('pmsDataPath', args[0]);
-    log.silly('hi there buddy');
+    settings.set.plexDataPath(args[0]);
   }
 });
 ipcMain.handle(MESSAGE_CHANNEL.openLink, (event, args: string[]) => {
@@ -60,7 +59,7 @@ function createWindow(): BrowserWindow {
       nodeIntegration: false,
       allowRunningInsecureContent: (serve) ? true : false,
       contextIsolation: true,  // false if you want to run 2e2 test with Spectron
-      enableRemoteModule : true, // true if you want to run 2e2 test  with Spectron or use remote module in renderer context (ie. Angular),
+      enableRemoteModule: true, // true if you want to run 2e2 test  with Spectron or use remote module in renderer context (ie. Angular),
       preload: path.join(__dirname, 'preload.js')
     }
   });

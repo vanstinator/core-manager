@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -30,7 +30,7 @@ export class PlexComponent implements OnInit {
 
   pmsLibraryExists = undefined;
 
-  myControl = new FormControl();
+  coreFilterControl = new FormControl();
   plexDataPathControl = new FormControl();
 
   filteredOptions: Observable<string[]>;
@@ -39,6 +39,7 @@ export class PlexComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private _electronService: ElectronApiService,
+    private _ref: ChangeDetectorRef,
     private _snackBar: MatSnackBar
   ) { }
 
@@ -91,32 +92,32 @@ export class PlexComponent implements OnInit {
 
   async updatePath() {
     await this._electronService.ipcInvoke<string>(MESSAGE_CHANNEL.pmsPath, this.plexDataPathControl.value);
-    this.testPlexDataPath();
+    await this.testPlexDataPath();
   }
 
-  testPlexDataPath() {
-    this._electronService.ipcInvoke<boolean>(MESSAGE_CHANNEL.pmsLibraryCheck).then((result: boolean) => {
-      this.pmsLibraryExists = result;
-    });
+  async testPlexDataPath() {
+    this.pmsLibraryExists = await this._electronService.ipcInvoke<boolean>(MESSAGE_CHANNEL.pmsLibraryCheck);
+    // TODO this is stupid and shouldn't be needed. Will likely fix itself when I refactor the electron services into observables
+    this._ref.detectChanges();
   }
 
   ngOnInit(): void {
 
     this.coreCheck();
 
-    this.testPlexDataPath();
+    this.testPlexDataPath().then();
 
     this._electronService.ipcInvoke<string>(MESSAGE_CHANNEL.pmsPath).then((result: string) => {
       console.log('######################');
       this.plexDataPathControl.setValue(result);
     });
 
-    this.filteredOptions = this.myControl.valueChanges
+    this.filteredOptions = this.coreFilterControl.valueChanges
       .pipe(
         map(value => value ? this._filter(value) : this.uniqueCorePlatforms.slice())
       );
 
-    this.myControl.valueChanges.subscribe(value => {
+    this.coreFilterControl.valueChanges.subscribe(value => {
       if (this.uniqueCorePlatforms.includes(value) || !value) {
         this.filter = value;
         this.coreCheck();

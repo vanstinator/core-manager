@@ -15,7 +15,7 @@ export default async function generateMappings(core?: Core, opts?: { delete: boo
   const cores = await getCores();
 
   try {
-    await fs.promises.unlink(PMS_MAPPINGS_PATH);
+    await fs.promises.unlink(PMS_MAPPINGS_PATH());
   } catch (e) {
     // do nothing
   }
@@ -52,5 +52,5 @@ export default async function generateMappings(core?: Core, opts?: { delete: boo
 
   log.info('generated mappings');
 
-  await fs.promises.writeFile(PMS_MAPPINGS_PATH, xml);
+  await fs.promises.writeFile(PMS_MAPPINGS_PATH(), xml);
 }

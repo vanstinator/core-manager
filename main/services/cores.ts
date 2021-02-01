@@ -21,7 +21,7 @@ async function loadXMLMappings(): Promise<XmlMapping | undefined> {
   const parser = new xml2js.Parser();
 
   try {
-    const xml = await fs.promises.readFile(PMS_MAPPINGS_PATH);
+    const xml = await fs.promises.readFile(PMS_MAPPINGS_PATH());
     return parser.parseStringPromise(xml);
   } catch (e) {
     log.warn('no mappings file available yet', e);
@@ -31,7 +31,7 @@ async function loadXMLMappings(): Promise<XmlMapping | undefined> {
 async function loadCores(): Promise<Core[]> {
 
   const xmlMapping = await loadXMLMappings();
-  const files = await fs.promises.readdir(PMS_GAME_CORES_PATH);
+  const files = await fs.promises.readdir(PMS_GAME_CORES_PATH());
 
   const cores = JSON.parse(JSON.stringify(CORES)).map(core => {
 
