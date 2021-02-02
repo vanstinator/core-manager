@@ -69,6 +69,7 @@ export class PlexComponent implements OnInit {
   }
 
   private _filter(platform: string): string[] {
+    console.log(platform);
     const filterValue = platform.toLowerCase();
 
     return this.uniqueCorePlatforms.filter(p =>
@@ -93,12 +94,12 @@ export class PlexComponent implements OnInit {
   async updatePath() {
     await this._electronService.ipcInvoke<string>(MESSAGE_CHANNEL.pmsPath, this.plexDataPathControl.value);
     await this.testPlexDataPath();
+    // TODO this is stupid and shouldn't be needed. Will likely fix itself when I refactor the electron services into observables
+    this._ref.detectChanges();
   }
 
   async testPlexDataPath() {
     this.pmsLibraryExists = await this._electronService.ipcInvoke<boolean>(MESSAGE_CHANNEL.pmsLibraryCheck);
-    // TODO this is stupid and shouldn't be needed. Will likely fix itself when I refactor the electron services into observables
-    this._ref.detectChanges();
   }
 
   ngOnInit(): void {
@@ -108,7 +109,6 @@ export class PlexComponent implements OnInit {
     this.testPlexDataPath().then();
 
     this._electronService.ipcInvoke<string>(MESSAGE_CHANNEL.pmsPath).then((result: string) => {
-      console.log('######################');
       this.plexDataPathControl.setValue(result);
     });
 
