@@ -19,7 +19,7 @@ jobs:
 
       - uses: actions/cache@v2
         with:
-          path: '**/node_modules'
+          path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-modules-
@@ -32,7 +32,7 @@ jobs:
         id: write_file
         uses: timheuer/base64-to-file@v1
         with:
-          fileName: 'win-certificate.pfx'
+          fileName: "win-certificate.pfx"
           encodedString: ${{ secrets.WINDOWS_PFX_CERT }}
 
       # Use on github actions cloud
@@ -56,11 +56,11 @@ jobs:
         if: matrix.os == 'windows-latest'
         with:
           name: windows.zip
-          path: ./out/make/squirrel.windows/x64/
+          path: ./out/make/**/*Setup.exe
 
       - uses: actions/upload-artifact@v2
         name: Upload macOS artifacts
         if: matrix.os == 'macOS-latest'
         with:
           name: macOS.zip
-          path: ./out/make/
+          path: ./out/make/*.dmg
