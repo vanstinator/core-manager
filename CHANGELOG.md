@@ -1,12 +1,19 @@
+## <small>1.1.1 (2021-02-02)</small>
+
+* fix(build): properly escape regex ([a82cef9](https://github.com/vanstinator/project-xenomorph/commit/a82cef9))
+
+
+
 ## 1.1.0 (2021-02-02)
 
+* chore: release v1.1.0 ([d1511b0](https://github.com/vanstinator/project-xenomorph/commit/d1511b0))
+* chore(build): only upload installers as artifacts to github (#27) ([d126625](https://github.com/vanstinator/project-xenomorph/commit/d126625)), closes [#27](https://github.com/vanstinator/project-xenomorph/issues/27)
 * fix(ui): change ref was causing UI elements to become non-responsive ([b9c5384](https://github.com/vanstinator/project-xenomorph/commit/b9c5384))
 * feat(core): add snes9x cores ([55311a6](https://github.com/vanstinator/project-xenomorph/commit/55311a6))
 * feat(core): allow mapping one core to many platforms #22 ([f8641cf](https://github.com/vanstinator/project-xenomorph/commit/f8641cf)), closes [#22](https://github.com/vanstinator/project-xenomorph/issues/22)
 * feat(core): custom pms paths (#25) ([018cebf](https://github.com/vanstinator/project-xenomorph/commit/018cebf)), closes [#25](https://github.com/vanstinator/project-xenomorph/issues/25)
 * feat(ui): automatically detected dark-mode (#26) ([ddc8477](https://github.com/vanstinator/project-xenomorph/commit/ddc8477)), closes [#26](https://github.com/vanstinator/project-xenomorph/issues/26)
 * feat(ui): rewrite UI with angular material ([89a2470](https://github.com/vanstinator/project-xenomorph/commit/89a2470))
-* chore(build): only upload installers as artifacts to github (#27) ([d126625](https://github.com/vanstinator/project-xenomorph/commit/d126625)), closes [#27](https://github.com/vanstinator/project-xenomorph/issues/27)
 
 
 
