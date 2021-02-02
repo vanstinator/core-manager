@@ -1,10 +1,23 @@
+## 1.1.0 (2021-02-02)
+
+* fix(ui): change ref was causing UI elements to become non-responsive ([b9c5384](https://github.com/vanstinator/project-xenomorph/commit/b9c5384))
+* feat(core): add snes9x cores ([55311a6](https://github.com/vanstinator/project-xenomorph/commit/55311a6))
+* feat(core): allow mapping one core to many platforms #22 ([f8641cf](https://github.com/vanstinator/project-xenomorph/commit/f8641cf)), closes [#22](https://github.com/vanstinator/project-xenomorph/issues/22)
+* feat(core): custom pms paths (#25) ([018cebf](https://github.com/vanstinator/project-xenomorph/commit/018cebf)), closes [#25](https://github.com/vanstinator/project-xenomorph/issues/25)
+* feat(ui): automatically detected dark-mode (#26) ([ddc8477](https://github.com/vanstinator/project-xenomorph/commit/ddc8477)), closes [#26](https://github.com/vanstinator/project-xenomorph/issues/26)
+* feat(ui): rewrite UI with angular material ([89a2470](https://github.com/vanstinator/project-xenomorph/commit/89a2470))
+* chore(build): only upload installers as artifacts to github (#27) ([d126625](https://github.com/vanstinator/project-xenomorph/commit/d126625)), closes [#27](https://github.com/vanstinator/project-xenomorph/issues/27)
+
+
+
 ## <small>1.0.4 (2021-01-30)</small>
 
+* chore: release v1.0.4 ([be16f7f](https://github.com/vanstinator/project-xenomorph/commit/be16f7f))
+* chore(ui): move electron logic to service ([bf1fba8](https://github.com/vanstinator/project-xenomorph/commit/bf1fba8))
 * feat(ui): show helpful error when rom unavailable ([103244d](https://github.com/vanstinator/project-xenomorph/commit/103244d))
 * fix(build): don't generate deltas unless we're explicitly releasing (#20) ([18538bb](https://github.com/vanstinator/project-xenomorph/commit/18538bb)), closes [#20](https://github.com/vanstinator/project-xenomorph/issues/20)
 * fix(build): rename win32 binary. fixes delta updates ([1e8cf6c](https://github.com/vanstinator/project-xenomorph/commit/1e8cf6c))
 * fix(core): log successful path detection correctly ([44667e5](https://github.com/vanstinator/project-xenomorph/commit/44667e5))
-* chore(ui): move electron logic to service ([bf1fba8](https://github.com/vanstinator/project-xenomorph/commit/bf1fba8))
 
 
 
