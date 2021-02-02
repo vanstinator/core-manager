@@ -24,7 +24,7 @@ export default async function deleteCore(event, args: Core[]): Promise<void> {
     filename = `${core.filename}.dylib`;
   }
 
-  const pathToCore = path.resolve(`${PMS_GAME_CORES_PATH}/${filename}`);
+  const pathToCore = path.resolve(`${PMS_GAME_CORES_PATH()}/${filename}`);
 
   const cores = await getCores();
   if (cores.filter(c => c.filename === core.filename && c.isDownloaded).length > 1) {
@@ -42,7 +42,7 @@ export default async function deleteCore(event, args: Core[]): Promise<void> {
       await generateMappings(core, { delete: true });
 
     } catch (e) {
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       log.error(`Something went wrong. ${e.message}`);
     }
   }

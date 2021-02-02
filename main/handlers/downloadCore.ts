@@ -25,8 +25,8 @@ export default async function downloadCore(event, args: Core[]): Promise<void> {
   let filename: string;
   let downloadPath: string;
 
-  if (!fs.existsSync(PMS_GAME_CORES_PATH)) {
-    await fs.promises.mkdir(PMS_GAME_CORES_PATH);
+  if (!fs.existsSync(PMS_GAME_CORES_PATH())) {
+    await fs.promises.mkdir(PMS_GAME_CORES_PATH());
   }
 
   if (process.platform === 'win32') {
@@ -37,12 +37,12 @@ export default async function downloadCore(event, args: Core[]): Promise<void> {
     downloadPath = `${LIBRETRO_PATH_MACOS}${filename}`;
   }
 
-  const pathToZip = path.resolve(`${PMS_GAME_CORES_PATH}/${filename}`);
+  const pathToZip = path.resolve(`${PMS_GAME_CORES_PATH()}/${filename}`);
   const downloadStream = got.stream(downloadPath);
   const fileWriterStream = fs.createWriteStream(pathToZip);
 
   let lastReportedPercent;
-  downloadStream.on('downloadProgress', ({ transferred, total, percent }: { transferred: string, total: string, percent: number}) => {
+  downloadStream.on('downloadProgress', ({ transferred, total, percent }: { transferred: string, total: string, percent: number }) => {
     const percentage = Math.round(percent * 100);
     if (lastReportedPercent !== percentage) {
       log.silly(`progress: ${transferred}/${total} (${percentage}%)`);
@@ -58,7 +58,7 @@ export default async function downloadCore(event, args: Core[]): Promise<void> {
     log.debug(`file downloaded to ${pathToZip}`);
 
     // Extract the core
-    await pipeline(fs.createReadStream(pathToZip), unzipper.Extract({ path: `${PMS_GAME_CORES_PATH}` }));
+    await pipeline(fs.createReadStream(pathToZip), unzipper.Extract({ path: `${PMS_GAME_CORES_PATH()}` }));
     log.debug('file extracted');
 
     // Delete the zip
