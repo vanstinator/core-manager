@@ -173,12 +173,47 @@ export const CORE_MAPPING: Core[] = [
     infoUrl: 'https://docs.libretro.com/library/higan_accuracy/'
   },
   {
-    platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
+    platforms: [PLATFORMS.SuperNintendoEntertainmentSystem, PLATFORMS.GameBoy, PLATFORMS.GameBoyColor],
     name: 'Mesen-S',
     filename: 'mesen-s_libretro',
     arch: [ARCH.win32, ARCH.macOS],
     infoUrl: 'https://docs.libretro.com/library/mesen-s/'
 
+  },
+  {
+    platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
+    name: 'Snes9x 2002',
+    filename: 'snes9x2002_libretro',
+    arch: [ARCH.win32, ARCH.macOS],
+    infoUrl: 'https://docs.libretro.com/library/snes9x_2002/'
+  },
+  {
+    platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
+    name: 'Snes9x 2005 Plus',
+    filename: 'snes9x2005_plus_libretro',
+    arch: [ARCH.win32, ARCH.macOS],
+    infoUrl: 'https://docs.libretro.com/library/snes9x_2005_plus/'
+  },
+  {
+    platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
+    name: 'Snes9x 2005',
+    filename: 'snes9x2005_libretro',
+    arch: [ARCH.win32, ARCH.macOS],
+    infoUrl: 'https://docs.libretro.com/library/snes9x_2005/'
+  },
+  {
+    platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
+    name: 'Snes9x 2010',
+    filename: 'snes9x2010_libretro',
+    arch: [ARCH.win32, ARCH.macOS],
+    infoUrl: 'https://docs.libretro.com/library/snes9x_2010/'
+  },
+  {
+    platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
+    name: 'Snes9x',
+    filename: 'snes9x_libretro',
+    arch: [ARCH.win32, ARCH.macOS],
+    infoUrl: 'https://docs.libretro.com/library/snes9x/'
   },
   {
     platforms: [PLATFORMS.Nintendo64],
