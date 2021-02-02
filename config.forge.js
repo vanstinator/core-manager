@@ -2,8 +2,8 @@ module.exports = {
   packagerConfig: {
     asar: true,
     icon: "./icons/icon",
-    ignore: "\\.git(ignore|modules)|node_modules/(.cache|.cli-ngcc)|.vscode|e2e|.editorconfig|.eslintrc.json|.npmrc|angular.json|angular.webpack.js|main.js.map|main.ts|tsconfig.json|tsconfig.serve.json|.env|icons",
-      asar: true,
+    ignore: "\\.git(ignore|modules)|node_modules/(\\.cache|.cli-ngcc)|\\.vscode|e2e|\\.editorconfig|\\.eslintrc\\.json|\\.npmrc|angular\\.json|angular\\.webpack\\.js|main\\.js\\.map|main\\.ts|tsconfig\\.json|tsconfig\\.serve\\.json|\\.env|icons",
+      // asar: true,
       darwinDarkModeSupport: 'true',
       // icon: 'electron-app/resources/icon',
       name: 'Core Manager',
