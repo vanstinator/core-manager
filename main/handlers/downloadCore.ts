@@ -25,10 +25,6 @@ export default async function downloadCore(event, args: Core[]): Promise<void> {
   let filename: string;
   let downloadPath: string;
 
-  if (!fs.existsSync(PMS_GAME_CORES_PATH())) {
-    await fs.promises.mkdir(PMS_GAME_CORES_PATH());
-  }
-
   if (process.platform === 'win32') {
     filename = `${core.filename}.dll.zip`;
     downloadPath = `${LIBRETRO_PATH_WIN32}${filename}`;

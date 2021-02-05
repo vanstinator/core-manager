@@ -30,6 +30,11 @@ async function loadXMLMappings(): Promise<XmlMapping | undefined> {
 
 async function loadCores(): Promise<Core[]> {
 
+  // New installs won't have this directory. So lets create it here before using it anywhere else
+  if (!fs.existsSync(PMS_GAME_CORES_PATH())) {
+    await fs.promises.mkdir(PMS_GAME_CORES_PATH());
+  }
+
   const xmlMapping = await loadXMLMappings();
   const files = await fs.promises.readdir(PMS_GAME_CORES_PATH());
 
