@@ -1,5 +1,13 @@
+## <small>1.1.2 (2021-02-05)</small>
+
+* fix(core): create "Game Cores" if it doesn't exist on start ([2bb46f0](https://github.com/vanstinator/project-xenomorph/commit/2bb46f0))
+* fix(ui): progress spinner was off center ([35bdf0c](https://github.com/vanstinator/project-xenomorph/commit/35bdf0c))
+
+
+
 ## <small>1.1.1 (2021-02-02)</small>
 
+* chore: release v1.1.1 ([ff3456d](https://github.com/vanstinator/project-xenomorph/commit/ff3456d))
 * fix(build): properly escape regex ([a82cef9](https://github.com/vanstinator/project-xenomorph/commit/a82cef9))
 
 
