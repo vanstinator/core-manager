@@ -7,7 +7,7 @@
       There was a problem with the default Plex Media Server path.
     </mat-card-subtitle>
     <mat-card-content>
-      <mat-form-field appearance="outline" class="filter_box" (onBlur)="onSubmit()">
+      <mat-form-field appearance="outline" class="filter_box">
         <mat-label>Plex Media Server data path</mat-label>
         <input matInput [formControl]="plexDataPathControl" [value]="pmsPath">
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
@@ -28,7 +28,7 @@
       </mat-option>
     </mat-autocomplete>
 
-    <mat-form-field appearance="outline" class="filter_box" (onBlur)="onSubmit()">
+    <mat-form-field appearance="outline" class="filter_box">
       <mat-label>Filter</mat-label>
       <input matInput placeholder="Nintendo Entertainment System" [formControl]="coreFilterControl"
         [matAutocomplete]="auto">

@@ -40,6 +40,7 @@ ipcMain.handle(MESSAGE_CHANNEL.pmsPath, (event, args) => {
   }
 });
 ipcMain.handle(MESSAGE_CHANNEL.openLink, (event, args: string[]) => {
+  win.close();
   shell.openExternal(CORES.find(core => core.filename === args?.[0]).infoUrl);
 });
 
@@ -55,6 +56,7 @@ function createWindow(): BrowserWindow {
     // y: 0,
     width: 800,
     height: 800,
+    frame: process.platform !== 'win32',
     webPreferences: {
       nodeIntegration: false,
       allowRunningInsecureContent: (serve) ? true : false,
