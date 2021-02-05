@@ -10,6 +10,7 @@ import coreCheck from './main/handlers/coreCheck';
 import deleteCore from './main/handlers/deleteCore';
 import downloadCore from './main/handlers/downloadCore';
 import pmsLibraryCheck from './main/handlers/pmsLibraryCheck';
+import windowEvents from './main/handlers/windowHandler';
 import settings, { initialize } from './main/settings';
 import registerUpdates from './main/update';
 
@@ -40,8 +41,15 @@ ipcMain.handle(MESSAGE_CHANNEL.pmsPath, (event, args) => {
   }
 });
 ipcMain.handle(MESSAGE_CHANNEL.openLink, (event, args: string[]) => {
+  win.close();
   shell.openExternal(CORES.find(core => core.filename === args?.[0]).infoUrl);
 });
+ipcMain.handle(MESSAGE_CHANNEL.platform, (event, args: string[]) => {
+  return process.platform;
+});
+if (process.platform === 'win32') {
+  ipcMain.on(MESSAGE_CHANNEL.windowHandler, windowEvents);
+}
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
@@ -55,6 +63,7 @@ function createWindow(): BrowserWindow {
     // y: 0,
     width: 800,
     height: 800,
+    frame: process.platform !== 'win32',
     webPreferences: {
       nodeIntegration: false,
       allowRunningInsecureContent: (serve) ? true : false,

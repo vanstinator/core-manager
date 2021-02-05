@@ -8,7 +8,9 @@ export const MESSAGE_CHANNEL = {
   pmsLibraryCheck: 'pmsLibraryCheck',
   downloadProgress: 'downloadProgress',
   openLink: 'openLink',
-  pmsPath: 'pmsPath'
+  pmsPath: 'pmsPath',
+  windowHandler: 'windowHandler',
+  platform: 'platform'
 };
 
 export enum PLATFORMS {

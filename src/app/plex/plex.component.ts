@@ -81,10 +81,6 @@ export class PlexComponent implements OnInit {
     return self.indexOf(value) === index;
   }
 
-  onSubmit() {
-    console.log('hi');
-  }
-
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 5000

@@ -3,16 +3,116 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Game Core Manager for Plex</title>
+  <title>Game Core Manager</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet">
-  <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="assets/assets/icons/titlebar/favicon.ico">
 </head>
 
 <body class="mat-app-background">
-  <app-root></app-root>
+
+  <!-- https://github.com/binaryfunt/electron-seamless-titlebar-tutorial -->
+  <header id="titlebar">
+    <div id="drag-region">
+      <div id="window-title">
+        <span>Core Manager</span>
+      </div>
+      <div id="window-controls">
+
+        <div class="button" id="min-button">
+          <img class="icon"
+            srcset="assets/icons/titlebar/min-w-10.png 1x, assets/icons/titlebar/min-w-12.png 1.25x, assets/icons/titlebar/min-w-15.png 1.5x, assets/icons/titlebar/min-w-15.png 1.75x, assets/icons/titlebar/min-w-20.png 2x, assets/icons/titlebar/min-w-20.png 2.25x, assets/icons/titlebar/min-w-24.png 2.5x, assets/icons/titlebar/min-w-30.png 3x, assets/icons/titlebar/min-w-30.png 3.5x"
+            draggable="false" />
+        </div>
+
+        <div class="button" id="max-button">
+          <img class="icon"
+            srcset="assets/icons/titlebar/max-w-10.png 1x, assets/icons/titlebar/max-w-12.png 1.25x, assets/icons/titlebar/max-w-15.png 1.5x, assets/icons/titlebar/max-w-15.png 1.75x, assets/icons/titlebar/max-w-20.png 2x, assets/icons/titlebar/max-w-20.png 2.25x, assets/icons/titlebar/max-w-24.png 2.5x, assets/icons/titlebar/max-w-30.png 3x, assets/icons/titlebar/max-w-30.png 3.5x"
+            draggable="false" />
+        </div>
+
+        <div class="button" id="restore-button">
+          <img class="icon"
+            srcset="assets/icons/titlebar/restore-w-10.png 1x, assets/icons/titlebar/restore-w-12.png 1.25x, assets/icons/titlebar/restore-w-15.png 1.5x, assets/icons/titlebar/restore-w-15.png 1.75x, assets/icons/titlebar/restore-w-20.png 2x, assets/icons/titlebar/restore-w-20.png 2.25x, assets/icons/titlebar/restore-w-24.png 2.5x, assets/icons/titlebar/restore-w-30.png 3x, assets/icons/titlebar/restore-w-30.png 3.5x"
+            draggable="false" />
+        </div>
+
+        <div class="button" id="close-button">
+          <img class="icon"
+            srcset="assets/icons/titlebar/close-w-10.png 1x, assets/icons/titlebar/close-w-12.png 1.25x, assets/icons/titlebar/close-w-15.png 1.5x, assets/icons/titlebar/close-w-15.png 1.75x, assets/icons/titlebar/close-w-20.png 2x, assets/icons/titlebar/close-w-20.png 2.25x, assets/icons/titlebar/close-w-24.png 2.5x, assets/icons/titlebar/close-w-30.png 3x, assets/icons/titlebar/close-w-30.png 3.5x"
+            draggable="false" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <app-root id="main"></app-root>
+
 </body>
 
 </html>
+<script>
+
+  // TODO this whole block should probably be angular-ized somehow
+  window.api.electronIpcInvoke('platform').then((platform) => {
+
+    if (platform === 'win32') {
+      var isMaximized = false;
+
+      // When document has loaded, initialise
+      document.onreadystatechange = (event) => {
+        if (document.readyState == "complete") {
+          handleWindowControls();
+        }
+      };
+
+      function handleWindowControls() {
+        // Make minimise/maximise/restore/close buttons work when they are clicked
+        document.getElementById('min-button').addEventListener("click", event => {
+          window.api.electronIpcSend('windowHandler', 'min')
+        });
+
+        document.getElementById('max-button').addEventListener("click", event => {
+          window.api.electronIpcSend('windowHandler', 'max')
+        });
+
+        document.getElementById('restore-button').addEventListener("click", event => {
+          window.api.electronIpcSend('windowHandler', 'unmax')
+        });
+
+        document.getElementById('close-button').addEventListener("click", event => {
+          window.api.electronIpcSend('windowHandler', 'close')
+        });
+
+        window.api.electronIpcOn('windowHandler', (event, args) => {
+          console.log(args)
+          if (args === 'maximize') {
+            isMaximized = true;
+          } else if (args === 'unmaximize') {
+            isMaximized = false;
+          }
+
+          toggleMaxRestoreButtons();
+        })
+
+        function toggleMaxRestoreButtons(maximized = false) {
+          if (isMaximized) {
+            document.body.classList.add('maximized');
+          } else {
+            document.body.classList.remove('maximized');
+          }
+        }
+      }
+    } else {
+
+      // Strip titlebar
+      const elem = document.getElementById('titlebar');
+      elem.parentNode.removeChild(elem)
+
+      // Strip id (clean up css rules)
+      document.getElementById('main').removeAttribute('id')
+    }
+  })
+</script>
