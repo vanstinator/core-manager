@@ -2,10 +2,23 @@
 
 /* You can add global styles to this file, and also import other style files */
 html, body {
-  // overflow-y: hidden;
+  overflow-y: hidden;
   margin: 0;
   padding: 0;
   font-family: Roboto, Arial, sans-serif;
+
+  .core-list {
+    height: calc(100vh - 150px);
+    overflow-y: auto;
+  }
+
+  .windows {
+    .core-list {
+      height: calc(100vh - 180px) !important;
+      overflow-y: auto;
+    }
+  }
+
 }
 
 .titlebar {
