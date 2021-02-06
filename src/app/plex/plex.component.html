@@ -35,59 +35,61 @@
       <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
     </mat-form-field>
   </mat-card>
-  <mat-card>
-    <table mat-table matSort [dataSource]="dataSource">
+  <mat-card class="core-list">
+    <ng-scrollbar #scrollable track="all" style="max-height: calc(100%);">
+      <table mat-table matSort [dataSource]="dataSource">
 
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Core </th>
-        <td mat-cell *matCellDef="let core"> {{core.name}} </td>
-      </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Core </th>
+          <td mat-cell *matCellDef="let core"> {{core.name}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="platform">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Platform </th>
-        <td mat-cell *matCellDef="let core"> {{core.platforms[0]}} </td>
-      </ng-container>
+        <ng-container matColumnDef="platform">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Platform </th>
+          <td mat-cell *matCellDef="let core"> {{core.platforms[0]}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="info">
-        <th mat-header-cell *matHeaderCellDef> Info </th>
-        <td mat-cell *matCellDef="let core">
-          <button *ngIf="!!core.infoUrl" mat-icon-button (click)="openLink(core)">
-            <mat-icon>open_in_new</mat-icon>
-          </button>
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="info">
+          <th mat-header-cell *matHeaderCellDef> Info </th>
+          <td mat-cell *matCellDef="let core">
+            <button *ngIf="!!core.infoUrl" mat-icon-button (click)="openLink(core)">
+              <mat-icon>open_in_new</mat-icon>
+            </button>
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef> Action </th>
-        <td mat-cell *matCellDef="let core">
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <td mat-cell *matCellDef="let core">
 
-          <!-- Download -->
-          <button *ngIf="!core.isDownloaded && !core.downloadProgress && core.supportedPlatform" color="primary"
-            mat-icon-button (click)="download(core)" [disabled]="core.disabled">
-            <mat-icon>download</mat-icon>
-          </button>
+            <!-- Download -->
+            <button *ngIf="!core.isDownloaded && !core.downloadProgress && core.supportedPlatform" color="primary"
+              mat-icon-button (click)="download(core)" [disabled]="core.disabled">
+              <mat-icon>download</mat-icon>
+            </button>
 
-          <button *ngIf="!core.isDownloaded && !core.downloadProgress && !core.supportedPlatform" color="gray"
-            mat-icon-button (click)="openSnackBar('Core temporarily unavailable on this OS', 'Ok')">
-            <mat-icon>download</mat-icon>
-          </button>
+            <button *ngIf="!core.isDownloaded && !core.downloadProgress && !core.supportedPlatform" color="gray"
+              mat-icon-button (click)="openSnackBar('Core temporarily unavailable on this OS', 'Ok')">
+              <mat-icon>download</mat-icon>
+            </button>
 
-          <!-- Delete -->
-          <button *ngIf="core.isDownloaded && !core.downloadProgress" color="warn" mat-icon-button
-            (click)="delete(core)">
-            <mat-icon>delete</mat-icon>
-          </button>
+            <!-- Delete -->
+            <button *ngIf="core.isDownloaded && !core.downloadProgress" color="warn" mat-icon-button
+              (click)="delete(core)">
+              <mat-icon>delete</mat-icon>
+            </button>
 
-          <!-- Progress Spinner -->
-          <button *ngIf="core.downloadProgress" mat-icon-button>
-            <mat-spinner [diameter]="28" mode="determinate" [value]="core.downloadProgress"></mat-spinner>
-          </button>
-        </td>
-      </ng-container>
+            <!-- Progress Spinner -->
+            <button *ngIf="core.downloadProgress" mat-icon-button>
+              <mat-spinner [diameter]="28" mode="determinate" [value]="core.downloadProgress"></mat-spinner>
+            </button>
+          </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="['name', 'platform', 'info', 'action']"></tr>
-      <tr mat-row *matRowDef="let myRowData; columns: ['name', 'platform', 'info', 'action']"></tr>
+        <tr mat-header-row *matHeaderRowDef="['name', 'platform', 'info', 'action']"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: ['name', 'platform', 'info', 'action']"></tr>
 
-    </table>
+      </table>
+    </ng-scrollbar>
   </mat-card>
 </div>

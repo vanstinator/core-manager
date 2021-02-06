@@ -8,6 +8,11 @@ mat-card {
   margin-top: 10px
 }
 
+.core-list {
+    height: calc(100vh - 180px);
+    overflow-y: auto;
+}
+
 .filter_box {
   margin-top: -10px;
   height: 60px;
