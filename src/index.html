@@ -17,6 +17,7 @@
   <header id="titlebar">
     <div id="drag-region">
       <div id="window-title">
+        <img id="favicon" src="assets/icons/icon.ico">
         <span>Core Manager</span>
       </div>
       <div id="window-controls">
@@ -58,19 +59,23 @@
   // TODO this whole block should probably be angular-ized somehow
   window.api.electronIpcInvoke('platform').then((platform) => {
 
+    console.log('here')
     if (platform === 'win32') {
       var isMaximized = false;
 
       // When document has loaded, initialise
-      document.onreadystatechange = (event) => {
-        if (document.readyState == "complete") {
-          handleWindowControls();
-        }
-      };
+      // document.onreadystatechange = (event) => {
+      //   console.log('here4')
+      //   if (document.readyState == "complete") {
+      console.log('here2')
+      handleWindowControls();
+      //   }
+      // };
 
       function handleWindowControls() {
         // Make minimise/maximise/restore/close buttons work when they are clicked
         document.getElementById('min-button').addEventListener("click", event => {
+          console.log('here3')
           window.api.electronIpcSend('windowHandler', 'min')
         });
 

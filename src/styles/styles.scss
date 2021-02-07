@@ -15,6 +15,11 @@ html, body {
   height: 32px;
   width: 100%; /*Compensate for body 1px border*/
   // background: #254053;
+
+  #favicon {
+    height: 20px;
+    margin-right: 7px;
+  }
 }
 
 #titlebar #drag-region {
