@@ -1,5 +1,13 @@
+## 1.2.0 (2021-02-11)
+
+* feat(ui): use a custom titlebar on win32 ([58dbbc4](https://github.com/vanstinator/project-xenomorph/commit/58dbbc4))
+* feat(ui): use custom themed scrollbar ([ca86323](https://github.com/vanstinator/project-xenomorph/commit/ca86323))
+
+
+
 ## <small>1.1.2 (2021-02-05)</small>
 
+* chore: release v1.1.2 ([c20123d](https://github.com/vanstinator/project-xenomorph/commit/c20123d))
 * fix(core): create "Game Cores" if it doesn't exist on start ([2bb46f0](https://github.com/vanstinator/project-xenomorph/commit/2bb46f0))
 * fix(ui): progress spinner was off center ([35bdf0c](https://github.com/vanstinator/project-xenomorph/commit/35bdf0c))
 
