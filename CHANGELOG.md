@@ -1,5 +1,12 @@
+## <small>1.2.1 (2021-02-11)</small>
+
+* fix(core): use asar ([e25ee9e](https://github.com/vanstinator/project-xenomorph/commit/e25ee9e))
+
+
+
 ## 1.2.0 (2021-02-11)
 
+* chore: release v1.2.0 ([ca1644d](https://github.com/vanstinator/project-xenomorph/commit/ca1644d))
 * feat(ui): use a custom titlebar on win32 ([58dbbc4](https://github.com/vanstinator/project-xenomorph/commit/58dbbc4))
 * feat(ui): use custom themed scrollbar ([ca86323](https://github.com/vanstinator/project-xenomorph/commit/ca86323))
 
