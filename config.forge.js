@@ -1,6 +1,6 @@
 module.exports = {
   packagerConfig: {
-    asar: false,
+    asar: true,
     icon: "./icons/icon",
     ignore: "\\.git(ignore|modules)|node_modules/(\\.cache|.cli-ngcc)|\\.vscode|e2e|\\.editorconfig|\\.eslintrc\\.json|\\.npmrc|angular\\.json|angular\\.webpack\\.js|main\\.js\\.map|main\\.ts|tsconfig\\.json|tsconfig\\.serve\\.json|\\.env",
     darwinDarkModeSupport: 'true',
