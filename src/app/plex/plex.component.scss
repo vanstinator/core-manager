@@ -1,3 +1,5 @@
+@import '../../styles/theme.scss';
+
 .container {
   max-width: 100%;
   padding-left: 10px;
@@ -11,7 +13,7 @@ mat-card {
 .filter_box {
   margin-top: -10px;
   height: 60px;
-  width: 100%
+  width: 100%;
 }
 
 table {
@@ -20,4 +22,17 @@ table {
 
 mat-spinner {
   margin: auto;
+}
+
+.recommended  {
+  color: mat-color($mat-light-green, 500)
+}
+
+.dangerzone  {
+  color: mat-color($mat-amber, 900)
+}
+
+mat-slide-toggle {
+  margin-top: 15px;
+  margin-left: 10px;
 }

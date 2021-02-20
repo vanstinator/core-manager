@@ -30,6 +30,7 @@ export class PlexComponent implements OnInit {
 
   pmsLibraryExists = undefined;
 
+  advancedToggle = new FormControl();
   coreFilterControl = new FormControl();
   plexDataPathControl = new FormControl();
 
@@ -113,6 +114,10 @@ export class PlexComponent implements OnInit {
         map(value => value ? this._filter(value) : this.uniqueCorePlatforms.slice())
       );
 
+    this.advancedToggle.valueChanges.subscribe(() => {
+      this.coreCheck();
+    });
+
     this.coreFilterControl.valueChanges.subscribe(value => {
       if (this.uniqueCorePlatforms.includes(value) || !value) {
         this.filter = value;
@@ -142,6 +147,10 @@ export class PlexComponent implements OnInit {
         return data[sortHeaderId];
       };
       this.dataSource.sort = this.sort;
+
+      if (!this.advancedToggle.value) {
+        this.dataSource.data = this.dataSource.data.filter(core => !core.hidden);
+      }
     });
 
     this._electronService.ipcOn(MESSAGE_CHANNEL.downloadProgress, (event, data) => {

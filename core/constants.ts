@@ -42,50 +42,56 @@ export const CORE_MAPPING: Core[] = [
     platforms: [PLATFORMS.Arcade],
     name: 'MAME',
     filename: 'mame_libretro',
-    arch: [ARCH.win32, ARCH.macOS]
+    arch: [ARCH.win32, ARCH.macOS],
+    hidden: true
   },
   {
     platforms: [PLATFORMS.Arcade],
     name: 'MAME 2003',
     filename: 'mame2003_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/mame_2003/'
+    infoUrl: 'https://docs.libretro.com/library/mame_2003/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.Arcade],
     name: 'MAME 2003-Plus',
     filename: 'mame2003_plus_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/mame2003_plus/'
+    infoUrl: 'https://docs.libretro.com/library/mame2003_plus/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.Arcade],
     name: 'MAME 2010',
     filename: 'mame2010_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/mame_2010/'
+    infoUrl: 'https://docs.libretro.com/library/mame_2010/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.Atari2600],
     name: 'Stella',
     filename: 'stella_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/stella/'
+    infoUrl: 'https://docs.libretro.com/library/stella/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.Atari5200],
     name: 'Atari800',
     filename: 'atari800_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/atari800/'
+    infoUrl: 'https://docs.libretro.com/library/atari800/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.Atari7800],
     name: 'ProSystem',
     filename: 'prosystem_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/prosystem/'
-
+    infoUrl: 'https://docs.libretro.com/library/prosystem/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.NintendoEntertainmentSystem],
@@ -99,21 +105,24 @@ export const CORE_MAPPING: Core[] = [
     name: 'Mesen',
     filename: 'mesen_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/mesen/'
+    infoUrl: 'https://docs.libretro.com/library/mesen/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.NintendoEntertainmentSystem],
     name: 'Nestopia UE',
     filename: 'nestopia_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/nestopia_ue/'
+    infoUrl: 'https://docs.libretro.com/library/nestopia_ue/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.NintendoEntertainmentSystem],
     name: 'QuickNES',
     filename: 'quicknes_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/quicknes/'
+    infoUrl: 'https://docs.libretro.com/library/quicknes/',
+    hidden: true
 
   },
   {
@@ -121,92 +130,104 @@ export const CORE_MAPPING: Core[] = [
     name: 'bsnes Accuracy',
     filename: 'bsnes2014_accuracy_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/bsnes_accuracy/'
+    infoUrl: 'https://docs.libretro.com/library/bsnes_accuracy/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
     name: 'bsnes Balanced',
     filename: 'bsnes2014_balanced_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/bsnes_balanced/'
+    infoUrl: 'https://docs.libretro.com/library/bsnes_balanced/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
     name: 'bsnes Performance',
     filename: 'bsnes2014_performance_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/bsnes_performance/'
+    infoUrl: 'https://docs.libretro.com/library/bsnes_performance/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
     name: 'bsnes C++98 (v085)',
     filename: 'bsnes_cplusplus98_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/bsnes_cplusplus98/'
+    infoUrl: 'https://docs.libretro.com/library/bsnes_cplusplus98/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
     name: 'bsnes-mercury Accuracy',
     filename: 'bsnes_mercury_accuracy_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/bsnes_mercury_accuracy/'
+    infoUrl: 'https://docs.libretro.com/library/bsnes_mercury_accuracy/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
     name: 'bsnes-mercury Balanced',
     filename: 'bsnes_mercury_balanced_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/bsnes_mercury_balanced/'
+    infoUrl: 'https://docs.libretro.com/library/bsnes_mercury_balanced/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
     name: 'bsnes-mercury Performance',
     filename: 'bsnes_mercury_performance_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/bsnes_mercury_performance/'
+    infoUrl: 'https://docs.libretro.com/library/bsnes_mercury_performance/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
     name: 'higan Accuracy',
     filename: 'higan_sfc_accuracy',
     arch: [ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/higan_accuracy/'
+    infoUrl: 'https://docs.libretro.com/library/higan_accuracy/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.SuperNintendoEntertainmentSystem, PLATFORMS.GameBoy, PLATFORMS.GameBoyColor],
     name: 'Mesen-S',
     filename: 'mesen-s_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/mesen-s/'
-
+    infoUrl: 'https://docs.libretro.com/library/mesen-s/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
     name: 'Snes9x 2002',
     filename: 'snes9x2002_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/snes9x_2002/'
+    infoUrl: 'https://docs.libretro.com/library/snes9x_2002/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
     name: 'Snes9x 2005 Plus',
     filename: 'snes9x2005_plus_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/snes9x_2005_plus/'
+    infoUrl: 'https://docs.libretro.com/library/snes9x_2005_plus/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
     name: 'Snes9x 2005',
     filename: 'snes9x2005_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/snes9x_2005/'
+    infoUrl: 'https://docs.libretro.com/library/snes9x_2005/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
     name: 'Snes9x 2010',
     filename: 'snes9x2010_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/snes9x_2010/'
+    infoUrl: 'https://docs.libretro.com/library/snes9x_2010/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.SuperNintendoEntertainmentSystem],
@@ -220,7 +241,8 @@ export const CORE_MAPPING: Core[] = [
     name: 'Mupen64Plus',
     filename: 'mupen64plus_next_libretro',
     arch: [ARCH.win32],
-    infoUrl: 'https://docs.libretro.com/library/mupen64plus/'
+    infoUrl: 'https://docs.libretro.com/library/mupen64plus/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.Nintendo64],
@@ -233,42 +255,48 @@ export const CORE_MAPPING: Core[] = [
     name: 'Gambatte',
     filename: 'gambatte_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/gambatte/'
+    infoUrl: 'https://docs.libretro.com/library/gambatte/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.GameBoy, PLATFORMS.GameBoyColor],
     name: 'SameBoy',
     filename: 'sameboy_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/sameboy/'
+    infoUrl: 'https://docs.libretro.com/library/sameboy/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.GameBoy, PLATFORMS.GameBoyColor],
     name: 'TGB Dual',
     filename: 'tgbdual_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/tgb_dual/'
+    infoUrl: 'https://docs.libretro.com/library/tgb_dual/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.GameBoy, PLATFORMS.GameBoyColor],
     name: 'Gearboy',
     filename: 'gearboy_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/gearboy/'
+    infoUrl: 'https://docs.libretro.com/library/gearboy/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.GameBoyAdvance],
     name: 'gpSP',
     filename: 'gpsp_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/gpsp/'
+    infoUrl: 'https://docs.libretro.com/library/gpsp/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.GameBoyAdvance],
     name: 'Meteor',
     filename: 'meteor_libretro',
     arch: [ARCH.win32],
-    infoUrl: 'https://docs.libretro.com/library/gpsp/'
+    infoUrl: 'https://docs.libretro.com/library/gpsp/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.GameBoyAdvance],
@@ -282,21 +310,24 @@ export const CORE_MAPPING: Core[] = [
     name: 'SMS Plus GX',
     filename: 'smsplus_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/smsplus/'
+    infoUrl: 'https://docs.libretro.com/library/smsplus/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.SegaMasterSystem, PLATFORMS.SegaGameGear],
     name: 'Gearsystem',
     filename: 'gearsystem_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/gearsystem/'
+    infoUrl: 'https://docs.libretro.com/library/gearsystem/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.SegaMasterSystem, PLATFORMS.SegaGameGear, PLATFORMS.SegaGenesis],
     name: 'Genesis Plus GX',
     filename: 'genesis_plus_gx_libretro',
     arch: [ARCH.win32, ARCH.macOS],
-    infoUrl: 'https://docs.libretro.com/library/genesis_plus_gx/'
+    infoUrl: 'https://docs.libretro.com/library/genesis_plus_gx/',
+    hidden: true
   },
   {
     platforms: [PLATFORMS.SegaMasterSystem, PLATFORMS.SegaGameGear, PLATFORMS.SegaGenesis, PLATFORMS.Sega32x],

@@ -2,13 +2,13 @@
 @include mat-core();
 
 // Light theme
-$light-primary: mat-palette($mat-indigo);
+$light-primary: mat-palette($mat-light-green);
 $light-accent:  mat-palette($mat-pink, A200, A100, A400);
 $light-theme:   mat-light-theme($light-primary, $light-accent);
 
 // Dark theme
-$dark-primary: mat-palette($mat-cyan);
-$dark-accent:  mat-palette($mat-purple, A200, A100, A400);
+$dark-primary: mat-palette($mat-light-green);
+$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
 $dark-warn:    mat-palette($mat-deep-orange);
 $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 

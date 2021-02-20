@@ -1,15 +1,16 @@
 import { PLATFORMS } from './constants';
 
 export interface Core {
-  platforms: PLATFORMS[],
-  name: string;
-  filename: string;
-  needsUpdate?: boolean;
-  isDownloaded?: boolean;
-  downloadProgress?: number;
-  disabled?: boolean;
   arch?: ARCH[];
+  disabled?: boolean;
+  downloadProgress?: number;
+  filename: string;
+  hidden?: boolean;
   infoUrl?: string;
+  isDownloaded?: boolean;
+  name: string;
+  needsUpdate?: boolean;
+  platforms: PLATFORMS[];
 }
 
 export interface XmlMapping {
