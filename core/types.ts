@@ -10,6 +10,7 @@ export interface Core {
   isDownloaded?: boolean;
   name: string;
   needsUpdate?: boolean;
+  platform?: PLATFORMS;
   platforms: PLATFORMS[];
 }
 

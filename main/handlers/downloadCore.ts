@@ -42,7 +42,7 @@ export default async function downloadCore(event, args: Core[]): Promise<void> {
     const percentage = Math.round(percent * 100);
     if (lastReportedPercent !== percentage) {
       log.silly(`progress: ${transferred}/${total} (${percentage}%)`);
-      event.reply(MESSAGE_CHANNEL.downloadProgress, { filename: core.filename, platform: core.platforms[0], progress: percentage });
+      event.reply(MESSAGE_CHANNEL.downloadProgress, { filename: core.filename, platform: core.platform, progress: percentage });
       lastReportedPercent = percentage;
     }
   });

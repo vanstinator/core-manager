@@ -344,7 +344,7 @@ for (const core of CORE_MAPPING) {
   for (const platform of core.platforms) {
     CORES.push({
       ...core,
-      platforms: [platform]
+      platform: [platform]
     });
   }
 }

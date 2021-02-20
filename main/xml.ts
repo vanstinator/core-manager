@@ -23,7 +23,7 @@ export default async function generateMappings(core?: Core, opts?: { delete: boo
   let coresByPlatform = [];
   for (const core of cores.filter(core => core.isDownloaded)) {
     coresByPlatform.push({
-      '@platform': core.platforms[0],
+      '@platform': core.platform,
       '@core': core.filename
     });
   }
@@ -31,11 +31,11 @@ export default async function generateMappings(core?: Core, opts?: { delete: boo
   // stub in the new core we just downloaded
   if (core) {
     if (opts?.delete) {
-      log.info(`unmapped ${core.filename} for ${core.platforms[0]}`);
-      coresByPlatform = coresByPlatform.filter(c => c['@platform'] !== core.platforms[0] && c.filename !== core.filename);
+      log.info(`unmapped ${core.filename} for ${core.platform}`);
+      coresByPlatform = coresByPlatform.filter(c => c['@platform'] !== core.platform && c.filename !== core.filename);
     } else {
       coresByPlatform.push({
-        '@platform': core.platforms[0],
+        '@platform': core.platform,
         '@core': core.filename
       });
     }

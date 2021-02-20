@@ -41,7 +41,7 @@ async function loadCores(): Promise<Core[]> {
   const cores = JSON.parse(JSON.stringify(CORES)).map(core => {
 
     const matchedFile = files.filter(f => /core.filename/.exec(f));
-    const downloadedPlatform = xmlMapping?.Mappings?.Mapping?.find(mapping => mapping.$.core === core.filename && mapping.$.platform === core.platforms[0]);
+    const downloadedPlatform = xmlMapping?.Mappings?.Mapping?.find(mapping => mapping.$.core === core.filename && mapping.$.platform === core.platform);
 
     return {
       ...core,

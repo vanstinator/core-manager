@@ -28,7 +28,7 @@ export default async function deleteCore(event, args: Core[]): Promise<void> {
 
   const cores = await getCores();
   if (cores.filter(c => c.filename === core.filename && c.isDownloaded).length > 1) {
-    log.warn(`only deleting mapping for ${core.filename} - ${core.platforms[0]}. another mapping is using this core lib`);
+    log.warn(`only deleting mapping for ${core.filename} - ${core.platform}. another mapping is using this core lib`);
     await generateMappings(core, { delete: true });
   } else {
 
