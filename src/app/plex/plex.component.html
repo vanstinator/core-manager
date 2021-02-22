@@ -35,8 +35,7 @@
           [matAutocomplete]="auto">
         <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
       </mat-form-field>
-      <mat-slide-toggle matTooltip="Untested and potentially broken. Proceed with caution" color="warn"
-        [formControl]="advancedToggle">Advanced
+      <mat-slide-toggle color="warn" [formControl]="advancedToggle">Advanced
       </mat-slide-toggle>
     </div>
   </mat-card>
@@ -71,7 +70,7 @@
             <button class="recommended"
               *ngIf="!core.isDownloaded && !core.downloadProgress && core.supportedPlatform && !core.hidden"
               mat-icon-button (click)="download(core)" [disabled]="core.disabled"
-              matTooltip="This core is untested and may not work on your hardware. Install at your own risk.">
+              matTooltip="This core is tested and recommended.">
               <mat-icon>download</mat-icon>
             </button>
 
