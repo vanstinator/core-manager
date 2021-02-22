@@ -1,5 +1,14 @@
+## 1.3.0 (2021-02-22)
+
+* fix(core): make sure platform is sortable in data table ([68c5113](https://github.com/vanstinator/project-xenomorph/commit/68c5113))
+* fix(ui): update tooltips ([b8e50bc](https://github.com/vanstinator/project-xenomorph/commit/b8e50bc))
+* feat(ui): advanced filtering ui toggle ([3936cd2](https://github.com/vanstinator/project-xenomorph/commit/3936cd2))
+
+
+
 ## <small>1.2.1 (2021-02-11)</small>
 
+* chore: release v1.2.1 ([fff6c9f](https://github.com/vanstinator/project-xenomorph/commit/fff6c9f))
 * fix(core): use asar ([e25ee9e](https://github.com/vanstinator/project-xenomorph/commit/e25ee9e))
 
 
