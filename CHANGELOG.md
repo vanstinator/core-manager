@@ -1,5 +1,12 @@
+## <small>1.3.2 (2021-02-24)</small>
+
+* fix(ui): allow core to be downloaded for multiple platforms ([d2c7cbf](https://github.com/vanstinator/project-xenomorph/commit/d2c7cbf))
+
+
+
 ## <small>1.3.1 (2021-02-24)</small>
 
+* chore: release v1.3.1 ([31c89d6](https://github.com/vanstinator/project-xenomorph/commit/31c89d6))
 * fix(core): platform should be enum rather than array ([24371d8](https://github.com/vanstinator/project-xenomorph/commit/24371d8))
 
 
