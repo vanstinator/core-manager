@@ -128,7 +128,7 @@ export class PlexComponent implements OnInit {
     this._electronService.ipcOn(MESSAGE_CHANNEL.coreResponse, (event, data: Core[]) => {
       this.cores = data;
       this.cores.map(core => {
-        core.disabled = this.cores.some(c => c.platforms.includes(core.platform) && (c.isDownloaded || c.downloadProgress > 0));
+        core.disabled = this.cores.some(c => c.platform === core.platform && (c.isDownloaded || c.downloadProgress > 0));
       });
 
       // eslint-disable-next-line @typescript-eslint/unbound-method
