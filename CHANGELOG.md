@@ -1,5 +1,12 @@
+## <small>1.3.1 (2021-02-24)</small>
+
+* fix(core): platform should be enum rather than array ([24371d8](https://github.com/vanstinator/project-xenomorph/commit/24371d8))
+
+
+
 ## 1.3.0 (2021-02-22)
 
+* chore: release v1.3.0 ([cf81c05](https://github.com/vanstinator/project-xenomorph/commit/cf81c05))
 * fix(core): make sure platform is sortable in data table ([68c5113](https://github.com/vanstinator/project-xenomorph/commit/68c5113))
 * fix(ui): update tooltips ([b8e50bc](https://github.com/vanstinator/project-xenomorph/commit/b8e50bc))
 * feat(ui): advanced filtering ui toggle ([3936cd2](https://github.com/vanstinator/project-xenomorph/commit/3936cd2))
