@@ -1,5 +1,7 @@
 # Core Manager
 
+It was a good ride, but Plex Gaming is officially dead. The repo will exist for posterity in an archived state but from this moment forward the online update service will be shut down and the app will likely cease to function properly.
+
 ### Installation Notes
 _You're going to get scary warnings from both Chrome and Microsoft Smartscreen. The domain name and signing certificates for this project are both brand new. As more users download and use the tool these warnings will go away._
 
